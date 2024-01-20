@@ -709,7 +709,7 @@ body.modal-open {
 										<div class="contents-brand">
 											<div class="contents-brand-group" id="reviewLikeGroup">
 												<c:if test="${ empty lList}">
-													<button class="contents-btn btn-like-line" type="button" onclick="reviewLikeUp(${review.memId});">
+													<button class="contents-btn btn-like-line" type="button" onclick="reviewLikeUp();">
 								                        <img src="rs/reviewDetail/icons/ico_like_black_line.svg" alt="하트 라인 아이콘">
 								                    </button>
 												</c:if>
@@ -944,7 +944,7 @@ window.onload = () =>{
          }
       } else{
          alert('리뷰는 로그인 후 등록 가능합니다.');
-         location.href='login';
+         location.href="loginView";
       }
    });
    
@@ -1133,7 +1133,7 @@ const submitReply = () =>{
       })
    } else{
       alert('댓글은 로그인 후 등록 가능합니다.');
-      location.href='login';
+      location.href="loginView";
    }
 }
 
@@ -1188,25 +1188,25 @@ const updateReply = (btn) => {
 
 
 const reviewLikeUp = () =>{
-   const memId = document.querySelector('#reviewMemId').value;
+	const reviewMemId = document.querySelector('#reviewMemId').value;
 	
-   if('${loginUser.memId}' != memId){
-      $.ajax({
-         url: 'insertReviewLike.rv',
-         data:{memId: '${loginUser.memId}', 
-              revNo: document.getElementById('revNo').value},
-         success: data =>{
-            console.log(data);
-            const like = document.querySelector('#reviewLike');
-            like.innerText = data;
-            $("#reviewLikeGroup").load(location.href + " #reviewLikeGroup");
-         },
-         error: data => console.log(data)
-      })
-   } else{
-      alert('작성하신 글은 [좋아요] 버튼을 누를 수 없습니다.');
-      
-   }
+	if('${loginUser.memId}' != reviewMemId){
+	   $.ajax({
+	      url: 'insertReviewLike.rv',
+	      data:{memId: '${loginUser.memId}', 
+	           revNo: document.getElementById('revNo').value},
+	      success: data =>{
+	         console.log(data);
+	         const like = document.querySelector('#reviewLike');
+	         like.innerText = data;
+	         $("#reviewLikeGroup").load(location.href + " #reviewLikeGroup");
+	      },
+	      error: data => console.log(data)
+	   })
+	} else{
+	   alert('작성하신 글은 [좋아요] 버튼을 누를 수 없습니다.');
+	   
+	}
 }
 
 const reviewLikeDown = () =>{

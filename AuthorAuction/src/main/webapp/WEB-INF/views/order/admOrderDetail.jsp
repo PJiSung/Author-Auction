@@ -126,7 +126,7 @@
 </style>
 </head>
 <body>
-  <jsp:include page="../common/header.jsp"/>
+  <jsp:include page="../common/adminHeadSide.jsp"/>
   <main class="th-layout-main ">
     <div class="myOrderDetail-a" data-bid="QHlQFySZSW" id="">
       <div class="contents-inner">

@@ -60,9 +60,12 @@ public class ReviewController {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String id = null;
 		ArrayList<HashMap<String, Object>> oList = null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		if(loginUser != null) {
 			id = loginUser.getMemId();
-			oList =  rService.getOrderList(id);
+			map.put("id", id);
+			oList =  rService.getOrderList(map);
 		}
 		
 		ArrayList<HashMap<String, Object>> lList = rService.reviewLikeList();
@@ -84,7 +87,8 @@ public class ReviewController {
 	
 	
 	@GetMapping("writeReview.rv")
-	public String goWriteReview(HttpSession session, Model model) {
+	public String goWriteReview(HttpSession session, Model model, 
+								@RequestParam(value="ordNo", required = false) String ordNo) {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String id = null;
@@ -92,7 +96,13 @@ public class ReviewController {
 			id = loginUser.getMemId();
 		}
 		
-		ArrayList<HashMap<String, Object>> list =  rService.getOrderList(id);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		if(ordNo != null) {
+			map.put("ordNo",  ordNo);
+		}
+		
+		ArrayList<HashMap<String, Object>> list =  rService.getOrderList(map);
 		
 		if(list != null) {
 			model.addAttribute("list", list);

@@ -21,8 +21,8 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDAO rDAO;
 
 	@Override
-	public ArrayList<HashMap<String, Object>> getOrderList(String id) {
-		return rDAO.getOrderList(id);
+	public ArrayList<HashMap<String, Object>> getOrderList(HashMap<String, Object> map) {
+		return rDAO.getOrderList(map);
 	}
 	
 	@Override

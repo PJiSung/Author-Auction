@@ -15,7 +15,7 @@ import com.kh.auction.user.model.vo.SearchReview;
 @Mapper
 public interface ReviewDAO {
 
-	ArrayList<HashMap<String, Object>> getOrderList(String id);
+	ArrayList<HashMap<String, Object>> getOrderList(HashMap<String, Object> map);
 
 	int insertReview(Review r);
 

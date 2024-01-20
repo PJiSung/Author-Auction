@@ -7,6 +7,9 @@
 		from orders join order_detail using(ord_no)
             		join product using(pro_no)
 		where mem_id = #{id} and ord_status = '배송완료' and months_between(sysdate, ord_date) <![CDATA[<=]]> 3
+			  <if test="ordNo != null">
+			  	and ord_no = #{ordNo}
+			  </if>
 	</select>
 	
 	<insert id="insertReview" useGeneratedKeys="true">

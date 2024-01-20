@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,10 +143,23 @@
 	vertical-align : top;
 }
 
+.tableset-order04{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+.tableset-author{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
 </style>
 </head>
 <body>
   <jsp:include page="../common/header.jsp"/>
+  <jsp:include page="../common/myPageSide.jsp"/>
   <main class="th-layout-main ">
     <div class="myReview" data-bid="ftLQde19y6">
       <div class="contents-inner">
@@ -172,7 +186,7 @@
           </div>
           
           <div id="myPage-orderListDiv">
-          	<form id="myOrderListForm">
+          	<form id="myOrderListForm" onsubmit="searchOrder()">
           	<input type="hidden" id="ordCategory" name="category">
           	<input type="hidden" name="page" value="${ pi.currentPage }">
           	<div class="contents-search">
@@ -227,13 +241,13 @@
 	                <tr>
 	                  <th scope="col" style="width: 14%;">주문번호</th>
 	                  <th scope="col" style="width: 7%;">사진</th>
-	                  <th scope="col" style="width: 15%;">작품명</th>
-	                  <th scope="col" style="width: 10%;">작가명</th>
+	                  <th scope="col" style="width: 13%;">작품명</th>
+	                  <th scope="col" style="width: 12%;">작가명</th>
 	                  <th scope="col" style="width: 11.5%;">가격</th>
-	                  <th scope="col" style="width: 7.5%;"></th>
+	                  <th scope="col" style="width: 8.5%;"></th>
 	                  <th scope="col" style="width: 11%;">주문일</th>
 	                  <th scope="col" style="width: 13%;">진행상황</th>
-	                  <th scope="col" style="width: 11%;">주문취소</th>
+	                  <th scope="col" style="width: 10%;">주문취소</th>
 	                </tr>
 	              </thead>
 	              <tbody>
@@ -253,7 +267,7 @@
 						  </td>
 		                  <td class="tableset-author">${ o.proName }</td>
 		                  <td class="tableset-order04">${ o.proWriter }</td>
-		                  <td class="tableset-order05">${ o.proPrice }</td>
+		                  <td class="tableset-order05"><fmt:formatNumber value="${ o.proPrice }" pattern="#,###" /></td>
 		                  <c:if test="${ o.ordAnother > 0 }">
 			                  <td class="tableset">외 ${ o.ordAnother }개</td>
 		                  </c:if>
@@ -393,7 +407,6 @@
 	</div>
 	
 <script type="text/javascript">
-
 const showDelModal = () => {
     let modal = document.getElementById('modalSet1');
     let dim = document.querySelector('.modalset-dim');

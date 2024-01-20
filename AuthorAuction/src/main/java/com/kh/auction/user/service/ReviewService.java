@@ -11,7 +11,7 @@ import com.kh.auction.user.model.vo.SearchReview;
 
 public interface ReviewService {
 
-	ArrayList<HashMap<String, Object>> getOrderList(String id);
+	ArrayList<HashMap<String, Object>> getOrderList(HashMap<String, Object> map);
 
 	int insertReview(Review r);
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +91,7 @@
 </style>
 </head>
 <body>
-  <jsp:include page="../common/header.jsp"/>
+  <jsp:include page="../common/adminHeadSide.jsp"/>
   <main class="th-layout-main ">
     <div class="myReview" data-bid="ftLQde19y6">
       <div class="contents-inner">
@@ -100,7 +101,7 @@
           </div>
           
           <div class="search-select">
-          <form id="searchForm">
+          <form id="searchForm" onsubmit="searchOrder()">
           	<input type="hidden" name="category" id="ordCategory">
           	<input type="hidden" name="page" value="${ pi.currentPage }">
           	<table>
@@ -221,7 +222,7 @@
 		                  <td class="tableset-author" id="ordNo">${ o.ordNo }</td>
 		                  <td class="tableset-progress">${ o.memId }</td>
 		                  <td class="tableset-order05">${ o.ordDate }</td>
-		                  <td class="tableset-order05">${ o.ordSumPrice }</td>
+		                  <td class="tableset-order05"><fmt:formatNumber value="${ o.ordSumPrice }" pattern="#,###" /></td>
 		                  <td class="tableset-cancel" onclick="notGoDetail(event)">
 		                  	<select name="ordStatus" class="progressOpt" onchange="changeOrdStatus(${o.ordNo}, this.value)">
 		                  		<option value="배송준비중" <c:if test="${ o.ordStatus == '배송준비중' }">selected</c:if>>배송준비중</option>
@@ -379,15 +380,9 @@ for (let i = 0; i < selectedButs.length; i++) {
     }
 }
 
-const enterKey = (event) => {
-  if (event.keyCode == 13) {
-	  searchOrder();
-  }
+const notGoDetail = (event) =>{
+	event.stopPropagation();
 }
- 
- const notGoDetail = (event) =>{
-	 event.stopPropagation();
- }
  
  const changeOrdStatus = (ordNo, ordStatus) =>{
 	 $.ajax({

@@ -127,6 +127,7 @@
 </head>
 <body>
   <jsp:include page="../common/header.jsp"/>
+  <jsp:include page="../common/myPageSide.jsp"/>
   <main class="th-layout-main ">
     <div class="myOrderDetail-a" data-bid="QHlQFySZSW" id="">
       <div class="contents-inner">
@@ -348,20 +349,14 @@ window.onload = () =>{
   	const finalPrice = document.getElementById('finalPrice').innerText.replace(/[^0-9]/g, '');
   	document.getElementById('deliveryFree').value = (finalPrice - totalProductPrice);
   	
-  	console.log('${o}');
-  	
   	const ordDateVal = '${o.ORD_DATE}';
   	const ordStatus = '${o.ORD_STATUS}';
     const ordDate = new Date(ordDateVal);
     const sysdate = new Date();
+    ordDate.setMonth(ordDate.getMonth() + 3);
     
-    console.log(ordDate);
-    console.log(sysdate);
-    console.log(sysdate - ordDate);
-    console.log(24 * 60 * 60 * 1000);
-    
-    if (sysdate - ordDate <= 24 * 60 * 60 * 1000 * 3 && ordStatus == '배송완료') {
-		document.querySelector('#goSubmitReviewBnt').innerHTML = '<a href="writeReview.rv" class="btnset btnset-lg">리뷰 작성</a>';
+    if (sysdate <= ordDate && ordStatus == '배송완료') {
+		document.querySelector('#goSubmitReviewBnt').innerHTML = '<a href="writeReview.rv?ordNo=' + ${ o.ORD_NO } + '" class="btnset btnset-lg">리뷰 작성</a>';
     }
   	
   }

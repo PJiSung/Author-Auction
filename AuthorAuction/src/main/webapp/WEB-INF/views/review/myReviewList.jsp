@@ -338,10 +338,20 @@ body.modal-open {
   z-index: 300;
 }
 
+#revContentTd, .tableset-order04, .tableset-content, .tableset-order05{
+	max-width:200px;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+
+
 </style>
 </head>
 <body>
   <jsp:include page="../common/header.jsp"/>
+  <jsp:include page="../common/myPageSide.jsp"/>
   <main class="th-layout-main ">
     <div class="myReview" data-bid="ftLQde19y6">
       <div class="contents-inner">
@@ -438,7 +448,7 @@ body.modal-open {
 						  </td>
 		                  <td class="tableset-author">${ r.proName }</td>
 		                  <td class="tableset-order04">${ r.proWriter }</td>
-			              <td class="tableset-order05">${ r.revContent }</td>
+			              <td class="tableset-order05" id="revContentTd">${ r.revContent }</td>
 		                  <td class="tableset-order05">${ r.revCreateDate }</td>
 		                  <td class="tableset-mobile">${ r.revLike }</td>
 		                  <td class="tableset-mobile">${ r.revCount }</td>
@@ -611,11 +621,11 @@ body.modal-open {
 		              <thead class="thead-light thead-border-top">
 		                <tr>
 		                  <th scope="col" style="width: 10%;">No.</th>
-		                  <th scope="col" style="width: 10%;">사진</th>
-		                  <th scope="col" style="width: 17%;">작품명</th>
-		                  <th scope="col" style="width: 13%;">작가명</th>
-		                  <th scope="col" style="width: 35%;">댓글 내용</th>
-		                  <th scope="col" style="width: 15%;">댓글 작성일</th>
+		                  <th scope="col" style="width: 8%;">사진</th>
+		                  <th scope="col" style="width: 16%;">작품명</th>
+		                  <th scope="col" style="width: 22%;">작가명</th>
+		                  <th scope="col" style="width: 32%;">댓글 내용</th>
+		                  <th scope="col" style="width: 12%;">댓글 작성일</th>
 		                </tr>
 		              </thead>
 		              <tbody>
@@ -1326,9 +1336,11 @@ const updateReview = () =>{
 const reviewReplyBut = () =>{
 	if(replyDiv.style.display == 'none'){
 		replyDiv.style.display = 'block';
+		loadReviewDetail();
 	} else{
 		replyDiv.style.display = 'none';
 	}
+	
 }
 
 const submitReply = () =>{
@@ -1352,7 +1364,7 @@ const submitReply = () =>{
 		})
 	} else{
 		alert('댓글은 로그인 후 등록 가능합니다.');
-		location.href='login';
+		location.href="loginView";
 	}
 }
 
