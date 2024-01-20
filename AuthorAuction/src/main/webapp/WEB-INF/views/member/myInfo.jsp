@@ -819,12 +819,11 @@ const checkNum2 = (value) =>{
 }
 
 const changeMemImg = () =>{
-	const img = document.querySelector(".profile tr td:first-child img");
+	const img = document.querySelector(".myPageprofile tr td:first-child img");
 	img.addEventListener("click", function(){
 		showModal();
 	});
 }
-
 const showModal = () =>{
 	let modal = document.getElementById('myModal');
 	let imgSrc = document.getElementById('imgSrc').value;
