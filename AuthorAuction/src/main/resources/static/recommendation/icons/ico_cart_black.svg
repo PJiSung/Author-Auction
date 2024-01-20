@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <g id="그룹_465496" data-name="그룹 465496" transform="translate(-1774 -378)">
+    <g id="icon_cart" transform="translate(-81 -542)">
+      <g id="가이드" transform="translate(1855 920)" fill="#e0f" stroke="#707070" stroke-width="1" opacity="0">
+        <rect width="32" height="32" stroke="none"/>
+        <rect x="0.5" y="0.5" width="31" height="31" fill="none"/>
+      </g>
+      <g id="shopping_bag_icon_02" transform="translate(1859 924)">
+        <rect id="사각형_342111" data-name="사각형 342111" width="24" height="24" fill="#e50025" opacity="0"/>
+        <path id="패스_15819" data-name="패스 15819" d="M19.085,11.4V7.8A4.7,4.7,0,0,0,14.5,3,4.7,4.7,0,0,0,9.917,7.8v3.6M4.865,13.023,4.177,20.7c-.2,2.184-.293,3.276.053,4.119a3.551,3.551,0,0,0,1.513,1.74C6.512,27,7.559,27,9.654,27h9.693c2.093,0,3.141,0,3.911-.439a3.542,3.542,0,0,0,1.512-1.74c.347-.843.248-1.935.052-4.119l-.688-7.68a9.031,9.031,0,0,0-.643-3.463,3.5,3.5,0,0,0-1.481-1.412c-.7-.348-1.584-.348-3.352-.348H10.342c-1.769,0-2.654,0-3.353.348A3.506,3.506,0,0,0,5.508,9.56,9.083,9.083,0,0,0,4.865,13.023Z" transform="translate(-2.001 -3)" fill="none" stroke="#040504" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

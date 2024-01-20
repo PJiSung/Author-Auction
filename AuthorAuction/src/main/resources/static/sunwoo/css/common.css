@@ -1,0 +1,36 @@
+@charset "utf-8"; 
+
+/* basic-N4 [kELq80DczI] */
+.basic-N4 { background-color: var(--primary); }
+.basic-N4 .footer-container { padding: 2.4rem 13rem; }
+.basic-N4 .footer-top { display: flex; justify-content: space-between; position: relative; margin-bottom: 1.6rem; }
+.basic-N4 .footer-logo { text-align: center; margin-bottom: 0; }
+.basic-N4 .footer-logo a { width: 10.6rem; height: 3.3rem; }
+.basic-N4 .footer-logo img { width: 100%; height: 100%; object-fit: contain; }
+.basic-N4 .footer-menulist { display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: var(--fs-p4); }
+.basic-N4 .footer-menuitem a { padding-right: 1.2rem; color: var(--text-color5); }
+.basic-N4 .footer-menuitem+.footer-menuitem a { padding-left: 1.2rem; }
+.basic-N4 .footer-menuitem { position: relative; }
+.basic-N4 .footer-menuitem+.footer-menuitem::after { content: ''; position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 1px; height: 1.4rem; background-color: rgba(var(--white), 0.1); }
+.basic-N4 .footer-snslist { display: flex; align-items: center; }
+.basic-N4 .footer-snsitem+.footer-snsitem { margin-left: 0.8rem; }
+.basic-N4 .footer-snslink { width: 3.6rem; height: 3.6rem; padding: 0.6rem; }
+.basic-N4 .footer-snslink img { width: 100%; height: 100%; object-fit: cover; vertical-align: top; }
+.basic-N4 .footer-bottom { padding-top: 2.4rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.basic-N4 .footer-txt { display: flex; justify-content: center; color: var(--text-color4); font-size: 1.2rem; line-height: 2.4rem; }
+.basic-N4 .footer-txt+.footer-txt { margin-top: 0.3rem; }
+.basic-N4 .footer-txt p { margin-bottom: 0; line-height: 1.8rem; }
+.basic-N4 .footer-txt p+p { margin-left: 0.8rem; }
+.basic-N4 .footer-txt p span+span { margin-left: 0.8rem; }
+@media (max-width: 992px) {
+ .basic-N4 .footer-container { padding: 4rem 1.6rem; }
+ .basic-N4 .footer-top { margin-bottom: 0; flex-direction: column; align-items: flex-start; }
+ .basic-N4 .footer-logo a { width: 8.4rem; height: 2.6rem; }
+ .basic-N4 .footer-menulist { position: relative; left: 0; transform: translate(0); margin-top: 1.3rem; }
+ .basic-N4 .footer-menuitem a { padding-right: 0.8rem; }
+ .basic-N4 .footer-menuitem+.footer-menuitem a { padding-left: 0.8rem; }
+ .basic-N4 .footer-snslist { margin: 2.4rem 0 1.6rem 0; justify-content: center; }
+ .basic-N4 .footer-bottom { text-align: left; }
+ .basic-N4 .footer-txt { flex-direction: column; }
+ .basic-N4 .footer-txt p+p { margin-left: 0; }
+}

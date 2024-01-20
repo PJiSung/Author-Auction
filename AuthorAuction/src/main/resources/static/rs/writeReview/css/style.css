@@ -1,0 +1,74 @@
+@charset "utf-8"; 
+
+/* insertReview [IdlQhr973C] */
+.insertReview .contents-inner { padding: 10rem 2.4rem; }
+.insertReview .textset { margin-top: 0; margin-bottom: 4rem; padding: 0; }
+.insertReview .contents-titgroup { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4rem; }
+.insertReview .contents-tit { display: inline-block; margin-right: 0.8rem; font-size: 2.4rem; font-weight: 500; }
+.insertReview .contents-tit span { display: flex; }
+.insertReview .contents-tit span::after { content: ''; flex-shrink: 0; align-self: flex-start; width: 2.4rem; height: 2.4rem; margin-left: .4rem; background: url("../../resources/icons/ico_lock_black.svg") no-repeat center/cover; }
+.insertReview .contents-date { display: flex; align-self: flex-start; flex-shrink: 0; align-items: center; font-size: 1.6rem; color: var(--text-color3); }
+.insertReview .contents-date i { font-style: normal; margin-right: .8rem; }
+.insertReview .contents-group { border-top: 1px solid var(--line-color4); border-bottom: 1px solid var(--line-color4); }
+.insertReview .contents-file { display: flex; align-items: center; padding: 1.6rem 0; font-size: var(--fs-p1); border-bottom: 1px solid var(--line-color1); }
+.insertReview .contents-file-txt { align-self: flex-start; width: 7.4rem; color: var(--text-color3); }
+.insertReview .contents-file-link { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.insertReview .contents-file-link::after { content: ''; flex-shrink: 0; align-self: flex-start; width: 2.4rem; height: 2.4rem; background: url("../../resources/icons/ico_download_black.svg") no-repeat center/cover; }
+.insertReview .contents-ask { padding: 4rem 0; font-size: var(--fs-p1); color: #505050; }
+.insertReview .contents-group-bottom { padding: 4rem 0; border-top: 1px solid var(--line-color1); }
+.insertReview .badgeset { width: 6.6rem; height: 3.2rem; margin-right: .8rem; color: var(--text-color5); font-size: var(--fs-p2); background-color: black; }
+.insertReview .badgeset.badgeset-active { background-color: var(--secondary); }
+.insertReview .contents-answer { margin-top: 1.6rem; font-size: var(--fs-p1); line-height: var(--lh-p1); color: #505050; }
+.insertReview .contents-btn { margin-top: 6rem; text-align: center; }
+.insertReview .contents-btn .btnset { min-width: 26rem; }
+@media (max-width: 992px) {
+ .insertReview .contents-inner { padding: 6rem 2.4rem; }
+ .insertReview .textset { margin-bottom: 2.4rem; text-align: left; }
+ .insertReview .contents-date { font-size: 1.2rem; line-height: 1.8rem; }
+ .insertReview .contents-titgroup { flex-direction: column; align-items: flex-start; margin-bottom: 2.4rem; }
+ .insertReview .contents-tit { margin-right: 0; margin-bottom: .8rem; font-size: 1.6rem; }
+ .insertReview .contents-tit span::after { width: 2rem; height: 2rem; }
+ .insertReview .badgeset { width: 4.6rem; height: 2.5rem; }
+ .insertReview .contents-ask { padding: 2.4rem 0; }
+ .insertReview .contents-group-bottom { padding: 2.4rem 0; }
+ .insertReview .contents-btn { margin-top: 4rem; }
+}
+
+/* myOrderDetail-a [QHlQFySZSW] */
+.myOrderDetail-a .contents-inner { padding: 10rem 2.4rem; }
+.myOrderDetail-a .textset-tit { margin-bottom: 2.4rem; text-align: center; }
+.myOrderDetail-a .contents-form-top { position: relative; padding: 4rem 0; border-top: 1px solid var(--line-color4); border-bottom: 1px solid var(--line-color4); }
+.myOrderDetail-a .contents-form-top .inputset+.inputset { margin-top: 4rem; }
+.myOrderDetail-a .contents-form-top .radioset-input+.radioset-label { width: 2.4rem; height: 2.4rem; }
+.myOrderDetail-a .contents-form-top .radioset-input.input-line:checked+.radioset-label::before { font-size: 2.4rem; }
+.myOrderDetail-a .radioset-text { font-size: var(--fs-p1); color: var(--text-color2); }
+.myOrderDetail-a .contents-form-top .contents-form-group+.contents-form-group { padding-top: 4rem; }
+.myOrderDetail-a .contents-address { flex-direction: column; }
+.myOrderDetail-a .contents-address+.contents-address { margin-top: 4rem; }
+.myOrderDetail-a .contents-address label+label { margin-left: 0; margin-top: 0.8rem; }
+.myOrderDetail-a .contents-address-btn { display: flex; justify-content: space-between; }
+.myOrderDetail-a .contents-address .inputset { display: flex; align-items: center; }
+.myOrderDetail-a .contents-address .inputset-input+.inputset-input { margin-top: 0.8rem; }
+.myOrderDetail-a .contents-address ul { margin-bottom: 1.2rem; }
+.myOrderDetail-a .contents-address ul li { font-size: var(--fs-p1); line-height: var(--lh-p1); color: var(--text-color2); }
+.myOrderDetail-a .contents-address .btnset { width: 100%; max-width: 17.6rem; padding: 1.6rem; margin-left: 1.2rem; }
+.myOrderDetail-a .contents-address .inputset-textarea { height: 5.6rem; padding: 1.2rem 1.6rem; resize: none; }
+.myOrderDetail-a .contents-form-bottom { padding: 4rem 0; }
+.myOrderDetail-a .checkset { margin-top: 1.2rem; }
+.myOrderDetail-a .checkset .checkset-input+.checkset-label { width: 2.4rem; height: 2.4rem; border-color: var(--primary); }
+.myOrderDetail-a .checkset .checkset-input.input-fill+.checkset-label::before { font-size: 2.4rem; }
+.myOrderDetail-a .checkset-text { font-size: 1.8rem; }
+@media (max-width: 992px) {
+ .myOrderDetail-a .contents-inner { padding: 6rem 2.4rem; }
+ .myOrderDetail-a .textset-tit { margin-bottom: 1.4rem; }
+ .myOrderDetail-a .contents-form-top { padding: 2.4rem 0; }
+ .myOrderDetail-a .contents-form-top .inputset+.inputset { margin-top: 1.2rem; }
+ .myOrderDetail-a .contents-address+.contents-address { margin-top: 2.4rem; }
+ .myOrderDetail-a .contents-address .btnset { max-width: 10rem; margin-left: 0.8rem; }
+ .myOrderDetail-a .contents-address ul { margin-bottom: 0.8rem; }
+ .myOrderDetail-a .contents-address .inputset-textarea { padding: 1.4rem; height: 9rem; }
+ .myOrderDetail-a .contents-form-bottom { padding: 2.4rem 0; }
+ .myOrderDetail-a .checkset .checkset-input+.checkset-label { width: 2rem; height: 2rem; }
+ .myOrderDetail-a .checkset .checkset-input.input-fill+.checkset-label::before { font-size: 2rem; }
+ .myOrderDetail-a .checkset-text { font-size: 1.4rem; }
+}

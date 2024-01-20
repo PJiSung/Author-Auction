@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.auction.user.dao.RecommendationDAO">					<!-- 문의 리스트 -->
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from recommendation
+		where REC_STATUS = 'Y'
+	</select>
+	
+	<select id="selectRecommendationList" resultType="Recommendation">			<!-- 문의 리스트 -->
+		select *
+		from recommendation join member using(mem_Id)
+		where REC_STATUS = 'Y' 
+		order by REC_CREATE_DATE desc
+	</select>
+	
+	<select id="selectAttmList">												<!-- 문의 리스트 -->
+		select *
+		from attachment
+		where att_status = 'Y' and att_category = 3
+		<if test="recNo != null">
+			and att_bno = #{recNo}
+		</if>
+		order by att_bno, att_no
+	</select>
+	
+	<insert id="insertRecommendation" useGeneratedKeys="true">					<!-- 문의 등록 -->
+		<selectKey order="BEFORE" resultType="_int" keyProperty="recNo">
+			select REC_SEQ.nextval from dual
+		</selectKey>
+		insert into recommendation
+		values (#{recNo}, #{recTitle}, #{recContent}, #{recStyle}, default, null, sysdate, #{memId})
+	</insert>
+	
+	<insert id="insertAttm">													<!-- 문의(첨부) 등록 -->
+		insert all
+		<foreach collection="list" item="item">
+			into attachment
+			values(ATT_NEW, #{item.attRename}, default, #{item.attFno}, #{item.attCategory}, #{item.attBno})
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<select id="getListCount2" resultType="_int">								<!-- 마이페이지 리스트 -->
+		select count(*)
+		from recommendation
+		where rec_status = 'Y' and mem_id = #{memId}
+		<if test="strDate != null and endDate == null">
+			and REC_CREATE_DATE <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == null and endDate != null">
+			and REC_CREATE_DATE <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != null and endDate != null">
+			and REC_CREATE_DATE between #{strDate} and #{endDate}
+		</if>
+	</select>
+	
+	<select id="myRecommendationList" resultType="Recommendation">				<!-- 마이페이지 리스트 -->
+		select *
+		from recommendation 
+		where rec_status = 'Y' and mem_id = #{memId}
+		<if test="strDate != null and endDate == null">
+			and REC_CREATE_DATE <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == null and endDate != null">
+			and REC_CREATE_DATE <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != null and endDate != null">
+			and REC_CREATE_DATE between #{strDate} and #{endDate}
+		</if>	
+		order by REC_CREATE_DATE desc	
+	</select>
+	
+	<update id="deleteRecommendation">											<!-- 글 삭제(내용) -->
+		update recommendation
+		set rec_status = 'N'
+		where rec_no = #{recNo}
+	</update>				
+	
+	<update id="statusNRecommendation">											<!-- 글 삭제(첨부) -->
+		update attachment
+		set att_status = 'N'
+		where att_bno = #{recNo}
+	</update>
+	
+	<update id="checkDelete">													<!-- 체크박스 삭제 -->
+		update recommendation
+		set rec_status = 'N'
+		where rec_No in
+		<foreach collection="array" open="(" separator="," close=")" item="recNo">
+			#{recNo}
+		</foreach>
+	</update>
+	
+	<select id="selectRecommendation" resultType="Recommendation">				<!-- 상세조회 -->
+		select *
+		from recommendation 
+		join member using(mem_id)
+		where rec_status = 'Y' and rec_no = #{recNo}
+	</select>
+	
+	<select id="selectAttmRecommendationList" resultType="Attachment">			<!-- 상세조회 -->
+		select *
+		from attachment
+		where att_status = 'Y'
+		<if test="recNo == null">
+			and att_fno = 0
+		</if>
+		<if test="recNo != null">
+			and att_bno = #{recNo}
+		</if>
+		order by att_no	
+	</select>
+	
+	<delete id="deleteAttm">													<!-- 글 수정(사진삭제) -->
+		delete from attachment
+		where att_rename in
+		<foreach collection="list" item="rename" open="(" separator="," close=")">
+			#{rename}
+		</foreach>
+	</delete>
+	
+	<update id="updateAttmLevel">												<!-- 글 수정 -->
+		update attachment
+		set att_fno = 0
+		where att_no = (select min(att_no)
+						from attachment
+						where att_bno = #{recNo})
+	</update>
+	
+	<update id="updateRecommendation">											<!-- 글 수정(글) -->
+		update recommendation
+		set REC_TITLE = #{recTitle}, REC_CONTENT = #{recContent}, REC_STYLE = #{recStyle}
+		where rec_no = #{recNo}
+	</update>
+	
+	
+	<update id="insertReply">													<!-- 답글 등록 -->
+		update recommendation 
+		set REC_REPLY=#{recReply}, REC_CREATE_DATE=sysdate
+		where REC_NO=#{recNo}
+	</update>
+	
+	<insert id="insertAttmReply">												<!-- 답글(첨부) 등록 -->
+		insert all
+			into attachment
+			values(ATT_NEW, #{attRename}, default, #{attFno}, #{attCategory}, #{attBno})
+		select * from dual	
+	</insert>
+
+	<update id="updateAttmReply">												<!-- 답글 수정 -->
+		update attachment
+		set att_rename = #{rename}
+		where att_bno = #{recNo} and att_fno = 2 and att_category = 3
+	</update>
+	
+	<delete id="deleteAttmReply">												<!-- 답글 수정 -->
+		delete attachment
+		where att_rename = #{delRename}
+	</delete>	
+	
+	<update id="updateReply">													<!-- 답글 수정 -->
+		update recommendation
+		set rec_reply = #{recReply}, rec_create_date=sysdate
+		where rec_no = #{recNo}
+	</update>
+	
+</mapper>
