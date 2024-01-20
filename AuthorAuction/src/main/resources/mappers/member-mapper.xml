@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.auction.member.dao.MemberDAO">
+	
+	<select id="checkId" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEM_ID = #{memId} AND MEM_STATUS = 'Y' AND MEM_PWD != 'kakao'
+	</select>
+	 
+	<select id="checkNickName" resultType="_int">
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE MEM_NICKNAME = #{memNickName} AND MEM_STATUS = 'Y' AND MEM_PWD != 'kakao'
+	</select>
+
+	<insert id="insertMember">
+		INSERT INTO MEMBER
+		VALUES (#{memId}, #{memPwd}, #{memName}, #{memNickName}, #{memFileName}, #{memAddress}, #{memPhone}, #{memEmail}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="login">
+		SELECT *
+		FROM MEMBER join grade on(GRA_NAME = MEM_RATING)
+		WHERE MEM_ID = #{memId} AND MEM_STATUS = 'Y' AND MEM_PWD != 'kakao'
+	</select>
+	
+	<select id="findMyInfo">
+		SELECT *
+		FROM MEMBER
+		WHERE MEM_STATUS = 'Y' AND MEM_PWD != 'kakao'
+		<if test="memId != null">
+			AND MEM_ID = #{memId}
+		</if>
+		<if test="memName != null">
+			AND MEM_NAME = #{memName}
+		</if>
+		<if test="memPhone != null">
+			AND MEM_PHONE = #{memPhone} 
+		</if>
+		<if test="memEmail != null">
+			AND MEM_EMAIL = #{memEmail}
+		</if>
+	</select>
+	
+	<update id="updatePwd">
+		UPDATE MEMBER
+		SET MEM_PWD = #{memPwd} 
+		WHERE MEM_ID = #{memId}
+	</update>
+	 
+	<insert id="insertAddress">
+		INSERT INTO ADDRESS
+		VALUES(SEQ_ADD.NEXTVAL, #{addName}, #{addRecipient}, #{addAddress}, #{addPhone}, #{addDefault}, #{memId}, DEFAULT)
+	</insert>
+	
+	<update id="updateAddressDefault">
+		UPDATE ADDRESS
+		SET ADD_DEFAULT = #{addDefault}
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<select id="selectAddressList">
+		SELECT *
+		FROM ADDRESS
+		WHERE MEM_ID = #{id} AND ADD_STATUS = 'Y' AND ADD_DEFAULT IN ('Y','N')
+		ORDER BY ADD_DEFAULT DESC,
+        ADD_NO DESC
+	</select>
+	
+	<select id="selectAddress">
+		SELECT *
+		FROM ADDRESS
+		WHERE ADD_NO = #{addNo}
+	</select>
+	
+	<update id="updateAddress">
+		UPDATE ADDRESS
+		SET ADD_NAME = #{addName}, ADD_RECIPIENT = #{addRecipient}, ADD_ADDRESS = #{addAddress}, ADD_PHONE = #{addPhone}, ADD_DEFAULT = #{addDefault}
+		WHERE ADD_NO = #{addNo}
+	</update>
+	
+	<update id="deleteMember">
+		UPDATE MEMBER
+		SET MEM_STATUS = 'N'
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<delete id="deleteAddress">
+		UPDATE ADDRESS
+		SET ADD_STATUS = 'N'
+		WHERE ADD_NO = #{addNo}
+	</delete>
+	
+	<update id="updateMember">
+		UPDATE MEMBER
+		<if test="memNickName != null">
+			SET MEM_NICKNAME = #{memNickName}
+		</if>
+		<if test="memName != null">
+			SET MEM_NAME = #{memName}
+		</if>
+		<if test="memEmail != null">
+			SET MEM_EMAIL = #{memEmail} 
+		</if>
+		<if test="memPhone != null">
+			SET MEM_PHONE = #{memPhone}
+		</if>
+		<if test="memAddress != null">
+			SET MEM_ADDRESS = #{memAddress}
+		</if>
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<update id="updateMemImg">
+		UPDATE MEMBER
+		SET MEM_FILENAME = #{memFileName}
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<update id="deleteMemImg">
+		UPDATE MEMBER
+		SET MEM_FILENAME = 'member/images/defaultProfile.svg'
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<select id="getListCount" resultType="_int"> 
+		SELECT COUNT(*)
+		FROM MEMBER
+		WHERE 1=1
+		<if test="isAdmin != null">
+			AND MEM_ISADMIN = #{isAdmin}
+		</if>
+		<if test="searchText != null">
+			AND ${keyword} like '%'|| #{searchText} ||'%'
+		</if>
+		<if test="startDate != null and endDate == null">
+			AND MEM_DATE <![CDATA[ >= ]]> #{startDate}
+		</if>
+		<if test="startDate == null and endDate != null">
+			AND MEM_DATE <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="startDate != null and endDate != null">
+			AND MEM_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="status != null">
+			AND MEM_STATUS = #{status}
+		</if>
+	</select>
+	
+	<select id="selectMemberList" resultType="Member">
+		SELECT *
+		FROM MEMBER
+		WHERE 1=1
+		<if test="isAdmin != null">
+			AND MEM_ISADMIN = #{isAdmin}
+		</if>
+		<if test="searchText != null">
+			AND ${keyword} like '%'|| #{searchText} ||'%'
+		</if>
+		<if test="startDate != null and endDate == null">
+			AND MEM_DATE <![CDATA[ >= ]]> #{startDate}
+		</if>
+		<if test="startDate == null and endDate != null">
+			AND MEM_DATE <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="startDate != null and endDate != null">
+			AND MEM_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		<if test="status != null">
+			AND MEM_STATUS = #{status}
+		</if>
+		ORDER BY MEM_STATUS DESC, MEM_DATE DESC
+	</select>
+	
+	<update id="deleteMembers">
+		UPDATE MEMBER
+		SET MEM_STATUS = 'N'
+		WHERE MEM_ID IN
+		<foreach item="item" collection="array" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<update id="updateMemberIsAdmin">
+		UPDATE MEMBER
+		SET MEM_ISADMIN = #{memIsAdmin}
+		WHERE MEM_ID = #{memId}	
+	</update>
+	
+	<select id="selectMember">
+		SELECT *
+		FROM MEMBER
+		WHERE MEM_ID = #{id}
+	</select>
+	
+	<update id="updateMemberByAdmin">
+		UPDATE MEMBER
+		SET MEM_NICKNAME = #{memNickName}, MEM_EMAIL = #{memEmail}, MEM_PHONE = #{memPhone}, MEM_ADDRESS = #{memAddress}
+		WHERE MEM_ID = #{memId}
+	</update>
+	
+	<select id="getiListCount">
+		SELECT COUNT(*)
+		FROM INQUIRY
+		WHERE MEM_ID = #{id}
+		<if test="startDate != null and endDate == null">
+			AND INQ_DATE <![CDATA[ >= ]]> #{startDate}
+		</if>
+		<if test="startDate == null and endDate != null">
+			AND INQ_DATE <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="startDate != null and endDate != null">
+			AND INQ_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+	</select>
+	
+	<select id="selectInquiryList">
+		SELECT *
+		FROM INQUIRY 
+		WHERE MEM_ID = #{id}
+		<if test="startDate != null and endDate == null">
+			AND INQ_DATE <![CDATA[ >= ]]> #{startDate}
+		</if>
+		<if test="startDate == null and endDate != null">
+			AND INQ_DATE <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="startDate != null and endDate != null">
+			AND INQ_DATE BETWEEN #{startDate} AND #{endDate}
+		</if>
+		ORDER BY INQ_NO DESC
+	</select>
+	
+	<select id="selectInquiry">
+		SELECT INQ_FILENAME
+		FROM INQUIRY
+		WHERE INQ_NO = #{inqNo}
+	</select>
+	
+	<select id="kakaoLogin">
+		SELECT *
+		FROM MEMBER
+		WHERE MEM_NAME = #{memName} AND MEM_PHONE = #{memPhone} AND MEM_STATUS = 'Y'
+	</select>
+	
+	<insert id="insertKakaoAddress">
+		INSERT ALL
+		<foreach collection="list" item="item">
+			INTO ADDRESS
+			VALUES(SEQ_AID, #{item.addName}, #{item.addRecipient}, #{item.addAddress}, #{item.addPhone}, #{item.addDefault}, #{item.memId}, 'Y')
+		</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<insert id="insertKakaoMember">
+		INSERT INTO MEMBER
+		VALUES(#{memId}, #{memPwd}, #{memName}, #{memNickName}, #{memFileName}, #{memAddress}, #{memPhone}, #{memEmail}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<select id="getWishCount">
+		SELECT COUNT(*)
+		FROM WISHLIST
+		WHERE MEM_ID = #{id}
+	</select>
+	
+</mapper>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="그룹_464319" data-name="그룹 464319" transform="translate(-2692 1629)">
+    <rect id="bg" width="24" height="24" transform="translate(2692 -1629)" fill="#d59b45" opacity="0"/>
+    <g id="그룹_464319-2" data-name="그룹 464319">
+      <path id="Vector" d="M10,20A10,10,0,1,0,0,10,10.029,10.029,0,0,0,10,20Z" transform="translate(2694 -1627)" fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+      <path id="합치기_5" data-name="합치기 5" d="M4,9V6H1A1,1,0,0,1,1,4H4V1A1,1,0,0,1,6,1V4H9A1,1,0,0,1,9,6H6V9A1,1,0,0,1,4,9Z" transform="translate(2699 -1622)" fill="#111"/>
+    </g>
+  </g>
+</svg>

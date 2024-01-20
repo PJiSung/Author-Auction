@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.auction.user.dao.ReviewDAO">
+	
+	<select id="getOrderList" resultType="map">
+		select distinct pro_no, pro_name, pro_writer, ord_date
+		from orders join order_detail using(ord_no)
+            		join product using(pro_no)
+		where mem_id = #{id} and ord_status = '배송완료' and months_between(sysdate, ord_date) <![CDATA[<=]]> 3
+	</select>
+	
+	<insert id="insertReview" useGeneratedKeys="true">
+		<selectKey order="BEFORE" resultType="_int" keyProperty="revNo">
+			select rev_seq.nextval from dual
+		</selectKey>
+		insert into review
+		values(#{revNo}, #{revContent}, default, sysdate, sysdate, default, #{memId}, #{proNo})
+	</insert>
+	
+	<insert id="insertAttm">
+		insert all
+		<foreach collection="list" item="item">
+			into attachment
+			values(att_new, #{item.attRename}, default, #{item.attFno}, #{item.attCategory}, #{item.attBno})
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from review
+		where rev_status = 'Y'
+	</select>
+	
+	<select id="selectReviewList" resultType="Review">
+		select *
+		from (select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, rev_status, mem_id, pro_no,
+        	  		 pro_name, pro_writer, pro_image, mem_nickname, mem_filename,
+        			 case when a.att_category = '1' then 'Y' else 'N' end as has_attm,
+        	  		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+			  		 row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+    		  from review r join member using (mem_id)
+        			  join product using (pro_no)
+					  left join attachment a on r.rev_no = a.att_bno
+    		  where rev_status = 'Y')
+		where rn = 1
+		order by rev_no desc
+	</select>
+	
+	<select id="selectAttmList" resultType="Attachment">
+		select *
+		from attachment
+		where att_status = 'Y' and att_category in (1, 4) 
+		<if test="revNo != null">
+			and att_bno = #{revNo}
+		</if>
+		order by att_no
+	</select>
+	
+	<select id="getSearchListCount" resultType="_int">
+		select count(*)
+    	from (select rev_no, rev_content, rev_modify_date, pro_no, pro_name, pro_writer, pro_image,
+            		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+            		 case when a.att_category = '1' then 'Y' else 'N' end as has_attm
+      		  from review r join product using (pro_no)
+      		  				left join attachment a on r.rev_no = a.att_bno
+   		<where>
+        	pro_no = pro_no and rev_status = 'Y'
+      		<if test="category != null and keyword != null">
+      			<choose>
+      				<when test="category == '전체'">
+			            and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
+      				</when>
+      				<when test="category == '작품명'">
+			            and pro_name like '%'||#{keyword}||'%'
+      				</when>
+      				<when test="category == '작가명'">
+			            and pro_writer like '%'||#{keyword}||'%'
+      				</when>
+      			</choose>
+      		</if>
+   		</where>
+   		)
+        <if test="selectedSort != null">
+        	<choose>
+	        	<when test="selectedSort == 'latest'">
+	        		order by rev_modify_date desc
+	        	</when>
+	        	<when test="selectedSort == 'recommend'">
+	        		order by rev_like desc
+	        	</when>
+        	</choose>
+        </if>
+	</select>
+	
+	<select id="searchReview" parameterType="map" resultType="Review">
+    	select *
+    	from (select rev_no, rev_content, rev_modify_date, pro_no, pro_name, pro_writer, pro_image,
+            		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+            		 case when a.att_category = '1' then 'Y' else 'N' end as has_attm
+      		  from review r join product using (pro_no)
+      		  				left join attachment a on r.rev_no = a.att_bno
+   		<where>
+        	pro_no = pro_no and rev_status = 'Y'
+      		<if test="category != null and keyword != null">
+      			<choose>
+      				<when test="category == '전체'">
+			            and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
+      				</when>
+      				<when test="category == '작품명'">
+			            and pro_name like '%'||#{keyword}||'%'
+      				</when>
+      				<when test="category == '작가명'">
+			            and pro_writer like '%'||#{keyword}||'%'
+      				</when>
+      			</choose>
+      		</if>
+   		</where>
+   		)
+        <if test="selectedSort != null">
+        	<choose>
+	        	<when test="selectedSort == 'latest'">
+	        		order by rev_modify_date desc
+	        	</when>
+	        	<when test="selectedSort == 'recommend'">
+	        		order by rev_like desc
+	        	</when>
+        	</choose>
+        </if>
+	</select>
+	
+	<update id="deleteReview">
+		update review
+		set rev_status = 'N'
+		where rev_no = #{revNo}
+	</update>
+		
+	<update id="statusNAttm">
+		update attachment
+		set att_status = 'N'
+		where att_bno = #{revNo}
+	</update>
+	
+	<update id="deleteReplyList">
+		update reply
+		set rep_status = 'N'
+		where rev_no = #{revNo}
+	</update>
+	
+	<select id="selectReview" resultType="Review">
+		select *
+		from (select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, rev_status, mem_id, pro_no,
+        	  		 pro_name, pro_writer, pro_image, mem_nickname, mem_filename,
+        			 case when a.att_category = '1' then 'Y' else 'N' end as has_attm,
+        	  		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+			  		 row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+    		  from review r join member using (mem_id)
+        			  join product using (pro_no)
+					  left join attachment a on r.rev_no = a.att_bno
+    		  where rev_status = 'Y')
+		where rev_status = 'Y' and rev_no = #{revNo} and rn = 1
+	</select>
+	
+	<delete id="deleteAttm">
+		delete from attachment
+		where att_rename in
+		<foreach collection="list" item="rename" open="(" close=")" separator=",">
+			#{rename}
+		</foreach>
+	</delete>
+	
+	<update id="updateAttmLevel">
+		update attachment
+		set att_fno = 0
+		where att_no = (select min(att_no)
+						from attachment
+						where att_bno = #{revNo})
+	</update>
+	
+	<update id="updateReview">
+		update review
+		set rev_content = #{revContent}, rev_modify_date = sysdate
+		where rev_no = #{revNo}
+	</update>
+	
+	<insert id="insertReviewList">
+		insert into review_like
+		values(lik_seq.nextval, #{memId}, #{revNo})
+	</insert>
+	
+	<select id="selectReviewLike" resultType="_int">
+		select count(*)
+		from review_like
+		where rev_no = #{revNo}
+	</select>
+	
+	<delete id="deleteReviewLike">
+		delete review_like
+		where rev_no = #{revNo} and mem_id = #{memId}
+	</delete>
+	
+	<select id="reviewLikeList" resultType="map">
+		select *
+		from review_like
+	</select>
+	
+	<select id="selectReviewAllList" resultType="Review">
+		select *
+		from (select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, rev_status, mem_id, pro_no,
+        	  		 pro_name, pro_writer, pro_image, mem_nickname, mem_filename,
+        			 case when a.att_category = '1' then 'Y' else 'N' end as has_attm,
+        	  		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+			  		 row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+    		  from review r join member using (mem_id)
+        			  join product using (pro_no)
+					  left join attachment a on r.rev_no = a.att_bno
+    		  where rev_status = 'Y')
+		where rn = 1
+		order by rev_no desc
+	</select>
+	
+	<update id="updateReviewCount">
+		update review
+		set rev_count = rev_count + 1
+		where rev_no = #{revNo}
+	</update>
+	
+	<select id="getReviewCount" resultType="_int">
+		select rev_count
+		from review
+		where rev_no = #{revNo}
+	</select>
+	
+	<insert id="insertReply">
+		insert into reply
+		values(rep_seq.nextval, #{repContent}, sysdate, sysdate, default, #{memId}, #{revNo})
+	</insert>
+	
+	<select id="selectReplyList" resultType="Reply">
+		select rep_no, rep_content, mem_id, mem_filename, mem_nickname, rev_no,
+        	   to_char(rep_create_date, 'YYYY-MM-DD"T"HH24:MI:SS') as rep_create_date,
+        	   to_char(rep_modify_date, 'YYYY-MM-DD"T"HH24:MI:SS') as rep_modify_date
+		from reply join member using(mem_id)
+		where rev_no = #{revNo} and rep_status = 'Y'
+		order by rep_no desc
+	</select>
+	
+	<update id="updateReply">
+		update reply
+		set rep_content = #{repContent}, rep_modify_date = sysdate
+		where rep_no = #{repNo}
+	</update>
+	
+	<update id="deleteReply">
+		update reply
+		set rep_status = 'N'
+		where rep_no = #{repNo}
+	</update>
+	
+	<select id="getMyReviewListCount" resultType="_int">
+		select count(*)
+		from (select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, mem_id, pro_no,
+        	  		 pro_name, pro_writer, pro_image,
+        	  		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+                     row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+    		  from review r join member using (mem_id)
+        			  join product using (pro_no)
+					  left join attachment a on r.rev_no = a.att_bno
+    		  where rev_status = 'Y' and mem_id = #{memId})
+        where rn = 1
+        <if test="keyword != null">
+		  	<choose>
+   				<when test="category == '전체'">
+            		and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
+   				</when>
+   				<when test="category == '작품명'">
+           		 	and pro_name like '%'||#{keyword}||'%'
+   				</when>
+   				<when test="category == '작가명'">
+            		and pro_writer like '%'||#{keyword}||'%'
+   				</when>
+   			</choose>
+		 </if>
+		<if test="strDate != null and endDate == null ">
+			and rev_create_date <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == null and endDate != null ">
+			and rev_create_date <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != null and endDate != null">
+			and rev_create_date between #{strDate} and #{endDate}
+		</if>
+		<if test="selectedSort != null">
+        	<choose>
+	        	<when test="selectedSort == '최신순'">
+	        		order by rev_no desc
+	        	</when>
+	        	<when test="selectedSort == '등록순'">
+	        		order by rev_no
+	        	</when>
+        	</choose>
+        </if>
+	</select>
+	
+	<select id="selectMayReviewList">
+		select *
+		from (select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, mem_id, pro_no,
+        	  		 pro_name, pro_writer, pro_image,
+        	  		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+                     row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+    		  from review r join member using (mem_id)
+        			  join product using (pro_no)
+					  left join attachment a on r.rev_no = a.att_bno
+    		  where rev_status = 'Y' and mem_id = #{memId})
+        where rn = 1
+        <if test="keyword != null">
+		  	<choose>
+   				<when test="category == '전체'">
+            		and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
+   				</when>
+   				<when test="category == '작품명'">
+           		 	and pro_name like '%'||#{keyword}||'%'
+   				</when>
+   				<when test="category == '작가명'">
+            		and pro_writer like '%'||#{keyword}||'%'
+   				</when>
+   			</choose>
+		 </if>
+		<if test="strDate != null and endDate == null ">
+			and rev_create_date <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == null and endDate != null ">
+			and rev_create_date <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != null and endDate != null">
+			and rev_create_date between #{strDate} and #{endDate}
+		</if>
+		<if test="selectedSort != null">
+        	<choose>
+	        	<when test="selectedSort == '최신순'">
+	        		order by rev_no desc
+	        	</when>
+	        	<when test="selectedSort == '등록순'">
+	        		order by rev_no
+	        	</when>
+        	</choose>
+        </if>
+        <if test="selectedSort == null">
+			order by rev_no desc
+        </if>
+	</select>
+	
+	<select id="getMyReplyListCount">
+		select count(*)
+		from member join reply on (member.mem_id = reply.mem_id)
+					join review on (reply.rev_no = review.rev_no)
+					join product on (review.pro_no = product.pro_no)
+		where reply.rep_status = 'Y' AND member.mem_id = #{memId}
+		<if test="keyword != null">
+		  	<choose>
+   				<when test="category == '전체'">
+            		and (product.pro_name like '%'||#{keyword}||'%' or product.pro_writer like '%'||#{keyword}||'%')
+   				</when>
+   				<when test="category == '작품명'">
+           		 	and product.pro_name like '%'||#{keyword}||'%'
+   				</when>
+   				<when test="category == '작가명'">
+            		and product.pro_writer like '%'||#{keyword}||'%'
+   				</when>
+   			</choose>
+		 </if>
+		<if test="strDate != null and endDate == null ">
+			and rep_create_date <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == null and endDate != null ">
+			and rep_create_date <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != null and endDate != null">
+			and rep_create_date between #{strDate} and #{endDate}
+		</if>
+		<if test="selectedSort != null">
+        	<choose>
+	        	<when test="selectedSort == '최신순'">
+	        		order by rep_no desc
+	        	</when>
+	        	<when test="selectedSort == '등록순'">
+	        		order by rep_no
+	        	</when>
+        	</choose>
+        </if>
+	</select>
+	
+	<select id="selectMyReplyList" resultType="Reply">
+		select rep_no, rep_content, rep_create_date, rep_modify_date, pro_name, pro_writer, product.pro_no, review.rev_no
+		from member join reply on (member.mem_id = reply.mem_id)
+					join review on (reply.rev_no = review.rev_no)
+					join product on (review.pro_no = product.pro_no)
+		where reply.rep_status = 'Y' AND member.mem_id = #{memId}
+		 <if test="keyword != null">
+		  	<choose>
+   				<when test="category == '전체'">
+            		and (product.pro_name like '%'||#{keyword}||'%' or product.pro_writer like '%'||#{keyword}||'%')
+   				</when>
+   				<when test="category == '작품명'">
+           		 	and product.pro_name like '%'||#{keyword}||'%'
+   				</when>
+   				<when test="category == '작가명'">
+            		and product.pro_writer like '%'||#{keyword}||'%'
+   				</when>
+   			</choose>
+		 </if>
+		<if test="strDate != null and endDate == null ">
+			and rep_create_date <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == null and endDate != null ">
+			and rep_create_date <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != null and endDate != null">
+			and rep_create_date between #{strDate} and #{endDate}
+		</if>
+		<if test="selectedSort != null">
+        	<choose>
+	        	<when test="selectedSort == '최신순'">
+	        		order by rep_no desc
+	        	</when>
+	        	<when test="selectedSort == '등록순'">
+	        		order by rep_no
+	        	</when>
+        	</choose>
+        </if>
+        <if test="selectedSort == null">
+			order by rep_no desc
+        </if>
+	</select>
+	
+	
+</mapper>

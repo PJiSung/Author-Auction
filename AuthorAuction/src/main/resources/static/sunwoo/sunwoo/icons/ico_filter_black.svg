@@ -1,0 +1,15 @@
+<svg id="filter_icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="사각형_341998" data-name="사각형 341998" width="24" height="24" fill="#e50025" opacity="0"/>
+  <g id="그룹_461238" data-name="그룹 461238">
+    <g id="그룹_465077" data-name="그룹 465077">
+      <line id="선_974" data-name="선 974" x2="8" transform="translate(2 6)" fill="none" stroke="#0e0d10" stroke-linecap="round" stroke-width="2"/>
+      <line id="선_976" data-name="선 976" x2="4" transform="translate(18 6)" fill="none" stroke="#0e0d10" stroke-linecap="round" stroke-width="2"/>
+      <circle id="타원_4052" data-name="타원 4052" cx="4" cy="4" r="4" transform="translate(10 2)" fill="none" stroke="#0e0d10" stroke-width="2"/>
+    </g>
+    <g id="그룹_465078" data-name="그룹 465078" transform="translate(2 14)">
+      <line id="선_974-2" data-name="선 974" x1="8" transform="translate(12 4)" fill="none" stroke="#0e0d10" stroke-linecap="round" stroke-width="2"/>
+      <line id="선_976-2" data-name="선 976" x1="4" transform="translate(0 4)" fill="none" stroke="#0e0d10" stroke-linecap="round" stroke-width="2"/>
+      <circle id="타원_4052-2" data-name="타원 4052" cx="4" cy="4" r="4" transform="translate(4)" fill="none" stroke="#0e0d10" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

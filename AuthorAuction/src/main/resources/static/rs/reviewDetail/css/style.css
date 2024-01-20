@@ -1,0 +1,50 @@
+@charset "utf-8"; 
+
+.reviewDetail .contents-inner { padding: 1.6rem; }
+.reviewDetail .contents-container { display: flex; justify-content: space-between; }
+.reviewDetail .contents-left { width: 50%; }
+.reviewDetail .contents-thumbnail { width: 100%; height: 64rem; border-radius: 2rem; overflow: hidden; }
+.reviewDetail .contents-thumblist { display: flex; align-items: center; margin-top: 2rem; overflow-x: auto; }
+.reviewDetail .contents-thumbitem { flex-shrink: 0; width: 12rem; height: 12rem; border-radius: 1rem; overflow: hidden; cursor: pointer; }
+.reviewDetail .contents-thumbitem+.contents-thumbitem { margin-left: 2rem; }
+.reviewDetail .contents-thumbimg { width: 100%; height: 100%; object-fit: cover; }
+.reviewDetail .contents-right { width: calc(50% - 10rem); margin-top: 4.2rem; }
+.reviewDetail .contents-btn { width: 2.4rem; height: 2.4rem; border: 0; background-color: transparent; }
+.reviewDetail .contents-btn img { width: 100%; height: 100%; object-fit: contain; vertical-align: top; }
+.reviewDetail .contents-right-group { padding-bottom: 2rem; }
+.reviewDetail .contents-right-group:first-child { border-bottom: 1px solid var(--line-color3); }
+.reviewDetail .contents-right-group+.contents-right-group { padding-top: 2rem; }
+.reviewDetail .contents-right-group+.contents-right-group+.contents-right-group { border-top: 1px solid var(--border-color); }
+.reviewDetail .contents-brand { display: flex; align-items: center; }
+.reviewDetail .contents-brand a { font-size: var(--fs-p3); line-height: var(--lh-p3); color: var(--text-color3); }
+.reviewDetail .contents-brand-group { display: flex; align-items: center; gap: 1.6rem; }
+.reviewDetail .contents-brand-group.like-on .btn-like-line { display: none; }
+.reviewDetail .contents-brand-group.like-on .btn-like-fill { display: block; }
+.reviewDetail .contents-brand .btn-like-fill { display: none; }
+.reviewDetail .contents-right .textset { margin: 1.6rem 0 2rem 0; }
+.reviewDetail .contents-right .textset-tit { font-size: var(--fs-h4); line-height: var(--lh-h4); font-weight: 500; }
+.reviewDetail .contents-right .textset-desc { margin-top: 0.6rem; }
+.reviewDetail .contents-badge-group { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; }
+.reviewDetail .contents-price { font-size: var(--fs-h5); font-weight: 600; }
+.reviewDetail .contents-price span { font-size: var(--fs-p2); font-weight: 500; }
+.reviewDetail .contents-right-item { display: flex; justify-content: space-between; font-size: 1.4rem; line-height: 2rem; font-weight: 400; }
+.reviewDetail .contents-right-item+.contents-right-item { margin-top: 0.8rem; }
+.reviewDetail .contents-right-item strong { display: inline-block; width: 40%; color: var(--text-color3); font-weight: 400; }
+.reviewDetail .contents-right-item span { display: inline-block; width: 60%; text-align: right; }
+.reviewDetail .contents-amount { display: flex; align-items: center; justify-content: flex-end; gap: 1.6rem; width: 50%; }
+.reviewDetail .contents-amount .contents-btn { width: 2.8rem; height: 2.8rem; border: 1px solid var(--border-color); border-radius: 50%; }
+.reviewDetail .contents-amount .contents-btn:hover,.reviewDetail .contents-amount .contents-btn:active { border-color: var(--line-color3); }
+.reviewDetail .contents-amount-num { font-size: 1.8rem; }
+.reviewDetail .contents-total { display: flex; justify-content: space-between; margin-top: 2.4rem; }
+.reviewDetail .contents-total strong { display: inline-block; width: 40%; font-size: var(--fs-p1); font-weight: 500; }
+.reviewDetail .contents-total .contents-price { width: 60%; text-align: right; }
+.reviewDetail .contents-btn-group { display: flex; align-items: center; margin-top: 2rem; }
+.reviewDetail .contents-btn-group .btnset { min-width: auto; width: 50%; }
+@media (max-width: 992px) {
+ .reviewDetail .contents-inner { padding: 1.6rem; }
+ .reviewDetail .contents-container { flex-direction: column; }
+ .reviewDetail .contents-left { width: 100%; }
+ .reviewDetail .contents-thumbnail { height: 50rem; }
+ .reviewDetail .contents-right { width: 100%; }
+ .reviewDetail .contents-total { margin-top: 2rem; }
+}

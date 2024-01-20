@@ -1,0 +1,250 @@
+@charset "utf-8"; 
+
+.dropdown{
+  position : relative;
+  display : inline-block;
+}
+
+.dropdown-content-user{
+  display : none;
+  position : relative;
+  left: -105px;
+  position : absolute;
+  z-index : 1;
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+              0 2px 2px rgba(0,0,0,0.12), 
+              0 4px 4px rgba(0,0,0,0.12), 
+              0 8px 8px rgba(0,0,0,0.12),
+              0 16px 16px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.2);
+  min-width: 250px;
+  font-size: 1.5rem;
+  color: #111111;
+}
+
+.dropdown-content-user table{
+    width: 100%;
+}
+
+.dropdown-content-user table tr:first-child{
+   background-color: rgb(246,246,246);
+}
+
+.dropdown-content-user tr{
+    padding: 30px;
+}
+
+.dropdown-content-user a{
+  display : block;
+  padding: 10px;
+  line-height: 2rem; 
+}
+
+.dropdown-content-user .profile{
+   width: 40%; 
+   margin: 0 auto; 
+   padding-top: 12px; 
+   padding-bottom: 10px;
+}
+
+.dropdown-content-user .profilePic{
+   margin: auto;
+   width: 60px;
+   height: 60px;
+   border-radius: 70%;
+   overflow: hidden;
+}
+
+.dropdown-content-user .profileImg{
+   width:100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.dropdown-content-user .cash{
+   padding: 10px;
+   text-align: center;
+}
+
+.dropdown-content-user .userText{
+   padding-left: 15px;
+}
+
+.dropdown-content-user .userMenu{
+   text-align: center;
+}
+
+.dropdown-content-user .cashButton{
+   display: inline-block;
+   line-height: 16px;
+   font-size: 1.3rem;
+   border: 1px solid rgba(0,0,0,0.5);
+   border-radius: 13%;
+   padding: 2px;
+   cursor: pointer;
+}
+
+.dropdown-content-user .cashButton:hover{
+   background-color: rgba(0,0,0,0.8);
+   color: white;
+}
+
+.dropdown-content-user tr:hover{
+   background-color: rgb(246,246,246);
+   color: black;
+}
+
+.dropdown:hover .dropdown-content-user{
+  display: block;
+}
+
+.dropdown-content-keyword{
+  display : none;
+  position : relative;
+  left: -265px;
+  z-index : 1;
+  width:300px;
+  min-height: 200px;
+  background-color: white;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+              0 2px 2px rgba(0,0,0,0.12), 
+              0 4px 4px rgba(0,0,0,0.12), 
+              0 8px 8px rgba(0,0,0,0.12),
+              0 16px 16px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 5px;
+  padding-bottom: 10px;
+}
+
+.dropdown:hover .dropdown-content-keyword{
+  display: block;
+}
+
+.dropdown-content-keyword #search-form button{
+  border: 0;
+  background-color: transparent;
+}
+
+.dropdown-content-keyword #search-form {
+   margin-left: 10px;
+   margin-right: 10px;
+   height: 50px;
+   border-bottom: 1px solid rgba(0,0,0);
+   position: relative;
+   display: flex;
+   align-items: center;
+   overflow: hidden;
+}
+
+ .dropdown-content-keyword #search-input {
+   flex: 1;
+   border: none;
+   outline: none;
+}
+
+.dropdown-content-keyword #search-results .recoTable{
+   text-align: center;
+   padding-bottom: 15px;
+}
+
+.dropdown-content-keyword #search-results .recoTable a{
+   border: 1px solid rgba(0,0,0,0.2);
+   border-radius: 20px;
+   padding: 5px;
+   padding-left: 5px;
+   width: 135px;
+   text-align: left;
+   background-color: rgb(246, 246, 246);
+   color: rgba(0, 0, 0, 0.8);
+}
+
+.dropdown-content-keyword #search-results .recoTable tr{
+   display : block;
+   padding-top: 10px;
+   font-size: 1.5rem; 
+   font-weight: 400; 
+   line-height: 30px;
+}
+
+.dropdown-content-keyword #search-results .recoTable td{
+   width: 150px;
+}
+
+.dropdown-content-keyword #search-results .searchTable td{
+	overflow: hidden;
+ 	text-overflow: ellipsis;
+ 	white-space: nowrap;
+	font-size: 1.4rem;
+	padding: 3px;
+	cursor: pointer;
+}
+
+.dropdown-content-keyword #search-results .searchTable tr{
+	color: var(--text-color4);
+}
+
+.dropdown-content-keyword #search-results .searchTable tr:hover{
+	color: black;
+}
+
+.dropdown-content-keyword #search-results .searchDiv{
+	margin: 0 auto;
+	margin-top: 3px;
+	text-align: center;
+	height: 250px;
+ 	width: 94%;
+ 	overflow: auto;
+}
+
+.dropdown-content-keyword #search-results .searchDiv::-webkit-scrollbar {
+    width: 6px;
+}
+
+#search-results .searchDiv::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: black;
+    border-radius: 10px;
+}
+
+#search-results .searchDiv::-webkit-scrollbar-track {
+    background-color: rgb(246, 246, 246);
+}
+
+.searchImg{
+   margin: auto;
+   width:37px;
+   height: 37px;
+   overflow: hidden;
+}
+
+#search-results img{
+   width:100%;
+   height: 100%;
+}
+
+#search-results a:hover{
+  color: black;
+}
+
+.dropbtn{
+   padding-bottom: 10px;
+   cursor: pointer;
+}
+
+.btn-cart{position: relative;}
+
+
+.cartCount{
+   position: absolute;
+   left:17px;
+   top:15px;
+   background-color: black;
+   width: 16px;
+   height: 16px;
+   color: white;
+   border-radius: 70%;
+   font-size: 1.3rem;
+   text-align: center;
+   line-height: 1.7rem;
+}
