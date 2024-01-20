@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.auction.user.dao.AuctionDAO">
+
+	<select id="getAllOngingAuctionNum">
+		select count(*)
+			from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno)
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where sysdate between auc_start_date and auc_finish_date
+	</select>
+
+	<select id="getAllAuction" resultType="Auction">
+		select auc_no, auc_start_price, auc_finish_price ,to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno)
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where sysdate between auc_start_date and auc_finish_date
+		<choose>
+			<when test="sort == null">
+				order by auc_no desc
+			</when>
+			<when test="sort != null">
+				<include refid="sort"></include>
+			</when>
+		</choose>
+	</select>
+	
+	<select id="getAuctionDetail" resultType="Auction">
+		select auc_no, auc_start_price, auc_finish_price, to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno) 
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where auc_no = #{aucNo}
+	</select>
+	
+	<select id="getAuctionAttachment" resultType="Attachment">
+		select *
+		from attachment
+		where att_bno = (select auc_cno
+                        from auction
+                        where auc_no = #{aucNo}) and att_status = 'Y' and att_category = 2 and (att_fno = 2 or att_fno = 3)
+		order by att_fno
+	</select>
+	
+	<update id="insertBid">
+		update auction
+		set auc_finish_price = #{bidMoney}, auc_mem_id = #{id}
+		<![CDATA[
+		where (auc_finish_price < #{bidMoney} or auc_finish_price < #{bidMoney}) and auc_no = #{aucNo}
+		]]>
+	</update>
+
+	<update id="returnUnsold">
+		update member
+		set mem_balance = mem_balance + #{beforeBidMoney}
+		where mem_id = #{beforeId}
+	</update>
+	
+	<update id="updateMoneyInsertBid">
+		update member
+		set mem_balance = mem_balance - #{bidMoney}
+		where mem_id = #{id}
+	</update>
+	
+	<insert id="insertBiddingDetail">
+		insert into bidding_Detail values(bdd_seq.nextval, #{bidMoney}, #{aucNo}, #{id})
+	</insert>
+	
+	<select id="checkLike" resultType="int">
+		select count(*)
+		from bidding_interest
+		where mem_id = #{id} and auc_no in
+		 <foreach collection="aucNo" item="aucNo" open="(" separator="," close=")">
+			#{aucNo}
+		</foreach> 	
+	</select>
+	
+	<insert id="insertLike">
+		insert into bidding_interest values 
+		<foreach collection="aucNo" item="aucNo" open="(" close="," >
+        	#{aucNo}
+    	</foreach>
+    	 #{id})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="java.util.Map">
+		delete from bidding_interest 
+		where mem_id = #{id} and auc_no in
+		<foreach collection="aucNo" item="aucNo" open="(" separator="," close=")">
+			#{aucNo}
+		</foreach> 
+	</delete> 
+	
+		<select id="getAllInterestNum" resultType="int">
+		select count(*)
+		from bidding_interest b
+			join auction a on (a.auc_no = b.auc_no)
+		where mem_id = #{id}
+		<choose>
+			<when test="aucStatus != null and aucStatus == 'scheduled'">
+				and auc_start_date > sysdate 
+			</when>
+			<when test="aucStatus != null and aucStatus == 'ongoing'">
+				and sysdate between auc_start_date and auc_finish_date 
+			</when>
+			<when test="aucStatus != null and aucStatus == 'end'">
+				and auc_finish_date <![CDATA[<]]> sysdate 
+			</when>
+		</choose>
+	</select>
+	
+	<select id="getMyInterestList">
+		select a.auc_No, att_Rename, con_Author, con_Product, to_char(auc_start_Date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_Date, to_char(auc_Finish_Date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_finish_price, auc_start_price
+		from bidding_interest b
+			join auction a on (a.auc_no = b.auc_no)
+            join consignment on (a.auc_cno = con_no)
+            join attachment p on (auc_cno = att_bno)
+        where b.mem_id = #{id} and att_fno = 0
+        <choose>
+			<when test="aucStatus != null and aucStatus == 'scheduled'">
+				and auc_start_date > sysdate
+				<if test="sort != null and sort == 'high'">
+					order by auc_start_Price desc
+				</if>
+				<if test="sort != null and sort == 'low'">
+					order by auc_start_Price asc
+				</if>
+			</when>
+			<when test="aucStatus != null and aucStatus == 'ongoing'">
+				and sysdate between auc_start_date and auc_finish_date
+				<include refid="sort"></include> 
+			</when>
+			<when test="aucStatus != null and aucStatus == 'end'">
+				and auc_finish_date <![CDATA[<]]> sysdate
+				<include refid="sort"></include>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="sort != null and sort == 'high'">
+						order by 
+						case 
+						when auc_finish_Price = 0 then auc_start_price
+						else auc_finish_price 
+						end desc
+					</when>
+					<when test="sort != null and sort == 'low'">
+						order by 
+						case 
+						when auc_finish_Price = 0 then auc_start_price
+						else auc_finish_price 
+						end
+					</when>
+					<otherwise>
+						order by a.auc_no desc
+					</otherwise>
+				</choose>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="getAllMyBidListCount" resultType="int">
+		select count(*)
+		from bidding_detail b
+			join auction a on (a.auc_no = b.auc_no)
+		where mem_id = #{id}
+		<choose>
+			<when test="aucStatus != null and aucStatus == 'ongoing'">
+				and sysdate between auc_start_date and auc_finish_date 
+			</when>
+			<when test="aucStatus != null and aucStatus == 'end'">
+				and auc_finish_date <![CDATA[<]]> sysdate 
+			</when>
+			<when test="aucStatus != null and aucStatus == 'successBid'">
+				and (sysdate > auc_finish_date and auc_mem_id = #{id})
+			</when>
+		</choose>     
+	</select>
+	
+	
+	<select id="getAllMyBidList" resultType="Auction">
+		select a.auc_no, auc_start_price, auc_finish_price, to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction a
+		    join (select *
+		          from consignment 
+		            join attachment on (con_no = att_bno)
+		          where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		    join bidding_detail b on (a.auc_no = b.auc_no)
+		where a.auc_no in (select b.auc_no
+		                 	from bidding_detail
+		                 	where b.mem_id = #{id}
+		                  )
+		<choose>
+			<when test="aucStatus != null and aucStatus == 'ongoing'">
+				and sysdate between auc_start_date and auc_finish_date
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>
+			</when>
+			<when test="aucStatus != null and aucStatus == 'end'">
+				and auc_finish_date <![CDATA[<]]> sysdate
+					<choose>
+						<when test="sort != null and sort == 'low'">
+							order by bid_price asc, bid_no desc
+						</when>
+						<when test="sort != null and sort == 'high'">
+							order by bid_price desc, bid_no desc
+						</when>
+						<otherwise>
+							order by bid_no desc
+						</otherwise>
+					</choose>
+			</when>
+			<when test="aucStatus != null and aucStatus == 'all'">
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>
+			</when>
+			<when test="aucStatus != null and aucStatus == 'successBid'">
+				and (sysdate > auc_finish_date and auc_mem_id = #{id})
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>		
+			</otherwise>
+		</choose>                  
+	</select> 
+	
+	
+	<select id="getAllMyDetail">
+		select *
+		from bidding_detail b
+			join auction a on (a.auc_no = b.auc_no)
+		where mem_id = #{id}
+		<choose>
+			<when test="aucStatus != null and aucStatus == 'ongoing'">
+				and sysdate between auc_start_date and auc_finish_date
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>
+			</when>
+			<when test="aucStatus != null and aucStatus == 'end'">
+				and auc_finish_date <![CDATA[<]]> sysdate
+					<choose>
+						<when test="sort != null and sort == 'low'">
+							order by bid_price asc, bid_no desc
+						</when>
+						<when test="sort != null and sort == 'high'">
+							order by bid_price desc, bid_no desc
+						</when>
+						<otherwise>
+							order by bid_no desc
+						</otherwise>
+					</choose>
+			</when>
+			<when test="aucStatus != null and aucStatus == 'all'">
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>
+			</when>
+			<otherwise>
+				<choose>
+					<when test="sort != null and sort == 'low'">
+						order by bid_price asc, bid_no desc
+					</when>
+					<when test="sort != null and sort == 'high'">
+						order by bid_price desc, bid_no desc
+					</when>
+					<otherwise>
+						order by bid_no desc
+					</otherwise>
+				</choose>		
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	
+	<select id="getSearchAuction" resultType="int">
+		select count(*)
+		from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno)
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where ((sysdate between auc_start_date and auc_finish_date
+		<choose>
+			<when test="searchType == 'all'">
+					 and (con_author like '%'|| #{searchContent} ||'%' or con_product like '%'|| #{searchContent} ||'%'))
+				</when>
+			<when test="searchType == 'artist'">
+				and con_author like '%'|| #{searchContent} ||'%')	
+			</when>
+			<when test="searchType == 'work'">
+				and con_product like '%'|| #{searchContent} ||'%')
+			</when>
+		</choose>
+			)
+	</select>
+	
+	<select id="getSearchAuctionList" resultType="Auction">
+		select auc_no, auc_start_price, auc_finish_price ,to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction
+		    join (select *
+		    	  from consignment 
+		  		  join attachment on (con_no = att_bno)
+			      where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where (sysdate between auc_start_date and auc_finish_date
+			<choose>
+				<when test="searchType == 'all'">
+					 and (con_author like '%'|| #{searchContent} ||'%' or con_product like '%'|| #{searchContent} ||'%'))
+					<include refid="sort"></include>
+				</when>
+				<when test="searchType == 'artist'">
+					and con_author like '%'|| #{searchContent} ||'%')
+					<include refid="sort"></include>	
+				</when>
+				<when test="searchType == 'work'">
+					and con_product like '%'|| #{searchContent} ||'%')
+					<include refid="sort"></include>
+				</when>
+				<otherwise>
+					)
+					<include refid="sort"></include>
+				</otherwise>
+			</choose>
+	</select>
+	
+	
+	<select id="getScheduledAuction">
+		select auc_no, auc_start_price, auc_finish_price ,to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno)
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where to_date(#{date}, 'YYYY-MM-DD HH24:MI:SS') <![CDATA[=]]> auc_start_date
+		order by auc_no desc
+	</select>
+	
+	<select id="getScheduledAuctionView">
+		select auc_no, auc_start_price, auc_finish_price ,to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno)
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where auc_no = #{aucNo}
+	</select>
+	
+	
+	
+	
+	<sql id ="sort">
+		<if test="sort != null and sort == 'high'">
+			order by auc_Finish_Price desc
+		</if>
+		<if test="sort != null and sort == 'low'">
+			order by auc_Finish_Price asc
+		</if>
+	</sql>
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	<!-- adimin -->
+	
+	<sql id="repeat">
+		<if test ="aucSS != null">
+				and auc_start_date <![CDATA[>]]>= to_date(#{aucSS}, 'YYYY-MM-DD HH24:MI:SS')
+			</if>
+			<if test ="aucSE != null">
+				and auc_start_date <![CDATA[<]]>= to_date(#{aucSE}, 'YYYY-MM-DD HH24:MI:SS')	
+			</if>
+			<if test ="aucFS != null">
+				and auc_finish_date <![CDATA[>]]>= to_date(#{aucFS}, 'YYYY-MM-DD HH24:MI:SS')
+			</if>
+			<if test ="aucFE != null">
+				and auc_finish_date <![CDATA[<]]>= to_date(#{aucFE}, 'YYYY-MM-DD HH24:MI:SS')
+			</if>
+	</sql>
+	
+	
+	<select id="getAdminSearchListCount" parameterType="java.util.Map">
+    SELECT COUNT(*)
+    FROM auction
+    JOIN (
+        SELECT *
+        FROM consignment
+        JOIN attachment ON (con_no = att_bno)
+        WHERE att_category = 2 AND att_fno = 1
+    ) ON (auc_cno = con_no)
+    	<choose>
+			<when test="search == 'all'">
+				where ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%')
+				<if test="scheduled != null and ongoing == null and end == null">
+					and ((auc_start_date > sysdate)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing != null and end == null">
+					and ((sysdate between auc_start_date and auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing == null and end != null">
+					and ((sysdate > auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled != null and ongoing != null and end == null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing != null and end != null">
+				    and ((sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled != null and ongoing == null and end != null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))    
+				</if>
+				<if test="scheduled != null and ongoing != null and end != null">
+					and ((auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing == null and end == null">
+					<include refid="repeat"></include>
+				</if>
+				)
+			</when>	
+			<when test="search == 'author'">
+				where ((con_author like '%'|| #{content} ||'%')
+				<if test="scheduled != null and ongoing == null and end == null">
+					and ((auc_start_date > sysdate)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing != null and end == null">
+					and ((sysdate between auc_start_date and auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>		
+				<if test="scheduled == null and ongoing == null and end != null">
+					and ((sysdate > auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>		
+				<if test="scheduled != null and ongoing != null and end == null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing != null and end != null">
+					and ((sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>	
+				<if test="scheduled != null and ongoing == null and end != null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))    
+				</if>			
+				<if test="scheduled != null and ongoing != null and end != null">
+					and ((auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or((con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing == null and end == null">
+					<include refid="repeat"></include>
+				</if>
+				)
+			</when>
+				
+			<when test="search == 'work'">
+				where ((con_product like '%'|| #{content} ||'%')
+				<if test="scheduled != null and ongoing == null and end == null">
+					and ((auc_start_date > sysdate)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing != null and end == null">
+					and ((sysdate between auc_start_date and auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				
+				
+				<if test="scheduled == null and ongoing == null and end != null">
+					and ((sysdate > auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				
+				
+				<if test="scheduled != null and ongoing != null and end == null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				
+				
+				<if test="scheduled == null and ongoing != null and end != null">
+					and ((sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				
+				
+				<if test="scheduled != null and ongoing == null and end != null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))    
+				</if>
+				
+				
+				<if test="scheduled != null and ongoing != null and end != null">
+					and ((auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or((con_product like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing == null and end == null">
+					<include refid="repeat"></include>
+				</if>
+				)
+			</when>
+		</choose>
+	</select>    	
+    	
+	<!--  -->
+	<select id="getAdminSearchList" parameterType="java.util.Map">
+    SELECT auc_no, auc_start_price, auc_finish_price ,to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+    FROM auction
+    JOIN (
+        SELECT *
+        FROM consignment
+        JOIN attachment ON (con_no = att_bno)
+        WHERE att_category = 2 AND att_fno = 1
+    	) ON (auc_cno = con_no)
+    	<choose>
+			<when test="search == 'all'">
+				where ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%')
+				<if test="scheduled != null and ongoing == null and end == null">
+					and ((auc_start_date > sysdate)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing != null and end == null">
+					and ((sysdate between auc_start_date and auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing == null and end != null">
+					and ((sysdate > auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled != null and ongoing != null and end == null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing != null and end != null">
+				    and ((sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled != null and ongoing == null and end != null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))    
+				</if>
+				<if test="scheduled != null and ongoing != null and end != null">
+					and ((auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%' or con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing == null and end == null">
+					<include refid="repeat"></include>
+				</if>
+				)
+			</when>	
+			<when test="search == 'author'">
+				where ((con_author like '%'|| #{content} ||'%')
+				<if test="scheduled != null and ongoing == null and end == null">
+					and ((auc_start_date > sysdate)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing != null and end == null">
+					and ((sysdate between auc_start_date and auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>		
+				<if test="scheduled == null and ongoing == null and end != null">
+					and ((sysdate > auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>		
+				<if test="scheduled != null and ongoing != null and end == null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing != null and end != null">
+					and ((sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>	
+				<if test="scheduled != null and ongoing == null and end != null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))    
+				</if>			
+				<if test="scheduled != null and ongoing != null and end != null">
+					and ((auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or((con_author like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_author like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing == null and end == null">
+					<include refid="repeat"></include>
+				</if>
+				)
+			</when>
+				
+			<when test="search == 'work'">
+				where ((con_product like '%'|| #{content} ||'%')
+				<if test="scheduled != null and ongoing == null and end == null">
+					and ((auc_start_date > sysdate)
+					<include refid="repeat"></include>
+					)
+				</if>
+				<if test="scheduled == null and ongoing != null and end == null">
+					and ((sysdate between auc_start_date and auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				
+				
+				<if test="scheduled == null and ongoing == null and end != null">
+					and ((sysdate > auc_finish_date)
+					<include refid="repeat"></include>
+					)
+				</if>
+				
+				
+				<if test="scheduled != null and ongoing != null and end == null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				
+				
+				<if test="scheduled == null and ongoing != null and end != null">
+					and ((sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				
+				
+				<if test="scheduled != null and ongoing == null and end != null">
+					and (( auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))    
+				</if>
+				
+				
+				<if test="scheduled != null and ongoing != null and end != null">
+					and ((auc_start_date > sysdate
+					<include refid="repeat"></include>
+					)
+					or((con_product like '%'|| #{content} ||'%') and sysdate between auc_start_date and auc_finish_date
+					<include refid="repeat"></include>
+					)
+					or ((con_product like '%'|| #{content} ||'%') and sysdate > auc_finish_date
+					<include refid="repeat"></include>
+					))
+				</if>
+				<if test="scheduled == null and ongoing == null and end == null">
+					<include refid="repeat"></include>
+				</if>
+				)
+			</when>
+		</choose>
+		<choose>
+			<when test="sort != null and sort == 'high'">
+				order by 
+				case 
+				when auc_finish_Price = 0 then auc_start_price
+				else auc_finish_price 
+				end desc
+			</when>
+			<when test="sort != null and sort == 'low'">
+				order by 
+				case 
+				when auc_finish_Price = 0 then auc_start_price
+				else auc_finish_price 
+				end
+			</when>
+			<otherwise>
+				order by auc_no desc
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<insert id="insertAuction">
+		insert into auction values(auc_seq.nextval, #{aucStartPrice}, default, to_date(#{aucStartDate}, 'YYYY-MM-DD HH24:MI:SS'), to_date(#{aucFinishDate}, 'YYYY-MM-DD HH24:MI:SS'), #{aucNo}, null)
+	</insert>
+	
+	<select id="getConsignmentInfo">
+		select *
+		from consignment
+		where con_no = #{conNo}
+	</select>
+	
+	
+	<select id="getAttachment">
+		select *
+		from attachment
+		where att_bno = #{conNo} and (att_fno = 1 or att_fno = 2 or att_fno = 3)
+	</select>
+	
+	<update id="updateApproval">
+		update consignment
+		set CON_CON_STATUS = 'Y'
+		where con_no = (select auc_cno
+		                from auction
+		                where auc_no = #{aucNo})
+	</update>
+	
+	
+	<select id="getTopAuction">
+		select auc_no, auc_start_price, auc_finish_price ,to_char(auc_start_date, 'YYYY-MM-DD HH24:MI:SS') as auc_start_date, 
+				to_char(auc_finish_date, 'YYYY-MM-DD HH24:MI:SS') as auc_finish_date, auc_mem_id, con_author, con_product, con_width, con_height,
+				con_year, con_etc, att_rename
+		from auction
+		    join (select *
+		    		from consignment 
+		    			join attachment on (con_no = att_bno)
+		    		where att_category = 2 and att_fno = 1) on (auc_cno = con_no)
+		where sysdate between auc_start_date and auc_finish_date
+		order by auc_finish_price desc
+		fetch first 5 rows only
+	</select>
+	
+	<select id="getNoReadCon" resultType="Consignment">
+		select *
+		from consignment
+		where con_adm_status = 'N' and con_del_status = 'Y'
+		order by con_no desc
+		fetch first 10 rows only
+	</select>
+	
+	<select id="getTopProduct" resultType="Product">
+		select *
+		from product
+		where pro_no in (select pro_no
+		                from order_detail
+		                group by pro_no
+		                order by count(pro_no) desc, pro_no desc
+		                fetch first 10 rows only) and pro_status = 'Y'
+	</select>
+</mapper>

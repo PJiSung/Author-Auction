@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.auction.user.dao.MainDAO">
+	
+	<insert id="insertInquiry">
+		INSERT INTO INQUIRY
+		VALUES(SEQ_INQ.NEXTVAL, #{inqFileName}, SYSDATE, #{memId}, #{adminId})
+	</insert>
+	
+	<select id="selectImg">
+		SELECT MEM_FILENAME
+		FROM MEMBER
+		WHERE MEM_ID = #{id}
+	</select>
+	
+	<select id="getWishCount">
+		SELECT COUNT(*)
+		FROM WISHLIST
+		WHERE MEM_ID = #{id}
+	</select>
+	
+	<select id="selectTopOrder">
+		SELECT *
+		FROM PRODUCT
+		WHERE PRO_NO IN (SELECT PRO_NO
+		FROM ORDER_DETAIL
+		GROUP BY PRO_NO
+		ORDER BY COUNT(PRO_NO) DESC, PRO_NO DESC
+		FETCH FIRST 5 ROWS ONLY)
+	</select>
+	
+	<select id="selectTopOrderAttm">
+		SELECT *
+		FROM ATTACHMENT
+		WHERE ATT_STATUS = 'Y' AND ATT_FNO = '1' AND ATT_CATEGORY = '4'
+	</select>
+	
+	<select id="selectTopAuction" resultType="Auction">
+		SELECT AUC_NO, AUC_FINISH_PRICE, CON_AUTHOR, CON_PRODUCT, ATT_RENAME
+		FROM AUCTION
+		JOIN ATTACHMENT ON(AUC_CNO = ATT_BNO)
+		JOIN CONSIGNMENT ON(CON_NO = ATT_BNO)
+		WHERE AUC_START_DATE <![CDATA[ <= ]]> SYSDATE AND AUC_FINISH_DATE <![CDATA[ >= ]]> SYSDATE AND ATT_CATEGORY = '2' AND ATT_FNO = '0'
+		ORDER BY AUC_FINISH_PRICE DESC
+		FETCH FIRST 5 ROWS ONLY
+	</select>
+	     
+</mapper>

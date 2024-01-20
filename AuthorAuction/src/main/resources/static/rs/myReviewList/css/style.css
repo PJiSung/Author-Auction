@@ -1,0 +1,46 @@
+@charset "utf-8"; 
+
+/* myReview [ftLQde19y6] */
+.myReview .contents-inner { padding: 10rem 2.4rem; }
+.myReview .textset { margin-top: 0; margin-bottom: 4rem; }
+.myReview .textset-tit { text-align: center; }
+.myReview .tabset.tabset-brick { margin-bottom: 4rem; }
+.myReview .contents-search { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.myReview .contents-result { font-size: 1.8rem; font-weight: 500; }
+.myReview .contents-result span { color: var(--secondary); }
+.myReview .contents-form { display: flex; align-items: center; gap: 0.8rem; }
+.myReview .selectset { width: 23rem; }
+.myReview .selectset .btn::after { color: var(--text-color1); }
+.myReview .inputset { width: 40.3rem; }
+.myReview .inputset-input { width: 100%; }
+.myReview .contents-btn { margin-top: 4rem; text-align: center; }
+.myReview .contents-btn .btnset { width: 100%; max-width: 26rem; }
+.myReview .pagiset { margin-top: 6rem; }
+.myReview .modalset { display: flex; flex-direction: column; align-items: center; position: fixed; transition: 0.3s; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 62rem; padding: 8rem 2rem; background-color: var(--white); visibility: hidden; opacity: 0; z-index: 999; }
+.myReview .modalset.modalset-active { visibility: visible; opacity: 1; }
+.myReview .modal-header { margin-bottom: 1.2rem; }
+.myReview .modal-title { font-size: var(--fs-h6); font-weight: 700; text-align: center; }
+.myReview .modal-body { max-height: 26rem; overflow-y: auto; }
+.myReview .modal-body p { padding: 0 1.7rem; text-align: center; font-size: var(--fs-p1); line-height: var(--lh-p1); font-weight: 400; }
+.myReview .modal-footer { width: 100%; margin-top: 4rem; text-align: center; }
+.myReview .modal-footer .btnset { width: 100%; max-width: 17.6rem; }
+.myReview .modalset-dim { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(17, 17, 17, 0.5); z-index: 300; }
+@media (max-width: 992px) {
+ .myReview .contents-inner { padding: 6rem 2.4rem; }
+ .myReview .textset-tit { text-align: left; }
+ .myReview .textset { margin-bottom: 2.4rem; text-align: left; }
+ .myReview .tabset.tabset-brick { margin-bottom: 2.4rem; }
+ .myReview .contents-search { flex-direction: column; align-items: flex-start; width: 100%; }
+ .myReview .contents-result { margin-bottom: 0.8rem; font-size: 1.4rem; }
+ .myReview .contents-form { flex-direction: column; align-items: flex-start; width: 100%; }
+ .myReview .selectset { width: 100%; }
+ .myReview .inputset { width: 100%; }
+ .myReview .contents-btn { margin-top: 2.4rem; }
+ .myReview .contents-btn .btnset { max-width: 20rem; }
+ .myReview .pagiset { margin-top: 4rem; }
+ .myReview .pagiset-link { width: 3.2rem; height: 3.2rem; }
+ .myReview .modalset { width: calc(100% - 4.8rem); padding: 4rem 2rem; }
+ .myReview .modal-footer { width: 100%; margin-top: 2rem; }
+ .myReview .modal-footer .btnset { width: calc(100% / 2 - 0.4rem); height: 3.6rem; }
+ .myReview .modal-footer .btnset+.btnset { margin-left: 0.4rem; }
+}

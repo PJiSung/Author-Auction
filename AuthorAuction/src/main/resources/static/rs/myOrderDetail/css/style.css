@@ -1,0 +1,74 @@
+@charset "utf-8"; 
+
+/* myOrderDetail-a [QHlQFySZSW] */
+.myOrderDetail-a .contents-inner { padding: 10rem 2.4rem; }
+.myOrderDetail-a .textset-tit { margin-bottom: 2rem; margin-top: 3rem; text-align: center; }
+.myOrderDetail-a .contents-form-top { position: relative; padding: 4rem 0; border-top: 1px solid var(--line-color4); border-bottom: 1px solid var(--line-color4); }
+.myOrderDetail-a .contents-form-top .inputset+.inputset { margin-top: 4rem; }
+.myOrderDetail-a .contents-form-top .radioset-input+.radioset-label { width: 2.4rem; height: 2.4rem; }
+.myOrderDetail-a .contents-form-top .radioset-input.input-line:checked+.radioset-label::before { font-size: 2.4rem; }
+.myOrderDetail-a .radioset-text { font-size: var(--fs-p1); color: var(--text-color2); }
+.myOrderDetail-a .contents-form-top .contents-form-group+.contents-form-group { padding-top: 4rem; }
+.myOrderDetail-a .contents-address { flex-direction: column; }
+.myOrderDetail-a .contents-address+.contents-address { margin-top: 4rem; }
+.myOrderDetail-a .contents-address label+label { margin-left: 0; margin-top: 0.8rem; }
+.myOrderDetail-a .contents-address-btn { display: flex; justify-content: space-between; }
+.myOrderDetail-a .contents-address .inputset { display: flex; align-items: center; }
+.myOrderDetail-a .contents-address .inputset-input+.inputset-input { margin-top: 0.8rem; }
+.myOrderDetail-a .contents-address ul { margin-bottom: 1.2rem; }
+.myOrderDetail-a .contents-address ul li { font-size: var(--fs-p1); line-height: var(--lh-p1); color: var(--text-color2); }
+.myOrderDetail-a .contents-address .btnset { width: 100%; max-width: 17.6rem; padding: 1.6rem; margin-left: 1.2rem; }
+.myOrderDetail-a .contents-address .inputset-textarea { height: 5.6rem; padding: 1.2rem 1.6rem; resize: none; }
+.myOrderDetail-a .contents-form-bottom { padding: 4rem 0; }
+.myOrderDetail-a .checkset { margin-top: 1.2rem; }
+.myOrderDetail-a .checkset .checkset-input+.checkset-label { width: 2.4rem; height: 2.4rem; border-color: var(--primary); }
+.myOrderDetail-a .checkset .checkset-input.input-fill+.checkset-label::before { font-size: 2.4rem; }
+.myOrderDetail-a .checkset-text { font-size: 1.8rem; }
+@media (max-width: 992px) {
+ .myOrderDetail-a .contents-inner { padding: 6rem 2.4rem; }
+ .myOrderDetail-a .textset-tit { margin-bottom: 1rem; margin-top: 2rem;}
+ .myOrderDetail-a .contents-form-top { padding: 2.4rem 0; }
+ .myOrderDetail-a .contents-form-top .inputset+.inputset { margin-top: 1.2rem; }
+ .myOrderDetail-a .contents-address+.contents-address { margin-top: 2.4rem; }
+ .myOrderDetail-a .contents-address .btnset { max-width: 10rem; margin-left: 0.8rem; }
+ .myOrderDetail-a .contents-address ul { margin-bottom: 0.8rem; }
+ .myOrderDetail-a .contents-address .inputset-textarea { padding: 1.4rem; height: 9rem; }
+ .myOrderDetail-a .contents-form-bottom { padding: 2.4rem 0; }
+ .myOrderDetail-a .checkset .checkset-input+.checkset-label { width: 2rem; height: 2rem; }
+ .myOrderDetail-a .checkset .checkset-input.input-fill+.checkset-label::before { font-size: 2rem; }
+ .myOrderDetail-a .checkset-text { font-size: 1.4rem; }
+}
+
+/* myOrderDetail-b [VulQFYt6XK] */
+.myOrderDetail-b .contents-inner { padding: 10rem 2.4rem; }
+.myOrderDetail-b .textset { margin-top: 0; padding: 0; }
+.myOrderDetail-b .textset-tit { margin-bottom: 2.4rem; text-align: center; }
+.myOrderDetail-b .tabset-item { width: 100%; }
+.myOrderDetail-b .tabset-item { width: 100%; }
+.myOrderDetail-b .contents-price { padding: 4rem 0; font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: 500; border-top: 1px solid var(--line-color4); border-bottom: 1px solid var(--border-color); }
+.myOrderDetail-b .contents-price span { margin-left: 1.6rem; color: var(--secondary); }
+.myOrderDetail-b .contents-group { padding-top: 4rem; }
+.myOrderDetail-b .contents-name { margin-bottom: 1.2rem; font-size: var(--fs-h6); font-weight: 500; }
+.myOrderDetail-b .contents-board { max-height: 20rem; overflow-y: auto; padding: 1.6rem; font-size: var(--fs-p1); color: var(--text-color3); border: 1px solid var(--border-color); }
+.myOrderDetail-b .checkset { margin-top: 1.2rem; }
+.myOrderDetail-b .checkset-input+.checkset-label { width: 2.4rem; height: 2.4rem; border-color: var(--primary); }
+.myOrderDetail-b .checkset-input.input-fill+.checkset-label::before { font-size: 2.4rem; }
+.myOrderDetail-b .checkset-text { font-size: 1.8rem; }
+.myOrderDetail-b .contents-btn { margin-top: 6rem; text-align: center; }
+.myOrderDetail-b .contents-btn .btnset { width: 100%; max-width: 62rem; }
+@media (max-width: 992px) {
+ .myOrderDetail-b .contents-inner { padding: 6rem 2.4rem; }
+ .myOrderDetail-b .textset-tit { margin-bottom: 1.4rem; }
+ .myOrderDetail-b .contents-price { display: flex; align-items: center; justify-content: space-between; padding: 1.6rem 0; }
+ .myOrderDetail-b .contents-price span { margin-left: 0; }
+ .myOrderDetail-b .contents-group { padding-top: 1.6rem; }
+ .myOrderDetail-b .contents-name { margin-bottom: 0.8rem; }
+ .myOrderDetail-b .tabset-list { flex-direction: column; }
+ .myOrderDetail-b .tabset-item { width: 100% !important; }
+ .myOrderDetail-b .contents-board { padding: 1.4rem; }
+ .myOrderDetail-b .checkset-input+.checkset-label { width: 2rem; height: 2rem; }
+ .myOrderDetail-b .checkset-input.input-fill+.checkset-label::before { font-size: 2rem; }
+ .myOrderDetail-b .checkset-text { font-size: 1.4rem; }
+ .myOrderDetail-b .contents-btn { margin-top: 4rem; }
+ .myOrderDetail-b .contents-btn .btnset { max-width: 100%; }
+}

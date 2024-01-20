@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.kh.auction.user.dao.OrderDAO">
+	
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from orders
+	</select>
+	
+	<select id="selectOrderList" resultType="Order">
+		select *
+		from orders
+		order by ord_no desc
+	</select>
+	
+	<select id="selectAdmOrder" resultType="map">
+		select ord_no, ord_date, mem_name, mem_phone, ord_status,
+		 	   add_recipient, add_phone, add_address, ord_message, 
+		 	   ord_po_price, ord_ca_price, ord_sum_price
+		from orders join member using(mem_id)
+            		join address using(add_no)
+		where ord_no = #{ordNo}
+	</select>
+	
+	<select id="selectAdmProduct" resultType="map">
+		select ord_no, pro_name, pro_price, pro_no, pro_writer, odt_num
+		from orders join order_detail using(ord_no)
+            		join product using(pro_no)
+		where ord_no = #{ordNo}
+	</select>
+	
+	<update id="updateOrderStatus">
+		update orders
+		set ord_status = #{ordStatus}
+		where ord_no = #{ordNo}
+	</update>
+	
+	<select id="getMyListCount" resultType="_int">
+		select count(*)
+		from orders o inner join order_detail od on o.ord_no = od.ord_no
+					  inner join product p on od.pro_no = p.pro_no
+		where od.pro_no = (select min(pro_no) from order_detail where ord_no = o.ord_no)
+			  and mem_id = #{id}
+	</select>
+	
+	<select id="selectMyOrderList" resultMap="selectMyOrderList">
+		select o.ord_no, od.pro_no,
+			   p.pro_name, p.pro_writer, p.pro_price,
+			   o.ord_date, o.ord_status,
+			   (select count(distinct pro_no) - 1
+				from order_detail
+				where ord_no = o.ord_no) as ord_another
+		from orders o join order_detail od on o.ord_no = od.ord_no
+					  join product p on od.pro_no = p.pro_no
+		where od.pro_no = (select min(pro_no) from order_detail where ord_no = o.ord_no)
+			  and mem_id = #{id}
+		order by o.ord_no desc
+	</select>
+	
+	<select id="selectMyOrderAllList" resultMap="selectMyOrderList">
+		select o.ord_no, od.pro_no, p.pro_image,
+			   p.pro_name, p.pro_writer, p.pro_price,
+			   o.ord_date, o.ord_status,
+			   (select count(distinct pro_no) - 1
+				from order_detail
+				where ord_no = o.ord_no) as ord_another
+		from orders o join order_detail od on o.ord_no = od.ord_no
+					  join product p on od.pro_no = p.pro_no
+		where od.pro_no = (select min(pro_no) from order_detail where ord_no = o.ord_no)
+			  and mem_id = #{id}
+		order by o.ord_no desc
+	</select>
+	
+	<resultMap id="selectMyOrderList" type="map">
+	    <result column="ord_no" property="ordNo"/>
+	    <result column="pro_no" property="proNo"/>
+	    <result column="pro_image" property="proImage"/>
+	    <result column="pro_name" property="proName"/>
+	    <result column="pro_writer" property="proWriter"/>
+	    <result column="pro_price" property="proPrice"/>
+	    <result column="ord_date" property="ordDate"/>
+	    <result column="ord_status" property="ordStatus"/>
+	    <result column="ord_another" property="ordAnother"/>
+	</resultMap>
+	
+	<update id="cancelOrder">
+		update orders
+		set ord_status = '주문취소'
+		where ord_no = to_number(#{ordNo})
+	</update>
+	
+	<select id="getSearchListCount" resultType="_int">
+		select count(*)
+		from orders o join order_detail od on o.ord_no = od.ord_no
+					  join product p on od.pro_no = p.pro_no
+		where od.pro_no = (select min(pro_no) from order_detail where ord_no = o.ord_no)
+			  and mem_id = #{id}
+			  <if test="keyword != null">
+			  	<choose>
+      				<when test="category == '전체'">
+			            and (p.pro_name like '%'||#{keyword}||'%' or p.pro_writer like '%'||#{keyword}||'%')
+      				</when>
+      				<when test="category == '작품명'">
+			            and p.pro_name like '%'||#{keyword}||'%'
+      				</when>
+      				<when test="category == '작가명'">
+			            and p.pro_writer like '%'||#{keyword}||'%'
+      				</when>
+      			</choose>
+			  </if>
+			  <if test="strDate != '' and endDate == ''">
+			  	and o.ord_date <![CDATA[ >= ]]> #{strDate}
+			  </if>
+			  <if test="strDate == '' and endDate != ''">
+			  	and o.ord_date <![CDATA[ <= ]]> #{endDate}
+			  </if>
+			  <if test="strDate != '' and endDate != ''">
+			  	and o.ord_date between #{strDate} and #{endDate}
+			  </if>
+	</select>
+	
+	<select id="searchOrderList" resultMap="selectMyOrderList">
+		select o.ord_no, od.pro_no, p.pro_image,
+			   p.pro_name, p.pro_writer, p.pro_price,
+			   o.ord_date, o.ord_status,
+			   (select count(distinct pro_no) - 1
+				from order_detail
+				where ord_no = o.ord_no) as ord_another
+		from orders o join order_detail od on o.ord_no = od.ord_no
+					  join product p on od.pro_no = p.pro_no
+		where od.pro_no = (select min(pro_no) from order_detail where ord_no = o.ord_no)
+			  and mem_id = #{id}
+			  <if test="keyword != null">
+			  	<choose>
+      				<when test="category == '전체'">
+			            and (p.pro_name like '%'||#{keyword}||'%' or p.pro_writer like '%'||#{keyword}||'%')
+      				</when>
+      				<when test="category == '작품명'">
+			            and p.pro_name like '%'||#{keyword}||'%'
+      				</when>
+      				<when test="category == '작가명'">
+			            and p.pro_writer like '%'||#{keyword}||'%'
+      				</when>
+      			</choose>
+			  </if>
+			  <if test="strDate != '' and endDate == ''">
+			  	and o.ord_date <![CDATA[ >= ]]> #{strDate}
+			  </if>
+			  <if test="strDate == '' and endDate != ''">
+			  	and o.ord_date <![CDATA[ <= ]]> #{endDate}
+			  </if>
+			  <if test="strDate != '' and endDate != ''">
+			  	and o.ord_date between #{strDate} and #{endDate}
+			  </if>
+		order by o.ord_no desc
+	</select>
+	
+	<select id="getSearchAdmListCount" resultType="_int">
+		select count(*)
+		from orders
+		where 1=1
+		<if test="keyword != ''">
+			<choose>
+				<when test="category == '전체'">
+				     and (ord_no like '%'||#{keyword}||'%' or mem_id like '%'||#{keyword}||'%')
+				</when>
+				<when test="category == '주문번호'">
+				     and ord_no like '%'||#{keyword}||'%'
+				</when>
+				<when test="category == '아이디'">
+				     and mem_id like '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</if>
+		<if test="strDate != '' and endDate == ''">
+			and ord_date <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == '' and endDate != ''">
+			and ord_date <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != '' and endDate != ''">
+			and ord_date between #{strDate} and #{endDate}
+		</if>
+		<if test="ordStatus != null">
+	        AND ord_status in
+		    <foreach item="item" index="index" collection="ordStatus.split(',')" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		</if>
+	</select>
+	
+	
+	<select id="searchAdmOrderList" resultType="Order">
+		select *
+		from orders
+		where 1=1
+		<if test="keyword != ''">
+			<choose>
+				<when test="category == '전체'">
+				     and (ord_no like '%'||#{keyword}||'%' or mem_id like '%'||#{keyword}||'%')
+				</when>
+				<when test="category == '주문번호'">
+				     and ord_no like '%'||#{keyword}||'%'
+				</when>
+				<when test="category == '아이디'">
+				     and mem_id like '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</if>
+		<if test="strDate != '' and endDate == ''">
+			and ord_date <![CDATA[ >= ]]> #{strDate}
+		</if>
+		<if test="strDate == '' and endDate != ''">
+			and ord_date <![CDATA[ <= ]]> #{endDate}
+		</if>
+		<if test="strDate != '' and endDate != ''">
+			and ord_date between #{strDate} and #{endDate}
+		</if>
+		<if test="ordStatus != null">
+	        AND ord_status IN 
+		    <foreach item="item" index="index" collection="ordStatus.split(',')" open="(" separator="," close=")">
+		        #{item}
+		    </foreach>
+		</if>
+		order by ord_no desc
+	</select>
+	
+	<select id="selectAttmList" resultType="Attachment">
+		select *
+		from attachment
+		where att_status = 'Y' and att_category in (1, 4)
+		order by att_no
+	</select>
+	
+</mapper>

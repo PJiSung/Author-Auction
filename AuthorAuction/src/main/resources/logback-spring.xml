@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+   <conversionRule conversionWord="color" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+      <!-- log 파일 경로 -->
+   <property name="LOG_PATH" value="C:/logs/member/"></property>
+   
+   <conversionRule conversionWord="color" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+   <appender name="myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+         <pattern>%d{yyyy-MM-dd'T'HH:mm:ss'+'09:00} %color(%-5level) %color(${PID:-}){magenta} --- [%15.15thread] %color(%-40.40logger{36}){cyan} : %m%n</pattern>
+      </layout>
+   </appender>
+   
+   <appender name="myFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <!-- 파일 경로 설정 -->
+      <file>${LOG_PATH}/login.log</file>
+      
+      <!-- 출력 패턴 설정 -->
+      <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+         <pattern>%d{yy-MM-dd HH:mm:ss} [%p] $c{1}.%M{%L} - %m%n</pattern>
+      </encoder>
+
+      <!-- Rolling 중에서도 선택할 정책 // fileNamePattern : 백업 파일 이름-->
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <fileNamePattern>${LOG_PATH}/login.log.%d{yyyyMMdd}</fileNamePattern>
+      </rollingPolicy>
+   </appender>
+
+   <logger name="com.kh.auction.member.controller.MemberController" level="info" additivity="false">
+      <appender-ref ref="myFileAppender"/>
+   </logger>
+   
+   <root level="info">
+   		<appender-ref ref="myConsoleAppender"/>
+   </root>
+</configuration>

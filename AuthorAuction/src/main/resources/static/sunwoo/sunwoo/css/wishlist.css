@@ -1,0 +1,60 @@
+  body{font-size: 14px;
+    line-height: 1.5;
+    font-family: "Noto Sans KR", "Helvetica Neue", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", "돋움", dotum, sans-serif;
+    color: #666;
+    letter-spacing: 0;
+  }
+  
+ div{
+ 	margin: 0;
+ 	padding: 0;
+ 	display: block;
+ }
+
+ul,li,ol{
+	list-style: none;
+}
+
+  
+#l_order_header{
+	
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 2px 12px 0 rgba(0, 0, 0, 0.03);
+    z-index: 10;
+	padding:3%;
+	
+}
+
+li{
+	line-height:125%;
+	float: left;
+	word-spacing: 20px;
+}
+ 
+ ul{
+ 	border-radius: 25px; 
+    height: 4%;
+    width: 20%;
+ 	border: 1px solid #eee;
+ }
+ 
+.step{
+	padding: 1%;
+	display:flex;
+	position:absolute;
+	right: 3%;
+}
+
+
+#selectdiv{
+ 	
+ 	background-color: #fafafa;
+ 	border-top : 1px solid #eee;
+ 	border-bottom : 1px solid #eee;
+ 	margin-top: 2%;
+ 	font-size: 17px;
+ 	color: #333;
+ 	
+ }
+ 
