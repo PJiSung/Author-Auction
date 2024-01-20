@@ -16,6 +16,13 @@
 <link rel="stylesheet" href="consignment/css/template.css">
 <link rel="stylesheet" href="consignment/css/common.css">
 <link rel="stylesheet" href="consignment/css/style.css">
+
+<link rel="stylesheet" href="main/css/setting.css">
+<link rel="stylesheet" href="main/css/plugin.css">
+<link rel="stylesheet" href="main/css/template.css">
+<link rel="stylesheet" href="main/css/common.css">
+<link rel="stylesheet" href="main/css/main.css">
+<link rel="stylesheet" href="main/css/style.css">
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <style type="text/css">
