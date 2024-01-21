@@ -1950,9 +1950,10 @@ const enterSend = () =>{
 	        	  contentRightCover.style.marginTop = "0";
 	          } else {
 	        	  if(window.scrollY <= 250){
+	        		contentRightCover.style.marginTop = "-8%";
 	        	  	contentRightCover.style.position = "fixed";
-	        	  	contentRightCover.style.marginTop = "-8%";
-	        	  }else{
+	        	  }else if(window.scrollY < 250 && distanceFromBottom > 165){
+	        		contentRightCover.style.position = "fixed";
 	          	  	contentRightCover.style.marginTop = "-4.5%";
 	        	  }
 	          }
