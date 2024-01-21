@@ -1491,7 +1491,6 @@ const enterSend = () =>{
 			</div>
 		</div>
 	
-	
 		<br>
 		<br>
 		
@@ -1500,6 +1499,7 @@ const enterSend = () =>{
 		<!-- 현재 입찰가를 낙찰 금액으로 변경 -->
 	
 		<script>
+		
 			const movePointCharge = () =>{
 				location.href='pointpayment.ar';
 			}
@@ -1946,7 +1946,7 @@ const enterSend = () =>{
 	        	  contentRightCover.style.marginTop = "0";
 	          } else {
 	        	  if(window.scrollY <= 250){
-	        	  	contentRightCover.style.position = "fixed";
+	        	  	contentRightCover.style.position = "sticky";
 	        	  	contentRightCover.style.marginTop = "-8%";
 	        	  }else{
 	          	  	contentRightCover.style.marginTop = "-4.5%";
