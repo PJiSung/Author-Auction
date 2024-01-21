@@ -95,7 +95,6 @@
 	.sortingDetail:hover{
 		cursor:pointer;
 		font-weight: 800;
-		
 	}
 	
 	#aucNums{

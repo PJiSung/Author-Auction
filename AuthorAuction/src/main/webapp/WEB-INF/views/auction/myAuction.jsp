@@ -36,13 +36,14 @@
 	.auction:hover{
 		transform: scale(1.0001);
 		transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-		box-shadow: 5px 5px 10px black;
+		box-shadow: 1.5px 1.5px 4px black;
 	}
 	
 	.info{
 		width: 14%;
 		margin-top: 1%;
-		margin-bottom: 1%;" 
+		margin-bottom: 1%; 
+		font-weight: 525;
 	}
 	
 	.infoCover{
@@ -54,6 +55,16 @@
 		display: inline-block;
 		text-align: center;
 		padding: 1%;
+		font-weight: 800;
+	}
+	
+	.price{
+		font-weight: 500;
+	}
+	
+	.price:hover{
+		cursor:pointer;
+		font-weight: 800;
 	}
 	
 </style>
