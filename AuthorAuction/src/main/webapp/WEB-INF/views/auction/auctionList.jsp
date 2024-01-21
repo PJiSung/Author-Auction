@@ -123,8 +123,6 @@
 
 	<button onclick="location.href='myBidList.ac'">내 입찰 경매</button>
 
-	<button onclick="location.href='scheduledAuction.ac'">예정 경매</button>
-
 	<button onclick="location.href='adminMain.adac'">관리자 메인</button>
 	
 	<button onclick="location.href='moveTocal.ac'">달력</button> 
