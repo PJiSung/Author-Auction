@@ -16,8 +16,7 @@
   <link rel="stylesheet" href="consignment/css/style.css">
 
 <style>
-.tabset-link{ style="cursor:pointer;"}
-.btnset btnset-lg{style="width: 20rem; margin: auto;"}
+.tabset-link{cursor:pointer;}
 </style> 
 </head>
 
@@ -191,8 +190,8 @@
         
         
         <br><br><br>
-        <div style="margin-left: 102rem;">
-          <a class="btnset btnset-lg" value="상담문의" type="button" style="width: 20rem; margin: auto;" id="conEnroll">위탁문의</a>
+        <div>
+          <a class="btnset btnset-lg" value="상담문의" type="button" id="conEnroll" style="width: 20rem; margin: auto; display: block; text-align: center; vertical-align: middle;">위탁문의</a>
         </div>
         <br><br><br>
       </div>

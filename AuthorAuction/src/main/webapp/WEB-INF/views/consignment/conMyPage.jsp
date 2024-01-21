@@ -16,6 +16,15 @@
   <link rel="stylesheet" href="consignment/css/template.css">
   <link rel="stylesheet" href="consignment/css/common.css">
   <link rel="stylesheet" href="consignment/css/style.css">
+<style>
+.date-box{border-radius: 0.6rem; border: 1px solid lightgray;}
+.con_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+.con_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+.search{border: 1px solid lightgray; background-color: black; color: white; border-radius :0.6rem;} 
+.cancel{border: 1px solid lightgray; border-radius :0.6rem;}
+.con_enroll{border-radius: 0.6rem; border: 1px solid black; height: 40px; background-color: black;}
+.inputText{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+</style>
 
 <script>
 	const consignmentDetail = (conNo) =>{												<!-- 상세보기로 이동 -->
@@ -33,8 +42,8 @@
     <div class="hooms-N48" data-bid="tr2cLyIIXB5">
       <div class="contents-inner" style="padding: 6rem 2.4rem 10rem;">
         <div class="contents-container container-md">
-          <div class="textset">
-            <a class="textset-tit">마이페이지(위탁 문의 내역)</a>
+          <div class="textset" style="text-align: center; margin-bottom: 1rem; margin-top: 1rem;">
+            <a class="textset-tit" style="font-size: 50px; margin: 50px;">MY PAGE - CONSIGNMENT</a>
             
             <br><br>
             
@@ -51,7 +60,7 @@
 						</span>
 						<span>
 						  <a>검색어</a>
-						  <select style="width: 5%; height: 3rem;" name="select">
+						  <select style="width: 5%; border-radius :0.6rem; border: 1px solid lightgray; height: 5rem;" name="select">
 						    <option value="전체">전체</option>
 						    <option value="작가명">작가명</option> 
 						    <option value="작품명">작품명</option>
@@ -66,7 +75,7 @@
             <br>
           </div>
           
-          <div><button class="con_enroll" style="margin-bottom: 4rem;"><a href="conEnroll.co" style="color:white;">문의하기</a></button></div>
+          <div><button class="con_enroll" style="float: left;"><a href="conEnroll.co" style="color:white;">문의하기</a></button></div>
           
           <br>
           
@@ -100,10 +109,10 @@
 		                  <td>${ c.conWidth }*${ c.conHeight }cm</td>
 		                  <td><fmt:formatNumber type="number" value="${ c.conHope }"/>원</td>
 		                  
-		                  <c:if test="${ c.conConStatus == 'Y' }">
+		                  <c:if test="${ c.conAdmStatus == 'Y' }">
 			              	<td class="tableset-order05">Y</td>
 			              </c:if>
-			              <c:if test="${ c.conConStatus == 'N' }">
+			              <c:if test="${ c.conAdmStatus == 'N' }">
 			              	<td class="tableset-order05">N</td>
 			              </c:if>
 		                  

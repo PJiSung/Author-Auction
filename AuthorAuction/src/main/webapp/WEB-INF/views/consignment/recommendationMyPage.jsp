@@ -61,8 +61,8 @@
     <div class="hooms-N48" data-bid="kTLqC36ddS" style="min-height: 800px;">
       <div class="contents-inner">
         <div class="contents-container container-md">
-          <div class="textset">
-            <a class="textset-tit">마이페이지(추천 문의 내역)</a>
+          <div class="textset" style="text-align: center;">
+            <a class="textset-tit" style="font-size: 50px; margin: 50px;">MY PAGE - RECOMMENDATION</a>
             <br><br>
             <div class="date-box">
               <div class="date">

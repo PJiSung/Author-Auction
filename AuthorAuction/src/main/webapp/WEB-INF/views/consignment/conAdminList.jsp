@@ -112,6 +112,12 @@ table {
 table tr {
 	width: 100%;
 }
+.admsearch{border: 1px solid lightgray; background-color: black; color: white; border-radius :0.6rem;} 
+.admcancel{border: 1px solid lightgray; border-radius :0.6rem;}
+.date-box{border-radius: 0.6rem; border: 1px solid lightgray;}
+.con_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+.con_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+.inputText{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
 </style>
 
 <script type="text/javascript">
@@ -213,6 +219,19 @@ table tr {
    				modalContent.innerText = '달력에서 날짜를 선택해주세요';
    				modal.style.display = 'block';
    			}else{
+   				$.ajax({
+   					url: 'updateConConStatus.adco',
+   					type:'post',
+   					data:{conNo:document.querySelector('input[name="aucNo"]').value, value:'Y'},
+   					success: (data) =>{
+   						if(data == 'success'){
+   							console.log(data)
+   						} else {
+   							
+   						}
+   					},
+   					error: (data) => console.log(data)
+   				})
    				$.ajax({
    					url:'insertAuction.adac',
    					type:'post',
@@ -906,10 +925,10 @@ table tr {
 
 	<main class="th-layout-main">
 		<div class="hooms-N48" data-bid="no2CLZNtZF5"  style="min-height: 800px;">
-			<div class="contents-inner" style="padding: 6rem 2.4rem 10rem;">
+			<div class="contents-inner" style="padding: 1rem 2.4rem 10rem;">
 				<div class="contents-container container-md">
-					<div class="textset" style="margin-bottom: 1rem;">
-						<a class="textset-tit">관리자(위탁 문의 내역)</a> <br>
+					<div class="textset" style="text-align: center;">
+						<a class="textset-tit" style="font-size: 50px; margin: 50px;">ADMIN - CONSIGNMENT</a> <br>
 						<br>
 						<div class="date-box">
 							<div class="date">
@@ -924,7 +943,7 @@ table tr {
 									</span> 
 									<span> 
 										<a>검색어</a> 
-										<select style="width: 5%; height: 3rem;" name="select">
+										<select style="width: 5%; border-radius :0.6rem; border: 1px solid lightgray; height: 5rem;" name="select">
 											<option value="전체">전체</option>
 											<option value="작가명">작가명</option>
 											<option value="작품명">작품명</option>
@@ -1069,7 +1088,7 @@ table tr {
 														</c:if>
 													</c:forEach>
 												</c:if> 
-												<c:if test="${c.conConStatus == 'D'}">거절</c:if>
+												<c:if test="${c.conConStatus == 'Z'}">거절</c:if>	
 											</td>
 										</tr>
 									</c:forEach>
