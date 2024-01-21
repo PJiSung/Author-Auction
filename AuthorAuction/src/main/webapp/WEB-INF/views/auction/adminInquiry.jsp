@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -125,6 +127,121 @@
 		box-shadow: 1.5px 1.5px 4px black;
 	}
 	
+	.modalInput{
+    	border: white;
+    	cursor: default;
+    	background: white;
+    }
+    
+    .modal_body {
+	   position: fixed;
+	  top: 50%;
+	  left: 50%;
+	  transform: translateX(-50%) translateY(-50%);
+	  width: 700px;
+	  height: 700px;
+	  padding: 50px 100px 0 50px;
+	  padding-bottom: 720px;
+	  background-color: rgb(255, 255, 255);
+	  border-radius: 10px;
+	  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+	  
+	  display: flex;
+	  flex-wrap: wrap; 
+	  align-items: flex-start;
+	  justify-content: space-between; 
+	}
+	
+	.modal_body div{
+		width:50%;
+		margin-bottom: 10px;
+		
+	}
+	
+	.modal {
+			position: fixed;
+			z-index: 1;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+			background-color: rgba(0, 0, 0, 0.4);
+			display: none;
+			}
+	
+	 #textBox{
+    	resize:none;
+    	border:white;
+    	background: white;
+    	overflow: scroll;
+    	margin-top: 2px;
+    }
+    
+    #textBox::-webkit-scrollbar {
+		  display: none;
+		}
+    
+    #picDiv{
+    	width:250px;
+    	height:250px;
+    	margin: 10px 0 0 0;
+    }
+    
+    #modalClose{
+    	margin-left:100px;
+    	float:right;
+    	background: black;
+    	color: white;
+    	border-radius:5px;
+    	cursor:pointer;
+	    }
+	    
+	    #closeCover{
+		text-align:right;
+		justify-content:flex-end;
+		margin: 10px 0 10px 0;
+	}
+	
+	#picModalBody{
+		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+		background-color:white;
+		border-radius:10px;
+		postion:relative;
+		z-index:8;
+		width: 700px;
+		height: 700px;
+		margin:auto;
+		margin-top:4.5%;	
+	}
+	
+	#largePic{
+		width:600px;
+		height:600px;
+		border-radius:10px;
+		margin-left: 50px;
+		margin-top: 40px;
+	}
+	
+	#largeClose{
+		float: right;
+		border-radius: 5px;
+		color:white;
+		background: black;
+		margin: 2% 7% 0 0;
+	}
+	
+	#modalGetLargePic{
+		position: fixed;
+		z-index: 5;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, 0.4);
+		display: none;
+	}
 </style>
 </head>
 <body>
@@ -363,7 +480,7 @@
 				</div>
 			</c:if>
 			<c:forEach items="${ aList }" var="auction" varStatus="status">
-				<div onclick="moveAuction(${auction.aucNo}, this);" class="auction"
+				<div onclick="openAuctionModal('${auction.aucNo}', '${ auction.aucStartPrice }','${ auction.aucFinishPrice }','${ auction.aucStartDate }','${ auction.aucFinishDate }','${ auction.aucMemId}','${ auction.conAuthor }','${ auction.conProduct }','${ auction.conWidth }','${ auction.conHeight }','${ auction.conYear }','${ StringEscapeUtils.escapeEcmaScript(auction.conEtc)}','${ auction.attRename }');" class="auction"
 					>
 					<div style="width: 14%;">${ auction.aucNo }</div>
 					<div style="width: 14%; height: 100%; display: inline-block;">
@@ -445,6 +562,50 @@
 					%>
 				</div>
 			</c:forEach>
+			
+			<div class="modal" id="aucModal">
+		      <div class="modal_body">
+		      	<div>경매 번호</div>
+		      	<div>작품명</div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div>작가명</div>
+		      	<div>경매 시작가</div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div>최고 입찰금</div>
+		      	<div>현재 입찰자 아이디</div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div>시작일</div>
+		      	<div>종료일</div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div>가로</div>
+		      	<div>세로</div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div><input type="text" disabled  class="modalInput"></div>
+		      	<div>사진<br><img id="picDiv" onclick="getLargePic(this);"/></div>
+		      	<div>
+		      		작품설명<br>
+		      		<textarea disabled rows="9" cols="40" id="textBox"></textarea>
+		      	</div>
+		      	<div></div>
+		      	<div id="closeCover">
+		      		<button id="modalClose">닫기</button>
+		      	</div>
+		      </div>
+		</div>
+			
+		<div class="modal" id="picModal">
+			<div id="picModalBody">
+				<img id="largePic">
+				<div>
+					<button onclick="closeLarge();" id="largeClose">닫기</button>
+				</div>
+			</div>
+		</div>
+			
 
 			<%
 			String queryString = request.getQueryString();
@@ -740,15 +901,15 @@
 	<br>
 
 	<script>
-	    const moveAuction = (data, data2) =>{
-			
-			if(data2.children[5].innerText.indexOf("예정") != -1){
-				console.log(1);
-			}else{
-				location.href = 'auctionDetail.ac?aucNo=' + data;
-			}
+		const getLargePic = (data) =>{
+	    	document.getElementById("largePic").setAttribute("src", data)
+	    	document.getElementById("picModal").style.display = "block";
 	    }
-    
+		
+		const closeLarge = () =>{
+	    	document.getElementById("picModal").style.display = "none";
+	    }
+	
 		window.onload = () =>{
 			console.log(document.querySelectorAll("input"))
 			const url = window.location.href;
@@ -756,6 +917,12 @@
 			const auction = document.querySelectorAll("div[class='auction']");
 			const monthPlace = document.querySelectorAll("span[class='monthPlace']");
 			const yearPlace = document.querySelectorAll("span[class='yearPlace']");
+			
+			const modalClose = document.querySelector("button[id='modalClose']");
+	    	modalClose.addEventListener('click',function(){
+	    		document.body.style.overflow = '';
+	    		document.getElementById("aucModal").style.display="none";
+    		})
 			
 			if(url.includes("sort=low")){
 				document.querySelectorAll("span[class='sorting']")[1].style.color = 'orange';
@@ -907,6 +1074,38 @@
 				document.getElementsByClassName("tb_body")[3].innerHTML = h.join("");
 			}
 		}
+		
+		const openAuctionModal = (aucNo, startPrice, lastPrice, startDate, finishDate, memId, author, product, width, height, year, explain, pic) =>{
+    		document.body.style.overflow = 'hidden';
+    		const modal = document.querySelector('.modal');
+    		let auctionModal = [];
+    		
+    		auctionModal.push(aucNo)
+    		auctionModal.push(product)
+    		auctionModal.push(author)
+    		auctionModal.push(startPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원")
+    		auctionModal.push(lastPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + " 원")
+    		if(memId == ''){
+    			memId = '입찰자가 없습니다'
+    		}
+    		auctionModal.push(memId)
+    		auctionModal.push(startDate.split(" ")[0])
+    		auctionModal.push(finishDate.split(" ")[0])
+    		auctionModal.push(width + "cm")
+    		auctionModal.push(height + "cm")
+    		
+    		for(const [index, inputs] of document.querySelectorAll("input[class='modalInput']").entries()){
+    			inputs.value = auctionModal[index];
+    		}
+    		
+    		document.querySelector("img[id='picDiv']").setAttribute("src", pic);
+    		document.querySelector("textarea[id='textBox']").value = explain;
+    		modal.style.display = 'block';
+		}
+		
+		
+		
+		
 		
 		const close = () =>{
 			console.log(document.querySelectorAll("button[class='close']")[0].parentElement.parentElement)

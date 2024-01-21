@@ -149,6 +149,7 @@
     	border:white;
     	background: white;
     	overflow: scroll;
+    	margin-top: 10px;
     }
     
     #textBox::-webkit-scrollbar {
@@ -159,10 +160,6 @@
     	width:250px;
     	height:250px;
     	margin: 10px 0 0 0;
-    }
-    
-    #textBox{
-    	margin-top: 10px;
     }
     
     #noData{
@@ -350,7 +347,6 @@
 		    
     <script type="text/javascript">
 	    window.onload = () =>{
-	    	console.log();
 	    	const modalClose = document.querySelector("button[id='modalClose']");
 	    	modalClose.addEventListener('click',function(){
 	    		document.body.style.overflow = '';
@@ -393,7 +389,6 @@
     		auctionModal.push(width + "cm")
     		auctionModal.push(height + "cm")
     		
-    		console.log(document.querySelectorAll("input[class='modalInput']"));
     		
     		for(const [index, inputs] of document.querySelectorAll("input[class='modalInput']").entries()){
     			inputs.value = auctionModal[index];
