@@ -571,6 +571,12 @@
 			text-align: center;
 		}
 	
+	#explain{
+	background-color: E6E6FA;
+	padding:10px;
+	overflow: auto;
+	white-space: pre-wrap;
+	}
 
 </style>
 </head>
@@ -1290,7 +1296,7 @@ const enterSend = () =>{
 	<div style="width: 600px; margin-left: 15%;">
 		<div style="font-size:40px; font-weight: 1000;">작품 설명</div>
 		<br>
-		<p id="explain">${ auction.conEtc }</p>
+		<pre id="explain">${ auction.conEtc }</pre>
 	</div>
 
 	
@@ -1517,6 +1523,8 @@ const enterSend = () =>{
         }
         
         
+        let itemsNum = 0;
+        
         var xhr = new XMLHttpRequest();
     	var url = 'http://openapi.seoul.go.kr:8088/6b645362786b79773339516a6f6f59/json/SemaPsgudInfoKorInfo/1/1000'; 
     	xhr.open('GET', url,false);
@@ -1529,12 +1537,14 @@ const enterSend = () =>{
     	            for (let i = 0; i < jsonResponse.SemaPsgudInfoKorInfo.row.length; i++){
     	                let row = jsonResponse.SemaPsgudInfoKorInfo.row[i];
  
-    	                console.log(row.main_image);
-    	                if (row.prdct_cl_nm === '드로잉&판화' || row.prdct_cl_nm === '회화' || row.prdct_cl_nm === '한국화') { 
-	    	                if(row.writr_nm == '${ auction.conAuthor }'){
+    	                if(row.writr_nm == '${ auction.conAuthor }'){
+    	               		if (row.prdct_cl_nm === '드로잉&판화' || row.prdct_cl_nm === '회화' || row.prdct_cl_nm === '한국화') { 
 	    	                    let imgElement = document.createElement("img");
 	    	                    imgElement.src = row.main_image;
 	    	                    imgElement.className = 'item'
+	    	                    
+	    	                    itemsNum++;
+	    	                    
 	    	                    imgElement.onclick = function(){
 	    	                    	expansion(this)
 	    	                    }
@@ -1544,15 +1554,13 @@ const enterSend = () =>{
 	    	            }
     	            }
 
-    	            carasel();
+    	            carasel(itemsNum);
     	        }
     	    }
     	};
     	xhr.send('');
 
-    	function carasel(){
-    	    const itemsLength = document.querySelectorAll("div[class='item']").length;
-
+    	function carasel(itemsNum){
     	    var owl = $('.owl-carousel'); 
     	    owl.owlCarousel({
     	        items: 5,

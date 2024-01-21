@@ -650,6 +650,13 @@
 	text-align: center;
 	line-height: 20px;
 }
+
+	#explain{
+	background-color: E6E6FA;
+	padding:10px;
+	overflow: auto;
+	white-space: pre-wrap;
+	}
 	
 	</style>
 	</head>
@@ -1372,7 +1379,7 @@ const enterSend = () =>{
 		<div style="width: 600px; margin-left: 15%;">
 			<div style="font-size:40px; font-weight: 1000;">작품 설명</div>
 			<br>
-			<p id="explain">${ auction.conEtc }</p>
+			<pre id="explain">${ auction.conEtc }</pre>
 		</div>
 	
 		
@@ -1948,6 +1955,9 @@ const enterSend = () =>{
 	        	document.querySelector("div[class='picModal']").style.display = 'block';
 	        }
 
+	        
+	        let itemsNum = 0;
+	        
 	        var xhr = new XMLHttpRequest();
 	    	var url = 'http://openapi.seoul.go.kr:8088/6b645362786b79773339516a6f6f59/json/SemaPsgudInfoKorInfo/1/1000'; 
 	    	xhr.open('GET', url,false);
@@ -1956,15 +1966,19 @@ const enterSend = () =>{
 	    	        if(xhr.status == 200||xhr.status == 201){
 	    	            let jsonResponse = JSON.parse(xhr.responseText);
 	    	            let itemsContainer = document.querySelector("div[class='owl-carousel owl-theme']");
-
+	    	            
 	    	            for (let i = 0; i < jsonResponse.SemaPsgudInfoKorInfo.row.length; i++){
 	    	                let row = jsonResponse.SemaPsgudInfoKorInfo.row[i];
-	 
-	    	                if (row.prdct_cl_nm === '드로잉&판화' || row.prdct_cl_nm === '회화' || row.prdct_cl_nm === '한국화') { 
-		    	                if(row.writr_nm == '${ auction.conAuthor }'){
+	    	                
+	    	                
+	                    	if(row.writr_nm == '${ auction.conAuthor }'){
+	    	                	if (row.prdct_cl_nm === '드로잉&판화' || row.prdct_cl_nm === '회화' || row.prdct_cl_nm === '한국화') { 
 		    	                    let imgElement = document.createElement("img");
 		    	                    imgElement.src = row.main_image;
 		    	                    imgElement.className = 'item'
+		    	                    	
+		    	                    itemsNum++;
+		    	                    
 		    	                    imgElement.onclick = function(){
 		    	                    	expansion(this)
 		    	                    }
@@ -1973,24 +1987,21 @@ const enterSend = () =>{
 		    	                }
 		    	            }
 	    	            }
-	    	            // 호출된 API의 응답을 받은 후 캐러셀을 초기화
-	    	            carasel();
 	    	        }
 	    	    }
+	    	    carasel(itemsNum);
 	    	};
 	    	xhr.send('');
 
-        	function carasel(){
-        	    const itemsLength = document.querySelectorAll("div[class='item']").length;
-
+        	function carasel(itemsNum){
         	    var owl = $('.owl-carousel'); 
         	    owl.owlCarousel({
-        	        items: 5,
+        	        items: itemsNum,
         	        loop: true, // 항목들을 무한으로 반복하여 보여줄지 여부
         	        autoplay: true, // 자동	으로 슬라이드 쇼를 시작할지 여부
         	        autoplayTimeout: 3000, // 다음 이미지로 넘어가는 시간 (단위 : 밀리초)
         	        autoplayHoverPause: true, // 마우스가 이미지에 위에 있을 때 자동 슬라이드를 일시중지 할지 여부
-        	    });           
+        	    });
         	}
 
 	    </script>
