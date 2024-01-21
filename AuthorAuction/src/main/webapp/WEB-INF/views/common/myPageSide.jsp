@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
+$(document).ready(function(){
+	checkUrl();
+});
 const openSidebar = () =>{
 	document.getElementsByClassName("sideTop")[0].style.display = "block";
     document.getElementsByClassName("sideContent")[0].style.display = "block";
@@ -16,6 +20,27 @@ const closeSidebar = () =>{
 	 document.getElementsByClassName("sideTop")[0].style.display = "none";
 	 document.getElementsByClassName("sideContent")[0].style.display = "none";
 	 document.getElementsByClassName("sideSideIcon")[0].style.display = "block";
+}
+
+const checkUrl = () =>{
+	let url = window.location.href;
+	let onclicks = document.querySelectorAll(".sideContent tr td:last-child");
+	let menu = url.split("//")[1].split("/")[1];
+	for(let i=0; i<onclicks.length; i++){
+		if(menu == "myInfo"){
+			if(tab=="2"){
+				onclicks[2].style.color = "white";
+			}else if(tab=="3"){
+				onclicks[3].style.color = "white";
+			}else{
+				onclicks[1].style.color = "white";
+			}
+		}else{
+			if(onclicks[i].id == menu){
+				onclicks[i].style.color = "white";
+			}
+		}			
+	}
 }
 </script>
 <style>
@@ -144,7 +169,7 @@ const closeSidebar = () =>{
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='myInfo?tab=1'">회원정보 수정</td>
+						<td onclick="location.href='myInfo'">회원정보 수정</td>
 					</tr>
 					<tr>
 						<td></td>
@@ -163,11 +188,11 @@ const closeSidebar = () =>{
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='myBidList.ac'">나의경매</td>
+						<td id="myBidList.ac" onclick="location.href='myBidList.ac'">나의경매</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='myInterest.ac'">관심목록</td>
+						<td id="myInterest.ac" onclick="location.href='myInterest.ac'">관심목록</td>
 					</tr>
 					
 					<tr></tr>
@@ -178,7 +203,7 @@ const closeSidebar = () =>{
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='myOrderList.od'">주문목록</td>
+						<td id="myOrderList.od" onclick="location.href='myOrderList.od'">주문목록</td>
 					</tr>
 					
 					<tr></tr>
@@ -189,15 +214,15 @@ const closeSidebar = () =>{
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='myReviewList.rv'">리뷰</td>
+						<td id="myReviewList.rv" onclick="location.href='myReviewList.rv'">리뷰</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='myRecommendationList.re'">그림추천</td>
+						<td id="myRecommendationList.re" onclick="location.href='myRecommendationList.re'">그림추천</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td onclick="location.href='list.co'">위탁문의</td>
+						<td id="list.co" onclick="location.href='list.co'">위탁문의</td>
 					</tr>
 				</table>
 			</div>
