@@ -666,6 +666,7 @@
 	padding:10px;
 	overflow: auto;
 	white-space: pre-wrap;
+	font-family: inherit;
 	}
 	
 	</style>
