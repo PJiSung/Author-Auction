@@ -101,7 +101,9 @@
          cursor:pointer;
      }
 </style>
+<script>
 
+</script>
 </head>
 <body>
 	<div style="text-align:center; height:200px;">
