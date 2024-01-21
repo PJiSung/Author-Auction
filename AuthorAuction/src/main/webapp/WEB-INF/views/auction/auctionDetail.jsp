@@ -64,16 +64,32 @@
 			margin: 5px 0 5px 0;
 		}
 	
-		#priceTag, #bidModal {
+		#priceTag, .picModal{
 			position: fixed;
-			z-index: 1;
+			z-index: 10;
 			left: 0;
 			top: 0;
 			width: 100%;
-			height: 100%;
 			overflow: auto;
 			background-color: rgba(0, 0, 0, 0.4);
 			display: none;
+		}
+		#bidModal {
+			display:none;
+			width: 100%;
+			position: fixed;
+			left: 0;
+			top: 0;
+			background-color: rgba(0, 0, 0, 0.4);
+			z-index: 10;
+		}
+		
+		#modal-content_bid{
+			background-color: #fefefe;
+			margin: 15% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 30%;
 		}
 		
 		#priceTag::-webkit-scrollbar { display: none; }
@@ -81,7 +97,7 @@
 		
 		.modal-content {
 			background-color: #fefefe;
-			margin: 15% auto;
+			margin:10% auto 10% auto;
 			padding: 20px;
 			border: 1px solid #888;
 			width: 80%;
@@ -150,44 +166,30 @@
 		}
 		
 		.picModal{
-			position:absolute;
 			width:100%;
 			height:100%;
 			display: none;
 		}
 		
-		.picModal_overlay{
-			 /* position: fixed;
-	         z-index: 1;
-	         left: 0;
-	         top: 0;
-	         width: 100%;
-	         height: 100%;
-	         overflow: auto;
-	         background-color: rgba(0, 0, 0, 0.6);
-	         display: none; */
-	         
-	         background-color: rgba(0, 0, 0, 0.6);
-		  width: 100%;
-		  height: 100%;
-		  min-height: 1000px;
-		  position: absolute;
-		  z-index: 5;
-		  display: flex;
-		  justify-content: center;
-		  align-items: center;
-		}
 		
 		.picModal_content{
 			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 			background-color:white;
 			border-radius:10px;
 			postion:relative;
-			z-index:2;
-			width: 800px;
-			height: 800px;
+			z-index:8;
+			width: 700px;
+			height: 700px;
 			margin:auto;
-			margin-top:5%;
+			margin-top:6%;
+		}
+		
+		
+		#contentRightCover{
+			width: 49%;
+			position: absolute;
+			left: 900px;
+			z-index: 0;
 		}
 		
 		
@@ -200,11 +202,11 @@
 		}
 		
 		#picModalImg{
-			width:750px;
-			height:750px;
+			width:650px;
+			height:650px;
 			padding-left:50px;
 			padding-top:25px;
-			z-index:3;
+			z-index:100;
 			border-radius: 10px;
 		}
 		
@@ -253,6 +255,7 @@
 	  }
 	  
 	  .item{
+	  	postion:relative;
 	  	width: 50%;
 	  	height: 200px;
 	  	display:flex;
@@ -260,7 +263,7 @@
 	  	text-align:center;
 	  	justify-content:center;
 	  	cursor:pointer;
-	  	
+	  	z-index: 0;
 	  }
 		
 		#api {
@@ -990,7 +993,9 @@
 		  </div>
 		  
 		  <script>
-
+		
+		  
+		  
 			$(document).ready(function(){
 			   recSearch();
 			});
@@ -1300,13 +1305,11 @@ const enterSend = () =>{
 		
 		<!-- 사진 확대 모달 제작 -->
 		<div class="picModal">
-	  		<div class="picModal_overlay">
-		  		<div class="picModal_content">
-		  			<img id="picModalImg">
-		  			<div>
-		  				<button id="closePicModal"> 닫기 </button>
-		  			</div>
-		  		</div>
+	  		<div class="picModal_content">
+	  			<img id="picModalImg">
+	  			<div>
+	  				<button id="closePicModal"> 닫기 </button>
+	  			</div>
 	  		</div>
 	  	</div>	
 		
@@ -1314,7 +1317,7 @@ const enterSend = () =>{
 			<div id="content-left" style="width: 49%; display: inline-block;">
 				<img src="${ auction.attRename }" style="width: 600px; height: 600px; border-radius: 30px;">
 			</div>
-			<div id="contentRightCover" style="width: 49%; position: absolute; left: 900px; z-index: 0;">
+			<div id="contentRightCover">
 				<div style="width: 600px; height: 800px;">
 					<div style="text-align: right; margin: 1% 1% 1%;">
 						<span>남은 경매 시간</span> <span id="remainingTime"></span>
@@ -1448,7 +1451,7 @@ const enterSend = () =>{
 	
 		<!-- 입찰 모달 -->
 		<div id="bidModal">
-			<div class="modal-content" style="width: 20%;">
+			<div id="modal-content_bid">
 				<h2>입찰</h2>
 				<div>
 						<div class="bidModalDiv">
@@ -1519,19 +1522,23 @@ const enterSend = () =>{
 	        	const nowPriceWord = document.getElementById('nowPriceWord')
 	        	
 	        	document.getElementById("closePicModal").addEventListener('click',function(){
+	        		document.body.style.overflow = '';
 	        		document.querySelector("div[class='picModal']").style.display = 'none';
 	        	})
 	        	
 	        	
 	        	/* 모달창 컨트롤 */
 	        	priceTagBtn.addEventListener('click',function(){
+	        		document.body.style.overflow = 'hidden';
 	        		priceTag.style.display='block';
 	        	})
 	        	closePriceTag.addEventListener('click',function(){
+	        		document.body.style.overflow = '';
 	        		priceTag.style.display='none';
 	        	})
 	        	
 	        	closeBidModal.addEventListener('click',function(){
+	        		document.body.style.overflow = '';
 	        		bidModal.style.display="none";
 	        		if(nowPrice.innerText == "0 원"){
 	    				myInputPoint.value = '${ auction.aucStartPrice }';
@@ -1602,6 +1609,7 @@ const enterSend = () =>{
 	        	}
 	        	
 	        	function bidding(){
+	        		document.body.style.overflow = 'hidden';
 	        		bidModal.style.display="block";
 	        	}
 	        	
@@ -1949,13 +1957,10 @@ const enterSend = () =>{
 	        window.addEventListener("scroll", handleScroll);
 	        
 	        const expansion = (data) =>{
-	        	
 	        	const modalPicture = document.querySelector("div[class='picModal_content']").children[0];
-	        	document.querySelector("div[class='picModal_overlay']").style.height = window.innerHeight + "px";
+	        	document.body.style.overflow = 'hidden';
 	        	modalPicture.setAttribute("src", data.src)
 	        	modalPicture.style.borderRadius = '10px';
-	        	
-	        	console.log(modalPicture);
 	        	
 	        	document.querySelector("div[class='picModal']").style.display = 'block';
 	        }
