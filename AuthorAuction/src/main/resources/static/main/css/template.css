@@ -310,10 +310,10 @@ body.body-scroll { overflow: hidden; }
 
 /* ========== */
 /* Textset */
-.textset { position: relative; margin-bottom: 4rem; } 
+.textset { position: relative; margin-bottom: 2rem; } 
 .textset .textset-tit { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: 600; } 
 .textset .textset-tit + .textset-desc,
-.textset .textset-subtit + .textset-desc { margin-top: 2rem; } 
+.textset .textset-subtit + .textset-desc { margin-top: 1rem; } 
 .textset .textset-subtit { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: 500; } 
 .textset .textset-desc { font-size: var(--fs-p3); line-height: var(--lh-p3); color: var(--text-color3); } 
 .textset .textset-desc + .textset-desc { margin-top: 2rem; } 

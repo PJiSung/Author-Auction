@@ -18,12 +18,13 @@
   <link rel="stylesheet" href="consignment/css/style.css">
 <style>
 .date-box{border-radius: 0.6rem; border: 1px solid lightgray;}
-.con_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
-.con_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+.con_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem; cursor: pointer;}
+.con_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem; cursor: pointer;}
 .search{border: 1px solid lightgray; background-color: black; color: white; border-radius :0.6rem;} 
 .cancel{border: 1px solid lightgray; border-radius :0.6rem;}
 .con_enroll{border-radius: 0.6rem; border: 1px solid black; height: 40px; background-color: black;}
 .inputText{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+tr{cursor: pointer;}
 </style>
 
 <script>
@@ -60,7 +61,7 @@
 						</span>
 						<span>
 						  <a>검색어</a>
-						  <select style="width: 5%; border-radius :0.6rem; border: 1px solid lightgray; height: 5rem;" name="select">
+						  <select style="width: 5%; border-radius :0.6rem; border: 1px solid lightgray; height: 5rem; cursor: pointer;" name="select">
 						    <option value="전체">전체</option>
 						    <option value="작가명">작가명</option> 
 						    <option value="작품명">작품명</option>
@@ -116,7 +117,7 @@
 			              	<td class="tableset-order05">N</td>
 			              </c:if>
 		                  
-		                  <c:if test="${c.conConStatus == 'D' }">
+		                  <c:if test="${c.conConStatus == 'Z' }">
 		                  	<td class="tableset-order05">거절</td>
 		                  </c:if>
 		                  <c:if test="${c.conConStatus == 'Y' }">

@@ -43,8 +43,8 @@
     font-weight: 400;
 }
 .date-box{border-radius: 0.6rem; border: 1px solid lightgray;}
-.rec_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
-.rec_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem;}
+.rec_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem; cursor: pointer;}
+.rec_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem; cursor: pointer;}
 .search{border: 1px solid lightgray; background-color: black; color: white; border-radius :0.6rem;} 
 .cancel{border: 1px solid lightgray; border-radius :0.6rem;}
 .recommendationEnroll>a:hover{color: white;}

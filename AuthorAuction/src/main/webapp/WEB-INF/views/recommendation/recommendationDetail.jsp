@@ -271,8 +271,8 @@
 
 
 <script>
+	
 	window.onload = () => {
-		checkImg();
 		// 답글 등록
 		if(document.getElementById('enrollReply') != null){
 			const form = document.getElementById('form');
@@ -295,18 +295,43 @@
 			})		
 		}
 		// 답글 수정페이지로 이동
-		/*
-		const updateReply = document.getElementById('updateReply');	// 수정버튼
-		const selectReply = document.getElementById('selectReply');	// 수정완료버튼
-		*/
 		if(document.getElementById('updateReply') != null){
 			var replyForm2 = document.getElementById('replyForm2');
 	 		var replyForm3 = document.getElementById('replyForm3');
 			document.getElementById('updateReply').addEventListener('click', () =>{
+		console.log(456456456)
 				replyForm2.style.display = 'none';
 				replyForm3.style.display = 'block';
 			})
-		};	
+		};
+		// 답글 수정완료 버튼 누를 때	
+		if(document.getElementById('selectReply') != null){
+			const form = document.getElementById('form');
+			document.getElementById('selectReply').addEventListener('click', ()=>{
+				
+				const fileInputs = document.querySelectorAll('.fileset-input');
+				let selectedFileCount = 0;
+				fileInputs.forEach(fileInput => {
+				    // 선택된 파일들 가져오기
+				    const selectedFiles = fileInput.files;
+
+				    // 파일이 선택되었는지 확인하고 개수 누적
+				    selectedFileCount += selectedFiles.length;
+				  });
+				
+				const imageTags = document.querySelectorAll('.contents-thumbitem.reply img.contents-thumbimg:not(.dark)').length;
+				console.log(imageTags);
+				
+				if(selectedFileCount + imageTags == 0 ){
+					alert('사진을 반드시 첨부해주세요.');
+				} else if(selectedFileCount + imageTags > 1) {
+					alert('사진은 1장만 첨부가능합니다.');
+				} else {
+					form.action = 'updateReply.re';
+					form.submit();
+				}
+			})
+		}
 		// 등록된 이미지 클릭 방지
 		const delAttms = document.getElementsByClassName('contents-thumbimg');
 			for(const dAtt of delAttms) {
@@ -344,6 +369,7 @@
 			});
 		}
 		// 글 삭제
+	/* 
 		if(document.getElementById('deleteConfirm') != null){
 			document.getElementById('deleteConfirm').addEventListener('click', () =>{
 			const recommendationForm = document.getElementById('recommendationForm');										
@@ -351,33 +377,20 @@
 				recommendationForm.submit();
 	        });
 		}
-	}
-	// 답글 수정완료 버튼 누를 때	
-	const checkImg = () =>{
-		if(document.getElementById('selectReply') != null){
-			const form = document.getElementById('form');
-			document.getElementById('selectReply').addEventListener('click', ()=>{
-				const files = document.getElementsByName('file');
-				console.log(files);
-				let selectedFileCount = 0;
-				
-				for(const f of files){
-					if(f.files && f.files.length>0){
-						selectedFileCount += 1;
-					}
-				}
-				const existingFiles = document.querySelectorAll('.contents-thumbitem');
-				const existingFileCount = existingFiles.length;
-				
-				if(selectedFileCount === 0 && existingFileCount === 0){
-					alert('사진을 반드시 첨부해주세요.');
-				} else {
-					form.action = 'updateReply.re';
-					form.submit();
-				}
-			});
-		}		
-	}
+		 */
+		const showModal = () => {
+		    const modal = document.getElementById('myModal');
+		    modal.style.display = 'block';
+		  };
+		const closeModal = () => {
+			const modal = document.getElementById('myModal');
+		    modal.style.display = 'none';
+		};
+		const submitBtn = () =>{
+			const recommendationForm = document.getElementById('recommendationForm');
+			recommendationForm.action='deleteRecommendation.re';
+			recommendationForm.submit();
+		}
 </script>
 </head>
 
@@ -487,9 +500,33 @@
 				<c:if test="${loginUser.memId == r.memId}">
 		            <div class="form-btn" id="form-btn">
 		              <button class="btnset" type="submit" onclick="location.href='editRecommendation.re'" style="color: white;">수정</button> 
-		              <button class="btnset" type="button" id="deleteConfirm">삭제</button>
+		              <button class="btnset" type="button" id="deleteConfirm" onclick="showModal()">삭제</button>
 			       	</div>
 				</c:if>
+				
+				<div id="myModal" class="modal">
+					<div class="modal-content">
+						<span class="close" onclick="closeModal()">&times;</span>
+					    <main class="th-layout-main ">
+					    	<div class="bloomcity-N10" data-bid="DDLQevsBR2">
+					    		<div class="content-container">
+									<div class="form-wrap">	
+										<div class="form-header">
+											<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem;">그림추천 문의 삭제</h3>
+										</div>
+										<div class="form-body">
+											<p style="text-align: center;">삭제하시겠습니까?</p>
+											<div class="btn-box">
+												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()" style="float: right; margin-top: 1rem;">네</a>
+												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="cancelBtn" onclick="closeModal()">아니오</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</main>
+					</div>
+				</div>
 			  </form>	
 				
 				
@@ -621,8 +658,8 @@
 											<ul class="contents-thumblist">
 												<c:forEach items="${aList}" var="a">
 												<c:if test="${a.attFno == '2'}">
-													<li class="contents-thumbitem" style="width: 20rem; height: 20rem;">
-														<img style="width: 100%; height: 100%;" class="contents-thumbimg" src="${a.attRename}" id="delete-${ a.attRename }/${a.attFno}" alt="등록된 사진">
+													<li class="contents-thumbitem reply" style="width: 20rem; height: 20rem;">
+														<img style="width: 100%; height: 100%;" class="contents-thumbimg " src="${a.attRename}" id="delete-${ a.attRename }/${a.attFno}" alt="등록된 사진">
 														<input type="hidden" name="deleteReplyAttm" value="none">
 													</li>
 												</c:if>	

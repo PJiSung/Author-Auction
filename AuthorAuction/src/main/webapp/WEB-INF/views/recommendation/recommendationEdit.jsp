@@ -344,22 +344,24 @@
 	const checkImg = () =>{
 		const attmForm = document.getElementById('attmForm');
 		document.getElementById('editFinish').addEventListener('click', ()=>{
-			console.log("ddddd");
-			const files = document.getElementsByName('file');
+
+			const fileInputs = document.querySelectorAll('.fileset-input');
 			let selectedFileCount = 0;
+			fileInputs.forEach(fileInput => {
+			    // 선택된 파일들 가져오기
+			    const selectedFiles = fileInput.files;
+
+				// 파일이 선택되었는지 확인하고 개수 누적
+			    selectedFileCount += selectedFiles.length;
+			});
 			
-			for(const f of files){
-				if(f.files && f.files.length>0){
-					selectedFileCount += 1;
-					
-				}
-			}
-			const existingFiles = document.querySelectorAll('.contents-thumbitem');
-			const existingFileCount = existingFiles.length;
+			const imageTags = document.querySelectorAll('.contents-thumbitem.reply img.contents-thumbimg:not(.dark)').length;
+			console.log(imageTags);
 			
-			//if(selectedFileCount < 1 && existingFiles.length === 0){
-			if(selectedFileCount === 0 && existingFileCount === 0){	
+			if(selectedFileCount + imageTags == 0 ){
 				alert('사진을 반드시 첨부해주세요.');
+			} else if(selectedFileCount + imageTags > 1) {
+				alert('사진은 1장만 첨부가능합니다.');
 			} else {
 				attmForm.submit();
 			}
