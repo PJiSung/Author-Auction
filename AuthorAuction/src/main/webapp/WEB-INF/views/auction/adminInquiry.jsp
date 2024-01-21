@@ -124,6 +124,7 @@
 		transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 		box-shadow: 1.5px 1.5px 4px black;
 	}
+	
 </style>
 </head>
 <body>
@@ -136,17 +137,17 @@
 					<div id="checkBoxAll">
 						<input type="checkBox" id="all"><label for="all">전체</label>
 					</div>
-					<div style="width: 10%; display: inline-block; margin-left: 3%;">
+					<div style="width: 15%; display: inline-block; margin-left: 3%;">
 						<input type="checkBox" class="auctionStatus" value="scheduled"
 							name="scheduled" id="scheduled" onclick="allCheck(this);"><label
 							for="scheduled">진행 예정 경매</label>
 					</div>
-					<div style="width: 10%; display: inline-block; margin-left: 3%;">
+					<div style="width: 15%; display: inline-block; margin-left: 3%;">
 						<input type="checkBox" class="auctionStatus" value="ongoing"
 							name="ongoing" id="ongoing" onclick="allCheck(this);"><label
 							for="ongoing">진행 중인 경매</label>
 					</div>
-					<div style="width: 10%; display: inline-block; margin-left: 3%;">
+					<div style="width: 15%; display: inline-block; margin-left: 3%;">
 						<input type="checkBox" class="auctionStatus" value="end"
 							name="end" id="end" onclick="allCheck(this);"><label
 							for="end">종료된 경매</label>
@@ -364,14 +365,14 @@
 			<c:forEach items="${ aList }" var="auction" varStatus="status">
 				<div onclick="moveAuction(${auction.aucNo}, this);" class="auction"
 					>
-					<div style="width: 14%; display: inline-block;">${ auction.aucNo }</div>
+					<div style="width: 14%;">${ auction.aucNo }</div>
 					<div style="width: 14%; height: 100%; display: inline-block;">
 						<img src="${ auction.attRename }"
 							style="height: 100px; width: 100px; margin: 3% 0 3% 0;">
 					</div>
-					<div style="width: 14%; display: inline-block;">${ auction.conAuthor }</div>
-					<div style="width: 14%; display: inline-block;">${ auction.conProduct }</div>
-					<div style="width: 14%; display: inline-block;">
+					<div style="width: 14%;">${ auction.conAuthor }</div>
+					<div style="width: 14%;">${ auction.conProduct }</div>
+					<div style="width: 14%;">
 						시작일 : ${ fn:split(auction.aucStartDate, ' ')[0] }<br> 종료일 :
 						${ fn:split(auction.aucFinishDate, ' ')[0] }
 					</div>
@@ -394,19 +395,19 @@
 					if (today.compareTo(auctionStartDate) < 0) {
 					%>
 					<div
-						style="width: 14%; display: inline-block; height: 100px; padding-top: 2.3%;">
+						style="width: 14%; display: flex; align-items:center; justify-content:center; text-align:center; height: 100px;">
 						예정 경매</div>
 					<%
 					} else if (today.compareTo(auctionEndDate) > 0) {
 					%>
 					<div
-						style="width: 14%; display: inline-block; height: 100px; padding-top: 2.3%;">
+						style="width: 14%; display: flex; align-items:center; justify-content:center; text-align:center; height: 100px;">
 						종료 경매</div>
 					<%
 					} else {
 					%>
 					<div
-						style="width: 14%; display: inline-block; height: 100px; padding-top: 2.3%;">
+						style="width: 14%; display: flex; align-items:center; justify-content:center; text-align:center; height: 100px;">
 						진행 경매</div>
 					<%
 					}
@@ -416,8 +417,8 @@
 					if (today.compareTo(auctionStartDate) < 0) {
 					%>
 					<div
-						style="width: 14%; display: inline-block; height: 100px; padding-top: 2.3%;">
-						경매 예정<br> 경매 시작가 :
+						style="width: 14%; display: flex; align-items:center; justify-content:center; text-align:center; height: 100px;">
+						경매 시작가<br>
 						<fmt:formatNumber value="${ auction.aucStartPrice }" />
 						원
 					</div>
@@ -425,8 +426,8 @@
 					} else if (today.compareTo(auctionEndDate) > 0) {
 					%>
 					<div
-						style="width: 14%; display: inline-block; height: 100px; padding-top: 2.3%;">
-						낙찰 금액 :
+						style="width: 14%; display: flex; align-items:center; justify-content:center; text-align:center; height: 100px;">
+						낙찰 금액<br>
 						<fmt:formatNumber value="${ auction.aucFinishPrice }" />
 						원
 					</div>
@@ -434,8 +435,8 @@
 					} else {
 					%>
 					<div
-						style="width: 14%; display: inline-block; height: 100px; padding-top: 2.3%;">
-						입찰 금액 :
+						style="width: 14%; display: flex; align-items:center; justify-content:center; text-align:center; height: 100px;">
+						입찰 금액<br>
 						<fmt:formatNumber value="${ auction.aucFinishPrice }" />
 						원
 					</div>

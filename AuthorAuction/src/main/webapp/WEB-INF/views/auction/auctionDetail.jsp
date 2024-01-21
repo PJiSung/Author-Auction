@@ -253,17 +253,21 @@
 	  }
 	  
 	  .item{
-	  	width: 50px;
-	  	height: 100px;
-	  	display:inline-block;
+	  	width: 50%;
+	  	height: 200px;
+	  	display:flex;
+	  	align-items:center;
+	  	text-align:center;
+	  	justify-content:center;
 	  	cursor:pointer;
+	  	
 	  }
 		
 		#api {
 			width: 600px;
 			margin-left: 15%;
 			margin-bottom: 3%;
-			height: 150px;
+			height: 200px;
 		}
 		
 		.owl-carousel{
@@ -1308,7 +1312,7 @@ const enterSend = () =>{
 		
 		<div id="content-allOver-cover"	style=" width: 70%; margin: auto; margin-top: 8%; display: flex; height: 100%; postion: absolute;">
 			<div id="content-left" style="width: 49%; display: inline-block;">
-				<img src="${ auction.attRename }" style="width: 600px; height: 600px; border-radius: 15px;">
+				<img src="${ auction.attRename }" style="width: 600px; height: 600px; border-radius: 30px;">
 			</div>
 			<div id="contentRightCover" style="width: 49%; position: absolute; left: 900px; z-index: 0;">
 				<div style="width: 600px; height: 800px;">
@@ -1371,6 +1375,7 @@ const enterSend = () =>{
 		<br>
 		<div id="api">
 			<h1>이 작가의 다른 작품</h1>
+			<h1 id="noShow" style="text-align:center; display:none; align-items: center; justify-content: center; height:100%;"> 조회된 데이터가 없습니다</h1>
 			<div class="owl-carousel owl-theme">
 			</div>
 		</div>
@@ -1982,18 +1987,24 @@ const enterSend = () =>{
 		    	                    imgElement.onclick = function(){
 		    	                    	expansion(this)
 		    	                    }
-		
 		    	                    itemsContainer.appendChild(imgElement);
 		    	                }
 		    	            }
 	    	            }
+	    	            carasel(itemsNum);
 	    	        }
 	    	    }
-	    	    carasel(itemsNum);
 	    	};
 	    	xhr.send('');
 
         	function carasel(itemsNum){
+        		
+        		if(itemsNum > 2){
+        			itemsNum = 2
+        		}else if(itemsNum == 0){
+        			document.querySelector("h1[id='noShow']").style.display = 'flex';
+        		}
+        		
         	    var owl = $('.owl-carousel'); 
         	    owl.owlCarousel({
         	        items: itemsNum,
@@ -2002,6 +2013,7 @@ const enterSend = () =>{
         	        autoplayTimeout: 3000, // 다음 이미지로 넘어가는 시간 (단위 : 밀리초)
         	        autoplayHoverPause: true, // 마우스가 이미지에 위에 있을 때 자동 슬라이드를 일시중지 할지 여부
         	    });
+        	    
         	}
 
 	    </script>

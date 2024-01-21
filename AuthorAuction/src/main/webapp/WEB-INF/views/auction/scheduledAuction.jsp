@@ -9,6 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="main/css/setting.css">
 <link rel="stylesheet" href="main/css/plugin.css">
 <link rel="stylesheet" href="main/css/template.css">
@@ -99,10 +104,6 @@
 		margin-bottom: 9%;
 	}
 	
-	img{
-		border-radius: 10px;
-	}
-	
 	.picModal{
 		position:absolute;
 		width:100%;
@@ -154,6 +155,10 @@
 	
 	#explain{
 		font-size: 25px;
+	}
+	
+	img{
+		border-radius: 10px;
 	}
 	
 	#forInfoPlace{
@@ -551,9 +556,12 @@
 }
 	
 	.item{
-	  	width: 50px;
-	  	height: 100px;
-	  	display:inline-block;
+	  width: 50%;
+	  	height: 200px;
+	  	display:flex;
+	  	align-items:center;
+	  	text-align:center;
+	  	justify-content:center;
 	  	cursor:pointer;
 	  }
 		
@@ -561,14 +569,10 @@
 			width: 600px;
 			margin-left: 15%;
 			margin-bottom: 3%;
-			height: 150px;
+			height: 200px;
 		}
 		
 		.owl-carousel{
-			width: 600px;
-			margin-bottom: 3%;
-			margin:auto;
-			text-align: center;
 		}
 	
 	#explain{
@@ -1225,7 +1229,7 @@ const enterSend = () =>{
 	
 	<div id="content-allOver-cover"	style=" width: 70%; margin: auto; margin-top: 8%; display: flex; height: 100%; postion: absolute;">
 		<div id="content-left" style="width: 49%; display: inline-block;">
-			<img src="${ auction.attRename }" style="width: 600px; height: 600px; border-radius: 15px;">
+			<img src="${ auction.attRename }" style="width: 600px; height: 600px; border-radius: 30px;">
 		</div>
 		<div id="contentRightCover" style="width: 49%; position: absolute; left: 900px; z-index: 0;">
 			<div style="width: 600px; height: 800px;">
@@ -1288,6 +1292,7 @@ const enterSend = () =>{
 	<br>
 	<div id="api">
 			<h1>이 작가의 다른 작품</h1>
+			<h1 id="noShow" style="text-align:center; display:none; align-items: center; justify-content: center; height:100%;"> 조회된 데이터가 없습니다</h1>
 			<div class="owl-carousel owl-theme">
 			</div>
 		</div>
@@ -1436,7 +1441,7 @@ const enterSend = () =>{
 			check.innerText = "경매 시작까지 남은 시간 " + days + "일 " + hours + "시간 " + minutes + "분 " + seconds + "초";
 			
 				if(check == '0일 0시간 0분 0초' || seconds.toString().indexOf('-') != -1){
-					check.innerText = '경매 시작'
+					check.innerText = '경매 페이지로 이동'
 					/* document.querySelector("div[id='timerZone']").innerText = '경매 시작'
 						check.addEventListener('click',function(){
 							if(confirm('경매가 시작되었습니다. \n경매 페이지로 이동하시겠습니까?')){
@@ -1465,7 +1470,7 @@ const enterSend = () =>{
 				
 					if(check == '0일 0시간 0분 0초' || seconds.toString().indexOf('-') != -1){
 						clearInterval(timer);
-						check.innerText = '경매 시작'
+						check.innerText = '경매 페이지로 이동'
 						document.querySelector("div[id='timerZone']").innerText = '경매 시작'
 							check.addEventListener('click',function(){
 								if(confirm('경매가 시작되었습니다. \n경매 페이지로 이동하시겠습니까?')){
@@ -1548,12 +1553,10 @@ const enterSend = () =>{
 	    	                    imgElement.onclick = function(){
 	    	                    	expansion(this)
 	    	                    }
-	
 	    	                    itemsContainer.appendChild(imgElement);
 	    	                }
 	    	            }
     	            }
-
     	            carasel(itemsNum);
     	        }
     	    }
@@ -1561,9 +1564,16 @@ const enterSend = () =>{
     	xhr.send('');
 
     	function carasel(itemsNum){
+    		
+    		if(itemsNum > 2){
+    			itemsNum = 2
+    		}else if(itemsNum == 0){
+    			document.querySelector("h1[id='noShow']").style.display = 'flex';
+    		}
+    		
     	    var owl = $('.owl-carousel'); 
     	    owl.owlCarousel({
-    	        items: 5,
+    	        items: itemsNum,
     	        loop: true, // 항목들을 무한으로 반복하여 보여줄지 여부
     	        autoplay: true, // 자동	으로 슬라이드 쇼를 시작할지 여부
     	        autoplayTimeout: 3000, // 다음 이미지로 넘어가는 시간 (단위 : 밀리초)

@@ -170,14 +170,13 @@
 	<jsp:include page="../common/adminHeadSide.jsp"></jsp:include>
         <main style="width:70%; ">
             <div style="display:flex; flex-direction:column; height:100%;">
-                <div style="display:flex; height:50%;">
-                    <section style="width:49%; margin-right:0.5%; height:100%;">
+                    <section style="width:100%; margin-right:0.5%; height:50%;">
 	                    <h2>최근 접속자수</h2>
 	                    <div style="height:100%;">
 	                        <canvas id="line-chart" height="140"></canvas>
 	                    </div>
                     </section>
-                    <section style="width:49%; margin-left:0.5%;">
+                    <section style="width:100%; margin-left:0.5%;">
                         <h2>입찰 TOP 5</h2>
                         <table id="auctionTable">
                             <tr>
@@ -202,30 +201,8 @@
                             </c:forEach>
                         </table>
                     </section>
-                </div>
-                <div style="display:flex; height:50%;">
-                    <section style="width:49%; margin-right:0.5%;">
-                        <h2>판매량 TOP 10</h2>
-						<table>
-                            <tr>
-                                <th>작품 번호</th>
-                                <th>작품명</th>
-                                <th>작가명</th>
-                                <th>가격</th>
-                                <th>재고</th>
-                            </tr>
-                            <c:forEach items="${ pList }" var="product">
-                            	<tr onclick="moveToProduct(${ product.proNo })">
-                            		<td>${ product.proNo }</td>
-	                                <td>${ product.proName }</td>
-	                                <td>${ product.proWriter }</td>
-	                                <td><fmt:formatNumber value="${ product.proPrice }"/> 원</td>
-	                                <td>${ product.proAmount }</td>
-                            	</tr>
-                            </c:forEach>
-                          </table>
-                    </section>
-                    <section style="width:49%; margin-left:0.5%;">
+                <div style="height:50%;">
+                	<section style="width:100%; margin-left:0.5%;">
                         <h2>신규 등록 문의글</h2>
                         <table>
                             <tr>
@@ -242,6 +219,27 @@
 	                                <td>${ consignment.conProduct }</td>
 	                                <td>${ consignment.conAuthor }</td>
 	                                <td><fmt:formatNumber value="${ consignment.conHope }"/> 원</td>
+                            	</tr>
+                            </c:forEach>
+                          </table>
+                    </section>
+                    <section style="width:100%; margin-right:0.5%;">
+                        <h2>판매량 TOP 10</h2>
+						<table>
+                            <tr>
+                                <th>작품 번호</th>
+                                <th>작품명</th>
+                                <th>작가명</th>
+                                <th>가격</th>
+                                <th>재고</th>
+                            </tr>
+                            <c:forEach items="${ pList }" var="product">
+                            	<tr onclick="moveToProduct(${ product.proNo })">
+                            		<td>${ product.proNo }</td>
+	                                <td>${ product.proName }</td>
+	                                <td>${ product.proWriter }</td>
+	                                <td><fmt:formatNumber value="${ product.proPrice }"/> 원</td>
+	                                <td>${ product.proAmount }</td>
                             	</tr>
                             </c:forEach>
                           </table>
