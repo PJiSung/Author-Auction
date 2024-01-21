@@ -62,6 +62,16 @@
 		box-shadow: 1.5px 1.5px 4px black;
 	}
 	
+	.auctionNoData{
+	width: 100%;
+		height: 110px;
+		border-bottom: 1px black solid;
+		display: flex;
+		align-items: center;
+		justify-content: center; 
+		text-align: center;
+	}
+	
 	.checkZone{
 		width: 14%;
 		height: 100px;
@@ -106,11 +116,21 @@
 		cursor:pointer;
 	}
 	
+	.price{
+		font-weight: 500;
+	}
+	
+	.price:hover{
+		cursor:pointer;
+		font-weight: 800;
+	}
+	
 </style>
 
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/myPageSide.jsp"/>
 	<div id="content-allOver-cover" style="width: 100%; height: 100%; min-height: 1000px;">
 		<div id="divine" style="width: 100%; height: 100%;">
 			<div id="headline" style="width: 70%; height: 100%; margin: auto;">
@@ -151,7 +171,7 @@
 
 				<div id="onlyLoad">
 					<c:if test="${ empty aList }">
-						<div class="auction">
+						<div class="auctionNoData">
 							<h1>조회 가능한 데이터가 없습니다</h1>
 						</div>
 					</c:if>

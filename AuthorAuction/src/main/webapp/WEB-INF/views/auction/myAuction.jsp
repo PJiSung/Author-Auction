@@ -71,6 +71,7 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
+	<jsp:include page="../common/myPageSide.jsp"/>
 
 	<div id="content-allOver-cover" style="width: 100%; height: 100%;">
 		<div id="divine" style="width: 100%; height: 100%; min-height: 950px;">
@@ -280,14 +281,36 @@
 
 	<script>
 		window.onload = () =>{
-			
 			const url = window.location.href;
 			if(url.includes("sort=low")){
 				document.querySelectorAll("span[class='price']")[1].style.color='orange';
 			}else if(url.includes("sort=high")){
 				document.querySelectorAll("span[class='price']")[0].style.color='orange';
 			}
+			
+			switch(true){
+			case url.includes("aucStatus=all"):
+				break;
+			case url.includes("aucStatus=ongoing"):
+				break;
+			case url.includes("aucStatus=end"):
+				break;
+			case url.includes("aucStatus=successBid"):
+				break;
+			
+			}
 		}
+		
+		function reloadSearch(data){
+			for(let i = 0; i < document.querySelectorAll("div[class='seeWhich']").length; i++){
+				if(i == data){
+					document.querySelectorAll("div[class='seeWhich']")[i].style.background = 'gray';
+				}else{
+					document.querySelectorAll("div[class='seeWhich']")[i].style.background = 'lightgray';
+				}
+			}
+		}
+		
 	
         const moveToAuction = (data)=>{
         	location.href="auctionDetail.ac?aucNo=" + data + "&page=" + ${pi.currentPage};
