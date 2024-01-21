@@ -27,7 +27,22 @@
 		height:100%;
 	}
 
-	#priceTag, #bidModal {
+	#checkId{
+		width: 96%;
+		border: 1px black solid;
+		display:flex;
+		justify-content:center;
+		align-items: center;
+		text-align: center;
+		margin-top: 2%;
+		height: 9%;
+		margin-left: 2%;
+		padding-top: 3%;
+		padding-bottom: 3%;
+		border-radius: 10px;
+	}
+
+	#priceTag{
 		position: fixed;
 		z-index: 1;
 		left: 0;
@@ -43,11 +58,12 @@
 	#bidModal::-webkit-scrollbar { display: none; }
 	
 	.modal-content {
-		background-color: #fefefe;
-		margin: 15% auto;
-		padding: 20px;
-		border: 1px solid #888;
-		width: 80%;
+			background-color: #fefefe;
+			margin:10% auto 10% auto;
+			padding: 20px;
+			border: 1px solid #888;
+			width: 80%;
+			border-radius: 10px;
 	}
 	
 	.close {
@@ -88,6 +104,7 @@
 		padding-top: 2%;
 		padding-bottom: 1.5%;
 		display: inline-block;
+		border-radius: 10px;
 	}
 	
 	#authorPlace {
@@ -105,35 +122,29 @@
 	}
 	
 	.picModal{
-		position:absolute;
-		width:100%;
-		height:100%;
-		display: none;
+		position: fixed;
+			z-index: 10;
+			left: 0;
+			top: 0;
+			height:100%;
+			width: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.4);
+			display: none;
 	}
 	
-	.picModal_overlay{
-	  background-color: rgba(0, 0, 0, 0.6);
-	  width: 100%;
-	  height: 100%;
-	  min-height: 1000px;
-	  position: absolute;
-	  z-index: 5;
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	}
 	
 	.picModal_content{
-		box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-		background-color:white;
-		border-radius:10px;
-		postion:relative;
-		z-index:2;
-		width: 800px;
-		height: 800px;
-		margin:auto;
-		margin-top:5%;
-	}
+			box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+			background-color:white;
+			border-radius:10px;
+			postion:relative;
+			z-index:8;
+			width: 700px;
+			height: 700px;
+			margin:auto;
+			margin-top:6%;
+		}
 	
 	
 	#closePicModal{
@@ -145,13 +156,13 @@
 	}
 	
 	#picModalImg{
-		width:750px;
-		height:750px;
-		padding-left:50px;
-		padding-top:25px;
-		z-index:3;
-		border-radius: 10px;
-	}
+			width:650px;
+			height:650px;
+			padding-left:50px;
+			padding-top:25px;
+			z-index:100;
+			border-radius: 10px;
+		}
 	
 	#explain{
 		font-size: 25px;
@@ -170,6 +181,7 @@
 	
 	.tooltip {
     position: absolute;
+    width:500px;
     left: -1px;
     top: 52px;
     background: black;
@@ -1216,14 +1228,14 @@ const enterSend = () =>{
 		
 		
 	<!-- 사진 확대 모달 제작 -->
+	
+	
 	<div class="picModal">
-  		<div class="picModal_overlay">
-	  		<div class="picModal_content">
-	  			<img id="picModalImg">
-	  			<div>
-	  				<button id="closePicModal" onclick="closeModal();" style="width: 10%; margin: 1% 5% 0 0;"> 닫기 </button>
-	  			</div>
-	  		</div>
+  		<div class="picModal_content">
+  			<img id="picModalImg">
+  			<div>
+  				<button id="closePicModal" onclick="closePicModal();" style="width: 10%; margin: 1% 5% 0 0;"> 닫기 </button>
+  			</div>
   		</div>
   	</div>	
 	
@@ -1275,12 +1287,11 @@ const enterSend = () =>{
 				<hr style="margin-left: 2%; width: 96%; margin-bottom: 3%;">
 				<div id="forInfoPlace">
 				    <div class="infoSpan" id="fees" style="display : inline-block; position:relative" >
-						낙찰 수수료 <div class="tooltip">시작 가격을 기준으로 낙찰 수수료는 <span id="fees"></span>원입니다.</div>
+						낙찰 수수료 <div class="tooltip">시작 가격을 기준으로<br>낙찰 수수료는 <span id="fees"></span>원입니다.</div>
 					</div>
-					<span class="infoSpan" id="priceTagBtn" onclick="onenPriceModal();">경매 호가표</span> <span class="infoSpan" id="likeBtn">관심 목록 추가</span>
+					<span class="infoSpan" id="priceTagBtn" onclick="openPriceModal();">경매 호가표</span> <span class="infoSpan" id="likeBtn">관심 목록 추가</span>
 					</div>
-				<div id="checkId"
-					style="width: 96%; border: 1px black solid; display:flex; justify-content:center; align-items: center; text-align: center; margin-top: 2%; height: 9%; margin-left: 2%; padding-top: 3%; padding-bottom: 3%;"></div>
+				<div id="checkId"></div>
 			</div>
 		</div>
 	</div>
@@ -1309,7 +1320,7 @@ const enterSend = () =>{
 	<div id="priceTag" style="display: none;">
 		<div class="modal-content" style="width: 30%;">
 			<h2
-				style="text-align: center; background-color: black; width:90%; margin:auto; color: white; height: 50px; padding-top: 10px;">호가표</h2>
+				style="text-align: center; background-color: black; width:90%; margin:auto; color: white; height: 50px; padding-top: 10px;  border-radius: 15px;">호가표</h2>
 			<table
 				style="margin: auto; border-collapse: collapse; text-align: center; width: 80%;">
 				<tr class="trLine">
@@ -1358,7 +1369,7 @@ const enterSend = () =>{
 				</tr>
 			</table>
 			<div style="text-align: right; margin-top: 2%; margin-right: 5%;">
-				<button id="closePriceTag" style="width: 10%; color:white; background:black;">닫기</button>
+				<button id="closePriceTag" style="width: 10%; color:white; background:black;  border-radius: 10px;">닫기</button>
 			</div>
 		</div>
 	</div>
@@ -1366,11 +1377,19 @@ const enterSend = () =>{
 	<br>
 	<br>
 	
+	
+	
+	
 	<jsp:include page="../common/footer.jsp" />
 
 
 	<script type="text/javascript">
 		window.onload = () =>{
+			
+			document.getElementById("closePriceTag").addEventListener('click',function(){
+				document.body.style.overflow = '';
+				document.getElementById("priceTag").style.display = 'none'; 
+			})
 			document.querySelector("span[id='fees']").innerText = (Math.floor(parseInt('${ auction.aucStartPrice}') * 0.198)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 			const likeBtn = document.querySelector("span[id='likeBtn']")
 			
@@ -1485,11 +1504,9 @@ const enterSend = () =>{
 		const expansion = (data) =>{
         	
         	const modalPicture = document.querySelector("div[class='picModal_content']").children[0];
-        	document.querySelector("div[class='picModal_overlay']").style.height = window.innerHeight + "px";
+        	document.body.style.overflow = 'hidden';
         	modalPicture.setAttribute("src", data.src)
         	modalPicture.style.borderRadius = '10px';
-        	
-        	console.log(modalPicture);
         	
         	document.querySelector("div[class='picModal']").style.display = 'block';
         }
@@ -1519,12 +1536,14 @@ const enterSend = () =>{
         window.addEventListener("scroll", handleScroll);
 		
         
-        const onenPriceModal = () =>{
+        const openPriceModal = () =>{
+        	document.body.style.overflow = 'hidden';
         	document.querySelector("div[id='priceTag']").style.display = 'block';
         }
         
-        const closeModal = () =>{
-        	document.querySelector("div[id='priceTag']").style.display = 'none';
+        const closePicModal = () =>{
+        	document.body.style.overflow = '';
+        	document.querySelector("div[class='picModal']").style.display = 'none';
         }
         
         

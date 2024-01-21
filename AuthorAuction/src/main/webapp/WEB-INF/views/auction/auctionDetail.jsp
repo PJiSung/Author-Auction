@@ -90,6 +90,7 @@
 			padding: 20px;
 			border: 1px solid #888;
 			width: 30%;
+			border-radius: 10px;
 		}
 		
 		#priceTag::-webkit-scrollbar { display: none; }
@@ -148,7 +149,8 @@
 			background: black;
 			color: white;
 			margin: 50px 0 10px 0;
-			border-radius: 5px;			
+			border-radius: 5px;		
+			cursor:pointer;	
 		}
 		
 		#authorPlace {
@@ -223,6 +225,7 @@
 		
 		.tooltip {
 	    position: absolute;
+	    width:500px;
 	    left: -1px;
 	    top: 52px;
 	    background: black;
@@ -1362,7 +1365,7 @@ const enterSend = () =>{
 					<hr style="margin-left: 2%; width: 96%; margin-bottom: 3%;">
 					<div id="forInfoPlace">
 					    <div class="infoSpan" id="fees" style="display : inline-block; position:relative" >
-							낙찰 수수료 <div class="tooltip">현재 가격을 기준으로 낙찰 수수료는 <span id="fees"></span>원입니다.</div>
+							낙찰 수수료 <div class="tooltip">현재 가격을 기준으로<br> 낙찰 수수료는 <span id="fees"></span>원입니다.</div>
 						</div>
 						<span class="infoSpan" id="priceTagBtn">경매 호가표</span> <span class="infoSpan" id="likeBtn">관심 목록 추가</span>
 						</div>
@@ -1377,9 +1380,9 @@ const enterSend = () =>{
 		</div>
 		<br>
 		<div id="api">
-			<h1>이 작가의 다른 작품</h1>
+			<h1 style="margin:2% 0 2% 0;">이 작가의 다른 작품</h1>
 			<h1 id="noShow" style="text-align:center; display:none; align-items: center; justify-content: center; height:100%;"> 조회된 데이터가 없습니다</h1>
-			<div class="owl-carousel owl-theme">
+			<div class="owl-carousel owl-theme" style="margin:2% 0 5% 0 ;">
 			</div>
 		</div>
 	
@@ -1393,9 +1396,9 @@ const enterSend = () =>{
 		
 		<!-- 호가표 모달창 -->
 		<div id="priceTag" style="display: none;">
-			<div class="modal-content" style="width: 30%;">
+			<div class="modal-content" style="width: 30%; border-radius: 15px;">
 				<h2
-					style="text-align: center; background-color: black; width:90%; margin:auto; color: white; height: 50px; padding-top: 10px;">호가표</h2>
+					style="text-align: center; background-color: black; width:90%; margin:auto; color: white; height: 50px; padding-top: 10px; border-radius: 15px;">호가표</h2>
 				<table
 					style="margin: auto; border-collapse: collapse; text-align: center; width: 80%;">
 					<tr class="trLine">
@@ -1444,7 +1447,7 @@ const enterSend = () =>{
 					</tr>
 				</table>
 				<div style="text-align: right; margin-top: 2%; margin-right: 5%;">
-					<button id="closePriceTag" style="width: 10%; color:white; background:black;">닫기</button>
+					<button id="closePriceTag" style="width: 10%; color:white; background:black; border-radius: 10px;">닫기</button>
 				</div>
 			</div>
 		</div>
@@ -1946,7 +1949,7 @@ const enterSend = () =>{
 	        	  contentRightCover.style.marginTop = "0";
 	          } else {
 	        	  if(window.scrollY <= 250){
-	        	  	contentRightCover.style.position = "sticky";
+	        	  	contentRightCover.style.position = "fixed";
 	        	  	contentRightCover.style.marginTop = "-8%";
 	        	  }else{
 	          	  	contentRightCover.style.marginTop = "-4.5%";
