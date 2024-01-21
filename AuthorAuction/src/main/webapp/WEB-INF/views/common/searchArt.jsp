@@ -93,6 +93,13 @@
   text-decoration: none;
   cursor: pointer;
 }
+
+.noResult{
+	width:100%;
+	text-align: center;
+	line-height: 400px;
+	font-size: 30px;
+}
 </style>
 <script>
 window.onload = () =>{
@@ -166,7 +173,9 @@ const detail = () =>{
            </c:forEach>
            </c:if>
            <c:if test="${ empty list }">
+           <div class="noResult">
            	<h1>검색결과가 없습니다.</h1>
+           	</div>
            </c:if>
           </div>
           <br><br><br>

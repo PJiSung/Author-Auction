@@ -286,7 +286,7 @@ window.onpopstate = function() {
             <img src="main/icons/ico_seach_black.svg" class="dropbtn" alt="검색 아이콘">
             <div class="dropdown-content-keyword">
               <form id="search-form" action="searchArts">
-                  <input type="text" name="keyword" id="search-input" placeholder="작품명 또는 작가명" oninput ="searchArts(this.value)">
+                  <input type="text" name="keyword" id="search-input" placeholder="작품명 또는 작가명" oninput ="searchArts(this.value)" autocomplete="off">
                   <button><img alt="검색 버튼" src="main/icons/ico_seach_black.svg"></button>
               </form>
               <div id="search-results">

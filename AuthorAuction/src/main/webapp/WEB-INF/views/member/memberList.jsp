@@ -385,6 +385,36 @@ tr .checkset {
     margin-right: 20px;
     background-color: #ffeb33;
 }
+input.closeModal.del {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 저장 버튼 호버 효과 */
+input.closeModal.del:hover {
+    background-color: #333;
+    color: white;
+}
+
+/* 취소 버튼 스타일 */
+input.closeModal.can {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* 취소 버튼 호버 효과 */
+input.closeModal.can:hover {
+    background-color: #f1f1f1;
+    color: black;
+}
 </style>
 <script>
 window.onload = () =>{
@@ -1346,7 +1376,6 @@ const msg = () => {
 	        
 		    </div>
 	</div>
-<%-- <jsp:include page="../common/footer.jsp"/> --%>
     <!-- [E]hooms-N36 -->
  </main>
 <script src="member/js/setting2.js"></script>

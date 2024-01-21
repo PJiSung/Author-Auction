@@ -117,11 +117,12 @@
             </label>
             <div class="sideBar">
             	<ul type="circle">
-            		<li><div class="sideBtn" style="margin-top:100%;" onclick="location.href='adminMain.adac'">관리자 메인</div></li>
-            		<li><div class="sideBtn" style="margin-top:10%;" onclick="location.href='adminInquiry.adac'">경매</div></li>
-            		<li><div class="sideBtn" style="margin-top:10%;">판매 작품</div></li>
-            		<li><div class="sideBtn" style="margin-top:10%;">문의글 확인</div></li>
-            		<li><div class="sideBtn" style="margin-top:10%;">회원 관리</div></li>
+            		<li><div class="sideBtn" style="margin-top:100%;" onclick="location.href='/'">Auction 메인</div></li>
+            		<li><div class="sideBtn" style="margin-top:10%;" onclick="location.href='memberList.adme'">회원 관리</div></li>
+            		<li><div class="sideBtn" style="margin-top:10%;" onclick="location.href='adminInquiry.adac'">경매 관리</div></li>
+            		<li><div class="sideBtn" style="margin-top:10%;" onclick="location.href='artsadmin.ar'">미술품 관리</div></li>
+            		<li><div class="sideBtn" style="margin-top:10%;" onclick="location.href='searchList.adco'">위탁 관리</div></li>
+            		<li><div class="sideBtn" style="margin-top:10%;" onclick="location.href='admOrderList.adod'">주문 관리</div></li>
             	</ul>
             </div>
         </aside>

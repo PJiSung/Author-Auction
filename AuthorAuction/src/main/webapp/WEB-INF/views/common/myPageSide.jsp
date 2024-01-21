@@ -9,11 +9,13 @@
 const openSidebar = () =>{
 	document.getElementsByClassName("sideTop")[0].style.display = "block";
     document.getElementsByClassName("sideContent")[0].style.display = "block";
+    document.getElementsByClassName("sideSideIcon")[0].style.display = "none";
 }
 
 const closeSidebar = () =>{
 	 document.getElementsByClassName("sideTop")[0].style.display = "none";
 	 document.getElementsByClassName("sideContent")[0].style.display = "none";
+	 document.getElementsByClassName("sideSideIcon")[0].style.display = "block";
 }
 </script>
 <style>
@@ -38,7 +40,6 @@ const closeSidebar = () =>{
 .sidebar img {
     width: 20px;
     height: 20px;
-    background: white;
     margin-left: 10px;
 }
 
@@ -102,8 +103,30 @@ const closeSidebar = () =>{
     font-size: 16px;
     height: 40px;
 }
-
-
+.sideSideIcon img{
+	width: 30px;
+	height: 30px;
+}
+.sideSideIcon .member{
+	position: absolute;
+	top: 142px;
+	left: 172px;
+}
+.sideSideIcon .auction{
+	position: absolute;
+	top: 342px;
+	left: 172px;
+}
+.sideSideIcon .shopping{
+	position: absolute;
+	top: 502px;
+	left: 172px;
+}
+.sideSideIcon .board{
+	position: absolute;
+	top: 622px;
+	left: 172px;
+}
 </style>
 </head>
 <body>
@@ -116,7 +139,7 @@ const closeSidebar = () =>{
 			<div class="sideContent">
 				<table>
 					<tr class="mainTr">
-						<td><img src="main/icons/logoImage.png"></td>
+						<td><img src="main/icons/user.png"></td>
 						<td onclick="location.href='myInfo'">회원정보</td>
 					</tr>
 					<tr>
@@ -135,7 +158,7 @@ const closeSidebar = () =>{
 					<tr></tr>
 					
 					<tr class="mainTr">
-						<td><img src="main/icons/logoImage.png"></td>
+						<td><img src="main/icons/auction.png"></td>
 						<td onclick="location.href='myBidList.ac'">경매정보</td>
 					</tr>
 					<tr>
@@ -150,7 +173,7 @@ const closeSidebar = () =>{
 					<tr></tr>
 					
 					<tr class="mainTr">
-						<td><img src="main/icons/logoImage.png"></td>
+						<td><img src="main/icons/shopping-cart.png"></td>
 						<td onclick="location.href='myOrderList.od'">쇼핑정보</td>
 					</tr>
 					<tr>
@@ -161,7 +184,7 @@ const closeSidebar = () =>{
 					<tr></tr>
 					
 					<tr class="mainTr">
-						<td><img src="main/icons/logoImage.png"></td>
+						<td><img src="main/icons/billboard.png"></td>
 						<td onclick="location.href='myReviewList.rv'">나의 게시글</td>
 					</tr>
 					<tr>
@@ -179,8 +202,21 @@ const closeSidebar = () =>{
 				</table>
 			</div>
 			<div class="sideSideIcon">
-			
-			
+				<div class="logo">
+					<img src="main/icons/logoImage.png">
+				</div>
+				<div class="member">
+					<img src="main/icons/user.png">
+				</div>
+				<div class="auction">
+					<img src="main/icons/auction.png">
+				</div>
+				<div class="shopping">
+					<img src="main/icons/shopping-cart.png">
+				</div>
+				<div class="board">
+					<img src="main/icons/billboard.png">
+				</div>
 			</div>
 		</div>
 	</div>

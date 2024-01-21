@@ -301,6 +301,29 @@ img:hover{
 .th-layout-main{
 	min-height: 700px;
 }
+.info input[type=button]{
+	background-color: black;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.info input[type=button]:hover{
+    background-color: #333;
+    color: white;
+}
+.authForm #email, #phone{
+	width: 135%;
+}
+.authForm #authNum{
+	width: 76%;
+}
+.authForm input[type=button]{
+	margin-left: 60px;
+}
+.authForm .changeBtn{
+	margin-left: -10% !important;
+}
 </style>
 <script>
 
@@ -332,7 +355,7 @@ const tab2 = () =>{
 		li[2].className = "tabset-link active";
 		document.getElementsByClassName("tabs")[0].style.display = "none";
 		document.getElementsByClassName("tabs")[1].style.display = "none";
-		document.getElementsByClassName("tabs")[1].style.display = "block";
+		document.getElementsByClassName("tabs")[2].style.display = "block";
 		window.history.pushState({}, "Title", "/myInfo");
 	}
 }
@@ -560,7 +583,7 @@ let tds = document.querySelectorAll(".myInfo tr td:last-child");
 						const authNo = document.createElement("td");
 						authNo.innerHTML = '<input type="text" id="authNum" placeholder="인증코드 입력">';
 						const checkAuthNo = document.createElement("td");
-						checkAuthNo.innerHTML = '<input type="button" value="변경" onclick="checkNum1('+i+')">';
+						checkAuthNo.innerHTML = '<input type="button" class="changeBtn" value="변경" onclick="checkNum1('+i+')">';
 						tr2.append(authNo);
 						tr2.append(checkAuthNo);
 						
@@ -585,7 +608,7 @@ let tds = document.querySelectorAll(".myInfo tr td:last-child");
 						const authNo = document.createElement("td");
 						authNo.innerHTML = '<input type="text" id="authNum" placeholder="인증코드 입력">';
 						const checkAuthNo = document.createElement("td");
-						checkAuthNo.innerHTML = '<input type="button" value="변경" onclick="checkNum2('+i+')">';
+						checkAuthNo.innerHTML = '<input type="button" class="changeBtn" value="변경" onclick="checkNum2('+i+')">';
 						tr2.append(authNo);
 						tr2.append(checkAuthNo);
 						
@@ -603,7 +626,7 @@ let tds = document.querySelectorAll(".myInfo tr td:last-child");
 						const addNo = document.createElement("td");
 						addNo.innerHTML = '<input type="text" id="sample6_postcode" value="'+ addArr[0] +'" readonly="readonly">';
 						const addBtn = document.createElement("td");
-						addBtn.innerHTML = '<input type="button" value="우편번호 검색" onclick="sample6_execDaumPostcode()" readonly="readonly">';
+						addBtn.innerHTML = '<input type="button" value="우편번호 검색" class="addressBtn" onclick="sample6_execDaumPostcode()" readonly="readonly">';
 						tr1.append(addNo);
 						tr1.append(addBtn);
 						

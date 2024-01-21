@@ -191,7 +191,7 @@
         
         <br><br><br>
         <div>
-          <a class="btnset btnset-lg" value="상담문의" type="button" id="conEnroll" style="width: 20rem; margin: auto; display: block; text-align: center; vertical-align: middle;">위탁문의</a>
+          <a class="btnset btnset-lg" value="상담문의" type="button" id="conEnroll" style="width: 20rem; margin: auto; display: block; text-align: center; vertical-align: middle; line-height:56px;">위탁문의</a>
         </div>
         <br><br><br>
       </div>
