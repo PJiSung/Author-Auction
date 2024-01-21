@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,25 +186,46 @@ window.onpopstate = function() {
                         <div class="userText">${ loginUser.memId }</div>
                      </td>
                   </tr>
+                  <tr style="height: 50px;">
+                  <!-- 
+                     <td class<div class="dropdown-content-user">
+               <table>
                   <tr>
+                     <td class="profile">
+                        <div class="profilePic">
+                           <img src="${ loginUser.memFileName }" alt="프로필 사진" class="profileImg">
+                        </div>
+                     </td>
+                     <td style="line-height: 20px; cursor: pointer;" onclick="location.href='myInfo';">
+                        <div class="userText"><b>계정 관리</b></div>
+                        <div class="userText">${ loginUser.memId }</div>
+                     </td>
+                  </tr>
+                  <tr style="height: 50px;">
+                  <!-- 
                      <td class="cash">
                         <span>예치금</span><br>
                                 <span onclick="location.href='';" class="cashButton">충전</span>
                                 <span onclick="location.href='';" class="cashButton">출금</span>
                      </td>
-                     <td class="userText"><fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원</td>
+                  	<td class="cash">
+	                  	<span>예치금</span><br>
+                  	</td>
+                  	-->
+                     <td class="userText" colspan="2">
+                     	<span style="margin-right: 10px; padding-left:15px;">예치금</span>
+                     	<fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원
+                    	<span onclick="location.href='pointpayment.ar';" class="cashButton">충전</span>
+                   	</td>
                   </tr>
                   <tr>
-                     <td><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
-                     <td></td>
+                     <td colspan="2"><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
                   </tr>
                   <tr>
-                     <td><a href="myReviewList.rv" class="userMenu">나의 주문</a></td>
-                     <td></td>
+                     <td colspan="2"><a href="myOrderList.od" class="userMenu">나의 주문</a></td>
                   </tr>
                   <tr>
-                     <td><a href="#" class="userMenu">마이페이지</a></td>
-                     <td></td>
+                     <td colspan="2"><a href="myInfo" class="userMenu">마이페이지</a></td>
                   </tr>
                </table>
              </div>

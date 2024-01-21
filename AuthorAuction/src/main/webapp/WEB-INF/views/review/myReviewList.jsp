@@ -345,7 +345,20 @@ body.modal-open {
 	text-overflow:ellipsis;
 }
 
+.EmptySearchResult{
+	width: 100%; 
+	height:450px; 
+	text-align: center; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	flex-direction: column;
+}
 
+.EmptySearchResult p{
+	margin-top: 10px;
+	color:var(--text-color3)
+}
 
 </style>
 </head>
@@ -412,7 +425,8 @@ body.modal-open {
 	              </div>
 	            </div>
 	          </div>
-	          <div class="tableset" id="reviewTable">
+	          <c:if test="${ !empty rList }">
+	          	<div class="tableset" id="reviewTable">
 	            <table class="tableset-table table" >
 	              <colgroup>
 	                <col>
@@ -563,6 +577,14 @@ body.modal-open {
 					</div>
 				</c:if>
 			</nav>
+	          </c:if>
+	          <c:if test="${ empty rList }">
+	          	<div class="EmptySearchResult">
+					<h2>검색 결과가 없습니다.</h2>
+					<p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
+				</div>
+	          </c:if>
+	          
 			<input type="hidden" name="listType" value="${ listType }">
 			</form>
           </div>
@@ -606,156 +628,164 @@ body.modal-open {
 		            </div>
 		          </div>
 		          
-		          
-		          <div class="tableset" id="replyTable">
-		            <table class="tableset-table table" style="table-layout:fixed; width: 100%" id="replyTable">
-		              <colgroup>
-		                <col>
-		                <col>
-		                <col>
-		                <col>
-		                <col>
-		                <col>
-		                <col>
-		              </colgroup>
-		              <thead class="thead-light thead-border-top">
-		                <tr>
-		                  <th scope="col" style="width: 10%;">No.</th>
-		                  <th scope="col" style="width: 8%;">사진</th>
-		                  <th scope="col" style="width: 16%;">작품명</th>
-		                  <th scope="col" style="width: 22%;">작가명</th>
-		                  <th scope="col" style="width: 32%;">댓글 내용</th>
-		                  <th scope="col" style="width: 12%;">댓글 작성일</th>
-		                </tr>
-		              </thead>
-		              <tbody>
-		                <c:forEach items="${ pList }" var="p">
-			                <tr class="replyTableTr">
-			                  <td class="tableset-mobile">${ p.repNo }<input type="hidden" value="${ p.revNo }" id="replyNo"></td>
-			                  <td class="tableset-proImg">
-			                  	<c:forEach items="${ aList }" var="a">
-			                  		<c:if test="${a.attBno == p.proNo && a.attCategory == 4 && a.attFno == 1}">
-					                  	<img alt="작품 사진" src="${ a.attRename }">
-			                  		</c:if>
-			                  	</c:forEach>
-							  </td>
-			                  <td class="tableset-author">${ p.proName }</td>
-			                  <td class="tableset-order04">${ p.proWriter }</td>
-			                  <td class="tableset-content">${ p.repContent }</td>
-			                  <td class="tableset-order05">${ fn:split(p.repCreateDate, ' ')[0] }</td>
+		          <c:if test="${ !empty pList }">
+		          	<div class="tableset" id="replyTable">
+			            <table class="tableset-table table" style="table-layout:fixed; width: 100%" id="replyTable">
+			              <colgroup>
+			                <col>
+			                <col>
+			                <col>
+			                <col>
+			                <col>
+			                <col>
+			                <col>
+			              </colgroup>
+			              <thead class="thead-light thead-border-top">
+			                <tr>
+			                  <th scope="col" style="width: 10%;">No.</th>
+			                  <th scope="col" style="width: 8%;">사진</th>
+			                  <th scope="col" style="width: 16%;">작품명</th>
+			                  <th scope="col" style="width: 22%;">작가명</th>
+			                  <th scope="col" style="width: 32%;">댓글 내용</th>
+			                  <th scope="col" style="width: 12%;">댓글 작성일</th>
 			                </tr>
-		                </c:forEach>
-		              </tbody>
-		            </table>
-		          </div>
-		          <nav class="pagiset pagiset-line" id="replyPage">
-					<c:if test="${ repPi.currentPage <= 1 }">
-						<div class="pagiset-ctrl">
-							<a class="pagiset-link pagiset-first"> <span
-								class="visually-hidden">처음</span>
-							</a>
+			              </thead>
+			              <tbody>
+			                <c:forEach items="${ pList }" var="p">
+				                <tr class="replyTableTr">
+				                  <td class="tableset-mobile">${ p.repNo }<input type="hidden" value="${ p.revNo }" id="replyNo"></td>
+				                  <td class="tableset-proImg">
+				                  	<c:forEach items="${ aList }" var="a">
+				                  		<c:if test="${a.attBno == p.proNo && a.attCategory == 4 && a.attFno == 1}">
+						                  	<img alt="작품 사진" src="${ a.attRename }">
+				                  		</c:if>
+				                  	</c:forEach>
+								  </td>
+				                  <td class="tableset-author">${ p.proName }</td>
+				                  <td class="tableset-order04">${ p.proWriter }</td>
+				                  <td class="tableset-content">${ p.repContent }</td>
+				                  <td class="tableset-order05">${ fn:split(p.repCreateDate, ' ')[0] }</td>
+				                </tr>
+			                </c:forEach>
+			              </tbody>
+			            </table>
+			          </div>
+			          <nav class="pagiset pagiset-line" id="replyPage">
+						<c:if test="${ repPi.currentPage <= 1 }">
+							<div class="pagiset-ctrl">
+								<a class="pagiset-link pagiset-first"> <span
+									class="visually-hidden">처음</span>
+								</a>
+							</div>
+							<div class="pagiset-ctrl">
+								<a class="pagiset-link pagiset-prev"> <span
+									class="visually-hidden">이전</span>
+								</a>
+							</div>
+						</c:if>
+						<c:if test="${ repPi.currentPage > 1 }">
+							<div class="pagiset-ctrl">
+								<c:url var="goFirst" value="${ loc }">
+									<c:param name="page" value="${ repPi.startPage }"></c:param>
+									<c:param name="category" value="${ sr.category }"></c:param>
+									<c:param name="keyword" value="${ sr.keyword }"></c:param>
+									<c:param name="strDate" value="${ sr.strDate }"></c:param>
+									<c:param name="endDate" value="${ sr.endDate }"></c:param>
+									<c:param name="listType" value="${ listType }"/>
+									<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
+								</c:url>
+								<a class="pagiset-link pagiset-first" href="${ goFirst }">
+									<span class="visually-hidden">처음</span>
+								</a>
+							</div>
+							<div class="pagiset-ctrl">
+								<c:url var="goBack" value="${ loc }">
+									<c:param name="page" value="${ repPi.currentPage-1 }"></c:param>
+									<c:param name="category" value="${ sr.category }"></c:param>
+									<c:param name="keyword" value="${ sr.keyword }"></c:param>
+									<c:param name="strDate" value="${ sr.strDate }"></c:param>
+									<c:param name="endDate" value="${ sr.endDate }"></c:param>
+									<c:param name="listType" value="${ listType }"/>
+									<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
+								</c:url>
+								<a class="pagiset-link pagiset-prev" href="${ goBack }"> 
+									<span class="visually-hidden">이전</span>
+								</a>
+							</div>
+						</c:if>
+						<div class="pagiset-list">
+							<c:forEach begin="${ repPi.startPage }" end="${ repPi.endPage }" var="p">
+								<c:url var="goNum" value="${ loc }">
+									<c:param name="page" value="${ p }"></c:param>
+									<c:param name="category" value="${ sr.category }"></c:param>
+									<c:param name="keyword" value="${ sr.keyword }"></c:param>
+									<c:param name="strDate" value="${ sr.strDate }"></c:param>
+									<c:param name="endDate" value="${ sr.endDate }"></c:param>
+									<c:param name="listType" value="${ listType }"/>
+									<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
+								</c:url>
+								<c:choose>
+									<c:when test="${p eq repPi.currentPage}">
+										<a class="pagiset-link active-fill" href="${ goNum }">${ p }</a>
+									</c:when>
+									<c:otherwise>
+										<a class="pagiset-link" href="${ goNum }">${ p }</a>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</div>
-						<div class="pagiset-ctrl">
-							<a class="pagiset-link pagiset-prev"> <span
-								class="visually-hidden">이전</span>
-							</a>
-						</div>
-					</c:if>
-					<c:if test="${ repPi.currentPage > 1 }">
-						<div class="pagiset-ctrl">
-							<c:url var="goFirst" value="${ loc }">
-								<c:param name="page" value="${ repPi.startPage }"></c:param>
-								<c:param name="category" value="${ sr.category }"></c:param>
-								<c:param name="keyword" value="${ sr.keyword }"></c:param>
-								<c:param name="strDate" value="${ sr.strDate }"></c:param>
-								<c:param name="endDate" value="${ sr.endDate }"></c:param>
-								<c:param name="listType" value="${ listType }"/>
-								<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
-							</c:url>
-							<a class="pagiset-link pagiset-first" href="${ goFirst }">
-								<span class="visually-hidden">처음</span>
-							</a>
-						</div>
-						<div class="pagiset-ctrl">
-							<c:url var="goBack" value="${ loc }">
-								<c:param name="page" value="${ repPi.currentPage-1 }"></c:param>
-								<c:param name="category" value="${ sr.category }"></c:param>
-								<c:param name="keyword" value="${ sr.keyword }"></c:param>
-								<c:param name="strDate" value="${ sr.strDate }"></c:param>
-								<c:param name="endDate" value="${ sr.endDate }"></c:param>
-								<c:param name="listType" value="${ listType }"/>
-								<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
-							</c:url>
-							<a class="pagiset-link pagiset-prev" href="${ goBack }"> 
-								<span class="visually-hidden">이전</span>
-							</a>
-						</div>
-					</c:if>
-					<div class="pagiset-list">
-						<c:forEach begin="${ repPi.startPage }" end="${ repPi.endPage }" var="p">
-							<c:url var="goNum" value="${ loc }">
-								<c:param name="page" value="${ p }"></c:param>
-								<c:param name="category" value="${ sr.category }"></c:param>
-								<c:param name="keyword" value="${ sr.keyword }"></c:param>
-								<c:param name="strDate" value="${ sr.strDate }"></c:param>
-								<c:param name="endDate" value="${ sr.endDate }"></c:param>
-								<c:param name="listType" value="${ listType }"/>
-								<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
-							</c:url>
-							<c:choose>
-								<c:when test="${p eq repPi.currentPage}">
-									<a class="pagiset-link active-fill" href="${ goNum }">${ p }</a>
-								</c:when>
-								<c:otherwise>
-									<a class="pagiset-link" href="${ goNum }">${ p }</a>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
+			
+						<c:if test="${ repPi.currentPage >= repPi.maxPage }">
+							<div class="pagiset-ctrl">
+								<a class="pagiset-link pagiset-next">
+									<span class="visually-hidden">다음</span>
+								</a>
+							</div>
+							<div class="pagiset-ctrl">
+								<a class="pagiset-link pagiset-last"> 
+									<span class="visually-hidden">마지막</span>
+								</a>
+							</div>
+						</c:if>
+						<c:if test="${ repPi.currentPage < repPi.maxPage }">
+							<div class="pagiset-ctrl">
+								<c:url var="goNext" value="${ loc }">
+									<c:param name="page" value="${ repPi.currentPage+1 }"></c:param>
+									<c:param name="category" value="${ sr.category }"></c:param>
+									<c:param name="keyword" value="${ sr.keyword }"></c:param>
+									<c:param name="strDate" value="${ sr.strDate }"></c:param>
+									<c:param name="endDate" value="${ sr.endDate }"></c:param>
+									<c:param name="listType" value="${ listType }"/>
+									<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
+								</c:url>
+								<a class="pagiset-link pagiset-next" href="${ goNext }"> <span
+									class="visually-hidden">다음</span>
+								</a>
+							</div>
+							<div class="pagiset-ctrl">
+								<c:url var="goList" value="${ loc }">
+									<c:param name="page" value="${ repPi.maxPage }"></c:param>
+									<c:param name="category" value="${ sr.category }"></c:param>
+									<c:param name="keyword" value="${ sr.keyword }"></c:param>
+									<c:param name="strDate" value="${ sr.strDate }"></c:param>
+									<c:param name="endDate" value="${ sr.endDate }"></c:param>
+									<c:param name="listType" value="${ listType }"/>
+									<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
+								</c:url>
+								<a class="pagiset-link pagiset-last" href="${ goList }"> 
+									<span class="visually-hidden">마지막</span>
+								</a>
+							</div>
+						</c:if>
+					</nav>
+		          </c:if>
+		          <c:if test="${ empty pList }">
+		          	<div class="EmptySearchResult">
+						<h2>검색 결과가 없습니다.</h2>
+						<p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
 					</div>
-		
-					<c:if test="${ repPi.currentPage >= repPi.maxPage }">
-						<div class="pagiset-ctrl">
-							<a class="pagiset-link pagiset-next">
-								<span class="visually-hidden">다음</span>
-							</a>
-						</div>
-						<div class="pagiset-ctrl">
-							<a class="pagiset-link pagiset-last"> 
-								<span class="visually-hidden">마지막</span>
-							</a>
-						</div>
-					</c:if>
-					<c:if test="${ repPi.currentPage < repPi.maxPage }">
-						<div class="pagiset-ctrl">
-							<c:url var="goNext" value="${ loc }">
-								<c:param name="page" value="${ repPi.currentPage+1 }"></c:param>
-								<c:param name="category" value="${ sr.category }"></c:param>
-								<c:param name="keyword" value="${ sr.keyword }"></c:param>
-								<c:param name="strDate" value="${ sr.strDate }"></c:param>
-								<c:param name="endDate" value="${ sr.endDate }"></c:param>
-								<c:param name="listType" value="${ listType }"/>
-								<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
-							</c:url>
-							<a class="pagiset-link pagiset-next" href="${ goNext }"> <span
-								class="visually-hidden">다음</span>
-							</a>
-						</div>
-						<div class="pagiset-ctrl">
-							<c:url var="goList" value="${ loc }">
-								<c:param name="page" value="${ repPi.maxPage }"></c:param>
-								<c:param name="category" value="${ sr.category }"></c:param>
-								<c:param name="keyword" value="${ sr.keyword }"></c:param>
-								<c:param name="strDate" value="${ sr.strDate }"></c:param>
-								<c:param name="endDate" value="${ sr.endDate }"></c:param>
-								<c:param name="listType" value="${ listType }"/>
-								<c:param name="selectedSort" value="${ sr.selectedSort }"></c:param>
-							</c:url>
-							<a class="pagiset-link pagiset-last" href="${ goList }"> 
-								<span class="visually-hidden">마지막</span>
-							</a>
-						</div>
-					</c:if>
-				</nav>
+		          </c:if>
+		          
 				<input type="hidden" name="listType" value="${ listType }">
           	</form>
           </div>

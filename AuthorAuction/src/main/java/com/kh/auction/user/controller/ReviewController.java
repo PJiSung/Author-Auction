@@ -174,10 +174,10 @@ public class ReviewController {
 	}
 	
 	public String saveFile(MultipartFile upload) {
-		String root = "C:\\";
-		String savaPath = root + "\\uploadFiles";
+//		String root = "C:\\";
+//		String savaPath = root + "\\uploadFiles";
 		
-//		String savaPath = "/Users/rosa/uploadFiles"; 
+		String savaPath = "/Users/rosa/uploadFiles"; 
 		
 		
 		File folder = new File(savaPath);
@@ -192,8 +192,8 @@ public class ReviewController {
 		String originFileName = upload.getOriginalFilename(); 
 		String renameFileName = sdf.format(time) + ranNum + originFileName.substring(originFileName.lastIndexOf("."));
 																	
-		String renamePath = folder + "\\" + renameFileName;
-//		String renamePath = folder + File.separator + renameFileName;
+//		String renamePath = folder + "\\" + renameFileName;
+		String renamePath = folder + File.separator + renameFileName;
 		try {
 			upload.transferTo(new File(renamePath));
 		} catch (IllegalStateException e) {
@@ -206,13 +206,13 @@ public class ReviewController {
 	}
 	
 	public void deleteFile(String fileName) {
-		String root = "C:\\";
-		String savaPath = root + "\\uploadFiles";
+//		String root = "C:\\";
+//		String savaPath = root + "\\uploadFiles";
 		
-//		String savaPath = "/Users/rosa/uploadFiles"; 
+		String savaPath = "/Users/rosa/uploadFiles"; 
 		
-		File f = new File(savaPath + "\\" + fileName);
-//		File f = new File(savaPath + File.separator  + fileName);
+//		File f = new File(savaPath + "\\" + fileName);
+		File f = new File(savaPath + File.separator  + fileName);
 		if(f.exists()) {
 			f.delete();
 		}
@@ -236,6 +236,7 @@ public class ReviewController {
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 9);
 		ArrayList<Review> rList = rService.searchReview(map, pi);
 		ArrayList<Attachment> aList = rService.selectAttmList(null);
+		ArrayList<Review> allRlist = rService.selectReviewAllList();
 		ArrayList<HashMap<String, Object>> lList = rService.reviewLikeList();
 		
 		Review review = new Review();
@@ -245,10 +246,13 @@ public class ReviewController {
 			replyList = rService.selectReplyList(revNo);
 		}
 		
+		System.out.println(rList);
+		
 		if(rList != null) {
 				model.addAttribute("pi", pi);
 				model.addAttribute("rList", rList);
 				model.addAttribute("aList", aList);
+				model.addAttribute("allRlist", allRlist);
 				model.addAttribute("replyList", replyList);
 				model.addAttribute("review", review);
 				model.addAttribute("lList", lList);
@@ -291,7 +295,6 @@ public class ReviewController {
 								 @RequestParam(value="beforeURL", required = false) String beforeURL,
 								 HttpSession session) {
 		
-		System.out.println(beforeURL);
 		
 		Review r = rService.selectReview(revNo);
 		ArrayList<Attachment> list = rService.selectAttmList(revNo);
@@ -383,7 +386,6 @@ public class ReviewController {
 			updateAttmResult = rService.insertAttm(list);
 		}
 		
-		 System.out.println(beforeURL);
 		if(updateReviewResult + updateAttmResult == list.size()+1) {
 			redirect.addAttribute("value", 1);
 			return (!beforeURL.isEmpty()) ? "redirect:" + beforeURL : "redirect:reviewList.rv";

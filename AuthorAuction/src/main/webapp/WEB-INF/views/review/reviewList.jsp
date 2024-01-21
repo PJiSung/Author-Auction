@@ -161,14 +161,6 @@
 	width: 100%;
 }
 
-.reviewDetail .reviewInfoTab .firTd {
-	width: 50%;
-}
-
-.reviewDetail .reviewInfoTab .secTd {
-	width: 50%;
-	text-align: right;
-}
 
 .reviewDetail #proImgTd {
 	width: 100px;
@@ -195,30 +187,58 @@
 	object-fit: cover;
 }
 
-.reviewDetail .reviewContentPre {
-	padding: 8px;
-	min-height: 150px;
-	font-size: var(--fs-p2);
-	font-weight: 400;
-	font-family: var(--ff);
-	font-size: var(--fs-p3);
-}
-
 .reviewDetail .reviewDetailDivs {
 	margin-left: 10px;
 	font-size: var(--fs-p2);
 	font-weight: 400;
 }
 
+.reviewDetail .reviewInfoTab .firTd {
+	width: 80%;
+}
+
+.reviewDetail .reviewInfoTab .secTd {
+	width: 20%;
+	text-align: right;
+}
+
+.reviewDetail .reviewContentPre {
+	padding: 8px;
+	min-height: 150px;
+	font-weight: 400;
+	font-family: var(--ff);
+	font-size: 1.5rem;
+	color: #14161a;
+	box-sizing: content-box;
+}
+
+.reviewDetail #productWriter{
+	font-size: 1.6rem;
+	font-weight: 400;
+}
+
 .reviewDetail .newbadge {
-	background: red;
-	width: 2.8rem;
-	text-align: center;
-	line-height: 2.2rem;;
-	font-size: 1rem;
-	border-radius: 50%;
-	color: white;
+	font-size: 1.4rem;
+	color: #dc0000;
 	margin-left: 10px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.reviewDetail #timeAgo{
+	font-size: 1.4rem;
+	color: var(--text-color3);
+	margin-left: 10px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviewDetail .secTd{
+	font-size: 1.5rem;
+	color: var(--text-color3);
 }
 
 .reviewDetail .updateDeleteDiv {
@@ -293,8 +313,6 @@ body.modal-open {
 	overflow: hidden;
  }
  
- .reviewDetail .contents-container{
- }
 
 .modal {
 	display: none;
@@ -398,6 +416,21 @@ body.modal-open {
   	cursor: pointer;
 }
 
+.EmptySearchResult{
+	width: 100%; 
+	height:450px; 
+	text-align: center; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	flex-direction: column;
+}
+
+.EmptySearchResult p{
+	margin-top: 10px;
+	color:var(--text-color3)
+}
+
 </style>
 </head>
 <body>
@@ -417,7 +450,7 @@ body.modal-open {
 					</div>
 					<div class="contents-body">
 						<form class="contents-sort" action="searchReview.rv" method="get" id="sortSearchForm">
-								<p class="contents-sort-total">미술품 리뷰 게시판 설명 솰라랄랄입니다.</p>
+								<p class="contents-sort-total">AUTHOR AUCTION과 함께하는 일상을 공유해 주세요.</p>
 								<div class="contents-sort-sel" style="gap: 1rem">
 									<div class="tabset tabset-text" style="width: 120px;">
 										<ul class="tabset-list">
@@ -467,58 +500,68 @@ body.modal-open {
 						</form>
 
 						<div class="contents-list">
-							<c:forEach items="${ rList }" var="r">
-								<div class="cardset cardset-shopping" id="reviewCardset">
-									<input type="hidden" value="${ r.revNo }" id="reviewNo">
-									<input type="hidden" value="${ r.hasAttm }" id="hasAttachment">
-									<input type="hidden" value="${ r.proNo }" id="productNo">
-									<input type="hidden" value="${ r.memId }" id="memId">
-									<c:if test="${ loginUser.memIsAdmin == 'Y' }">
-										<div class="adminDelete" onclick="notGoDetail(event, ${r.revNo})">
-											<span>X</span>
-										</div>
-									</c:if>
-									<c:if test="${ r.hasAttm eq 'Y' }">
-										<c:forEach items="${ aList }" var="a">
-											<c:if test="${ r.revNo eq  a.attBno && a.attFno == 0 && a.attCategory == 1 }">
-												<figure class="cardset-figure">
-													<img class="cardset-img" src="${a.attRename}" alt="리뷰 이미지">
-												</figure>
-											</c:if>
-										</c:forEach>
-									</c:if>
-									<c:if test="${ r.hasAttm eq 'N' }">
-										<c:forEach items="${ aList }" var="a">
-											<c:if test="${ r.proNo eq  a.attBno && a.attFno == 1 && a.attCategory == 4 }">
-												<figure class="cardset-figure">
-													<img class="cardset-img" src="${a.attRename}" alt="상품 이미지">
-												</figure>
-											</c:if>
-										</c:forEach>
-									</c:if>
-									<table class="cardset-body"> 
-										<tr>
-											<td class="secTd">
-												<div class="profilePic">
-													<img src="${ r.memFileName }" alt="프로필 사진" class="profileImg">
-												</div>
-											</td>
-											<td>
-												<h2 class="cardset-tit">${ r.memNickName }</h2>
-											</td>
-											<td colspan="2" class="firTd"><span class="cardset-name">${ r.revModifyDate }</span>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="3">
-												<p class="cardset-desc" id="proNameWriter">${ r.proName }&nbsp;|&nbsp;${ r.proWriter }</p>
-											</td>
-										</tr>
-									</table>
+							<c:if test="${ !empty rList }">
+								<c:forEach items="${ rList }" var="r">
+									<div class="cardset cardset-shopping" id="reviewCardset">
+										<input type="hidden" value="${ r.revNo }" id="reviewNo">
+										<input type="hidden" value="${ r.hasAttm }" id="hasAttachment">
+										<input type="hidden" value="${ r.proNo }" id="productNo">
+										<input type="hidden" value="${ r.memId }" id="memId">
+										<c:if test="${ loginUser.memIsAdmin == 'Y' }">
+											<div class="adminDelete" onclick="notGoDetail(event, ${r.revNo})">
+												<span>X</span>
+											</div>
+										</c:if>
+										<c:if test="${ r.hasAttm eq 'Y' }">
+											<c:forEach items="${ aList }" var="a">
+												<c:if test="${ r.revNo eq  a.attBno && a.attFno == 0 && a.attCategory == 1 }">
+													<figure class="cardset-figure">
+														<img class="cardset-img" src="${a.attRename}" alt="리뷰 이미지">
+													</figure>
+												</c:if>
+											</c:forEach>
+										</c:if>
+										<c:if test="${ r.hasAttm eq 'N' }">
+											<c:forEach items="${ aList }" var="a">
+												<c:if test="${ r.proNo eq  a.attBno && a.attFno == 1 && a.attCategory == 4 }">
+													<figure class="cardset-figure">
+														<img class="cardset-img" src="${a.attRename}" alt="상품 이미지">
+													</figure>
+												</c:if>
+											</c:forEach>
+										</c:if>
+										<table class="cardset-body"> 
+											<tr>
+												<td class="secTd">
+													<div class="profilePic">
+														<img src="${ r.memFileName }" alt="프로필 사진" class="profileImg">
+													</div>
+												</td>
+												<td>
+													<h2 class="cardset-tit">${ r.memNickName }</h2>
+												</td>
+												<td colspan="2" class="firTd"><span class="cardset-name">${ r.revModifyDate }</span>
+												</td>
+											</tr>
+											<tr>
+												<td colspan="3">
+													<p class="cardset-desc" id="proNameWriter">${ r.proName }&nbsp;|&nbsp;${ r.proWriter }</p>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</c:forEach>
+								
+							</c:if>
+							<c:if test="${ empty rList }">
+								<div class="EmptySearchResult">
+									<h2>검색 결과가 없습니다.</h2>
+									<p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
 								</div>
-							</c:forEach>
+							</c:if>
 						</div>
-
+					</div>
+					<c:if test="${ !empty rList }">—
 						<nav class="pagiset pagiset-line">
 							<c:if test="${ pi.currentPage <= 1 }">
 								<div class="pagiset-ctrl">
@@ -571,7 +614,7 @@ body.modal-open {
 									</c:choose>
 								</c:forEach>
 							</div>
-
+		
 							<c:if test="${ pi.currentPage >= pi.maxPage }">
 								<div class="pagiset-ctrl">
 									<a class="pagiset-link pagiset-next">
@@ -609,11 +652,12 @@ body.modal-open {
 								</div>
 							</c:if>
 						</nav>
-					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
 	</main>
+	
 	<div id="myModal" class="modal">
 		<div class="modal-content">
 			<span class="close" id="closeSelectRevMd"></span>
@@ -891,49 +935,46 @@ const loadReviewDetail = () =>{
 const keepSort = () =>{
 	let sort = '${ selectedSort }';
 	let divs = document.querySelectorAll(".tabset-item div");
-	console.log(sort);
 	if(sort == "latest"){divs[0].classList.add("active")}
-	else{divs[1].classList.add("active")}
+	else if(sort == "recommend"){divs[1].classList.add("active")}
 }
 
 window.onload = () =>{
 	keepSort();
-   const selectedButs = document.querySelectorAll('.selectset-link');
-   document.getElementById('selectedCat').value = '전체';
+	const selectedButs = document.querySelectorAll('.selectset-link');
+	document.getElementById('selectedCat').value = '전체';
+	
+	for(let i = 0; i < selectedButs.length; i++){
+	   selectedButs[i].addEventListener('click', function() {
+	      document.getElementById('selectedCat').value = this.value;
+	   });
+	}
    
-   for(let i = 0; i < selectedButs.length; i++){
-      selectedButs[i].addEventListener('click', function() {
-         document.getElementById('selectedCat').value = this.value;
-      });
-   }
-   
-   const selectSort = document.getElementById('selectedSort');
-   const sortSearchForm = document.getElementById('sortSearchForm');
-   const lastetSort = document.getElementById('lastetSort');
-   const recommendSort = document.getElementById('recommendSort');
-   lastetSort.addEventListener('click', function(){
-      selectSort.value = 'latest';
-      sortSearchForm.action = 'searchReview.rv';
-      sortSearchForm.submit();
-   });
-   
-   recommendSort.addEventListener('click', function(){
-      selectSort.value = 'recommend';
-      sortSearchForm.action = 'searchReview.rv';
-      sortSearchForm.submit();
-   });
-   
-   const urlSearchParams = new URLSearchParams(window.location.search);
-   const selectedSort = urlSearchParams.get('selectedSort');
-   if (selectedSort == 'recommend') {
-      recommendSort.classList.add('active');
-      lastetSort.classList.remove('active');
-   } else if(selectedSort == 'latest') {
-      recommendSort.classList.remove('active');
-      lastetSort.classList.add('active');
-   }
-   
-   
+	const selectSort = document.getElementById('selectedSort');
+	const sortSearchForm = document.getElementById('sortSearchForm');
+	const lastetSort = document.getElementById('lastetSort');
+	const recommendSort = document.getElementById('recommendSort');
+	lastetSort.addEventListener('click', function(){
+	   selectSort.value = 'latest';
+	   sortSearchForm.action = 'searchReview.rv';
+	   sortSearchForm.submit();
+	});
+	
+	recommendSort.addEventListener('click', function(){
+	   selectSort.value = 'recommend';
+	   sortSearchForm.action = 'searchReview.rv';
+	   sortSearchForm.submit();
+	});
+	
+	const urlSearchParams = new URLSearchParams(window.location.search);
+	const selectedSort = urlSearchParams.get('selectedSort');
+	if (selectedSort == 'recommend') {
+	   recommendSort.classList.add('active');
+	   lastetSort.classList.remove('active');
+	} else if(selectedSort == 'latest') {
+	   recommendSort.classList.remove('active');
+	   lastetSort.classList.add('active');
+	}
    
    document.getElementById('goWriteReviewButton').addEventListener('click', () =>{
       if( '${loginUser}' != '' ){
@@ -954,11 +995,11 @@ window.onload = () =>{
    const cardsetDiv = document.getElementsByClassName('cardset cardset-shopping');
    for(const card of cardsetDiv){
 		const revNo = card.querySelector('#reviewNo').value;
-		const memId = document.querySelector('#memId').value;
       
 		revNos.push(revNo);
 		card.addEventListener('click', function(){
 		   showModal(revNo);
+		   const memId = document.querySelector('#reviewMemId').value;
 		   if( '${loginUser.memId}' != memId ){
 		      $.ajax({
 		         url: 'updateReviewCount.rv',
@@ -1189,23 +1230,24 @@ const updateReply = (btn) => {
 
 const reviewLikeUp = () =>{
 	const reviewMemId = document.querySelector('#reviewMemId').value;
-	
-	if('${loginUser.memId}' != reviewMemId){
-	   $.ajax({
-	      url: 'insertReviewLike.rv',
-	      data:{memId: '${loginUser.memId}', 
-	           revNo: document.getElementById('revNo').value},
-	      success: data =>{
-	         console.log(data);
-	         const like = document.querySelector('#reviewLike');
-	         like.innerText = data;
-	         $("#reviewLikeGroup").load(location.href + " #reviewLikeGroup");
-	      },
-	      error: data => console.log(data)
-	   })
+	console.log('${loginUser.memId}');
+	if('${loginUser.memId}' == ''){
+		alert('로그인 후 이용 가능합니다.');
+	} else if('${loginUser.memId}' == reviewMemId) {
+		alert('작성하신 글은 [좋아요] 버튼을 누를 수 없습니다.');
 	} else{
-	   alert('작성하신 글은 [좋아요] 버튼을 누를 수 없습니다.');
-	   
+		$.ajax({
+		      url: 'insertReviewLike.rv',
+		      data:{memId: '${loginUser.memId}', 
+		           revNo: document.getElementById('revNo').value},
+		      success: data =>{
+		         console.log(data);
+		         const like = document.querySelector('#reviewLike');
+		         like.innerText = data;
+		         $("#reviewLikeGroup").load(location.href + " #reviewLikeGroup");
+		      },
+		      error: data => console.log(data)
+		   })
 	}
 }
 

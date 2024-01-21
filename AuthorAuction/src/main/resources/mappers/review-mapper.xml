@@ -62,74 +62,72 @@
 	
 	<select id="getSearchListCount" resultType="_int">
 		select count(*)
-    	from (select rev_no, rev_content, rev_modify_date, pro_no, pro_name, pro_writer, pro_image,
-            		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
-            		 case when a.att_category = '1' then 'Y' else 'N' end as has_attm
-      		  from review r join product using (pro_no)
-      		  				left join attachment a on r.rev_no = a.att_bno
-   		<where>
-        	pro_no = pro_no and rev_status = 'Y'
-      		<if test="category != null and keyword != null">
-      			<choose>
-      				<when test="category == '전체'">
-			            and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
-      				</when>
-      				<when test="category == '작품명'">
-			            and pro_name like '%'||#{keyword}||'%'
-      				</when>
-      				<when test="category == '작가명'">
-			            and pro_writer like '%'||#{keyword}||'%'
-      				</when>
-      			</choose>
-      		</if>
-   		</where>
-   		)
-        <if test="selectedSort != null">
-        	<choose>
-	        	<when test="selectedSort == 'latest'">
-	        		order by rev_modify_date desc
-	        	</when>
-	        	<when test="selectedSort == 'recommend'">
-	        		order by rev_like desc
-	        	</when>
-        	</choose>
+    	from (
+        select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, rev_status, mem_id, pro_no,
+               pro_name, pro_writer, pro_image, mem_nickname, mem_filename,
+               case when a.att_category = '1' then 'Y' else 'N' end as has_attm,
+               (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+               row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+        from review r 
+        join member using (mem_id)
+        join product using (pro_no)
+        left join attachment a on r.rev_no = a.att_bno
+        where rev_status = 'Y'
+        <if test="category != null and keyword != null">
+            <choose>
+                <when test="category == '전체'">
+                    and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
+                </when>
+                <when test="category == '작품명'">
+                    and pro_name like '%'||#{keyword}||'%'
+                </when>
+                <when test="category == '작가명'">
+                    and pro_writer like '%'||#{keyword}||'%'
+                </when>
+            </choose>
         </if>
+    	)
+        where rn = 1
 	</select>
 	
 	<select id="searchReview" parameterType="map" resultType="Review">
     	select *
-    	from (select rev_no, rev_content, rev_modify_date, pro_no, pro_name, pro_writer, pro_image,
-            		 (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
-            		 case when a.att_category = '1' then 'Y' else 'N' end as has_attm
-      		  from review r join product using (pro_no)
-      		  				left join attachment a on r.rev_no = a.att_bno
-   		<where>
-        	pro_no = pro_no and rev_status = 'Y'
-      		<if test="category != null and keyword != null">
-      			<choose>
-      				<when test="category == '전체'">
-			            and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
-      				</when>
-      				<when test="category == '작품명'">
-			            and pro_name like '%'||#{keyword}||'%'
-      				</when>
-      				<when test="category == '작가명'">
-			            and pro_writer like '%'||#{keyword}||'%'
-      				</when>
-      			</choose>
-      		</if>
-   		</where>
-   		)
-        <if test="selectedSort != null">
-        	<choose>
-	        	<when test="selectedSort == 'latest'">
-	        		order by rev_modify_date desc
-	        	</when>
-	        	<when test="selectedSort == 'recommend'">
-	        		order by rev_like desc
-	        	</when>
-        	</choose>
-        </if>
+		from (
+		    select rev_no, rev_content, rev_count, rev_create_date, rev_modify_date, rev_status, mem_id, pro_no,
+		           pro_name, pro_writer, pro_image, mem_nickname, mem_filename,
+		           case when a.att_category = '1' then 'Y' else 'N' end as has_attm,
+		           (select count(*) from review_like rl where rl.rev_no = r.rev_no) as rev_like,
+		           row_number() over (partition by r.rev_no order by r.rev_no desc) as rn
+		    from review r 
+		    join member using (mem_id)
+		    join product using (pro_no)
+		    left join attachment a on r.rev_no = a.att_bno
+		    where rev_status = 'Y'
+		    <if test="category != null and keyword != null">
+		        <choose>
+		            <when test="category == '전체'">
+		                and (pro_name like '%'||#{keyword}||'%' or pro_writer like '%'||#{keyword}||'%')
+		            </when>
+		            <when test="category == '작품명'">
+		                and pro_name like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="category == '작가명'">
+		                and pro_writer like '%'||#{keyword}||'%'
+		            </when>
+		        </choose>
+		    </if>
+		)
+		where rn = 1
+		<if test="selectedSort != null">
+		    <choose>
+		        <when test="selectedSort == 'latest'">
+		            order by rev_modify_date desc
+		        </when>
+		        <when test="selectedSort == 'recommend'">
+		            order by rev_like desc
+		        </when>
+		    </choose>
+		</if>
 	</select>
 	
 	<update id="deleteReview">

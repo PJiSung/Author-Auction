@@ -155,6 +155,21 @@
 	text-overflow:ellipsis;
 }
 
+.EmptySearchResult{
+	width: 100%; 
+	height:450px; 
+	text-align: center; 
+	display: flex; 
+	align-items: center; 
+	justify-content: center; 
+	flex-direction: column;
+}
+
+.EmptySearchResult p{
+	margin-top: 10px;
+	color:var(--text-color3)
+}
+
 </style>
 </head>
 <body>
@@ -226,164 +241,174 @@
 	          </div>
 	          </form>
 	          
-	          <div class="tableset">
-	            <table class="tableset-table table" style="table-layout:fixed; width: 100%">
-	              <colgroup>
-	                <col>
-	                <col>
-	                <col>
-	                <col>
-	                <col>
-	                <col>
-	                <col>
-	              </colgroup>
-	              <thead class="thead-light thead-border-top">
-	                <tr>
-	                  <th scope="col" style="width: 14%;">주문번호</th>
-	                  <th scope="col" style="width: 7%;">사진</th>
-	                  <th scope="col" style="width: 13%;">작품명</th>
-	                  <th scope="col" style="width: 12%;">작가명</th>
-	                  <th scope="col" style="width: 11.5%;">가격</th>
-	                  <th scope="col" style="width: 8.5%;"></th>
-	                  <th scope="col" style="width: 11%;">주문일</th>
-	                  <th scope="col" style="width: 13%;">진행상황</th>
-	                  <th scope="col" style="width: 10%;">주문취소</th>
-	                </tr>
-	              </thead>
-	              <tbody>
-	                <c:forEach items="${ list }" var="o">
-                		<input type="hidden" value="${ o.ordNo }" name="ordNo">
-		                <tr class="orderTableTr" onclick="selectOrderDetail(event, this)">
-		                  <td class="tableset-mobile">
-		                  	${ o.ordNo }
-		                  	<input type="hidden" value="${ o.proNo }" id="proNo">
-		                  </td>
-		                  <td class="tableset-proImg">
-		                  	<c:forEach items="${ aList }" var="a">
-         						<c:if test="${a.attBno == o.proNo && a.attCategory == 4 && a.attFno == 1}">
-            						<img alt="상품" src="${ a.attRename }">
-         						</c:if>
-         					</c:forEach>
-						  </td>
-		                  <td class="tableset-author">${ o.proName }</td>
-		                  <td class="tableset-order04">${ o.proWriter }</td>
-		                  <td class="tableset-order05"><fmt:formatNumber value="${ o.proPrice }" pattern="#,###" /></td>
-		                  <c:if test="${ o.ordAnother > 0 }">
-			                  <td class="tableset">외 ${ o.ordAnother }개</td>
-		                  </c:if>
-		                  <c:if test="${ o.ordAnother == 0 }">
-			                  <td class="tableset"></td>
-		                  </c:if>
-		                  <td class="tableset-order05">${ fn:split(o.ordDate, ' ')[0] }</td>
-		                  <td class="tableset-progress">${ o.ordStatus }</td>
-		                  <td class="tableset-cancel" onclick="notGoDetail(event)">
-		                  	<input type="hidden" value="${ o.ordDate }" id="orderTableHidden">
-		                  </td>
+	          <c:if test="${ !empty list }">
+	          	<div class="tableset">
+		            <table class="tableset-table table" style="table-layout:fixed; width: 100%">
+		              <colgroup>
+		                <col>
+		                <col>
+		                <col>
+		                <col>
+		                <col>
+		                <col>
+		                <col>
+		              </colgroup>
+		              <thead class="thead-light thead-border-top">
+		                <tr>
+		                  <th scope="col" style="width: 14%;">주문번호</th>
+		                  <th scope="col" style="width: 7%;">사진</th>
+		                  <th scope="col" style="width: 13%;">작품명</th>
+		                  <th scope="col" style="width: 12%;">작가명</th>
+		                  <th scope="col" style="width: 11.5%;">가격</th>
+		                  <th scope="col" style="width: 8.5%;"></th>
+		                  <th scope="col" style="width: 11%;">주문일</th>
+		                  <th scope="col" style="width: 13%;">진행상황</th>
+		                  <th scope="col" style="width: 10%;">주문취소</th>
 		                </tr>
-	                </c:forEach>
-	              </tbody>
-	            </table>
-	          </div>
-	          
-	          
-	          <nav class="pagiset pagiset-line">
-				<c:if test="${ pi.currentPage <= 1 }">
-					<div class="pagiset-ctrl">
-						<a class="pagiset-link pagiset-first"> <span
-							class="visually-hidden">처음</span>
-						</a>
+		              </thead>
+		              <tbody>
+		                <c:forEach items="${ list }" var="o">
+	                		<input type="hidden" value="${ o.ordNo }" name="ordNo">
+			                <tr class="orderTableTr" onclick="selectOrderDetail(event, this)">
+			                  <td class="tableset-mobile">
+			                  	${ o.ordNo }
+			                  	<input type="hidden" value="${ o.proNo }" id="proNo">
+			                  </td>
+			                  <td class="tableset-proImg">
+			                  	<c:forEach items="${ aList }" var="a">
+	         						<c:if test="${a.attBno == o.proNo && a.attCategory == 4 && a.attFno == 1}">
+	            						<img alt="상품" src="${ a.attRename }">
+	         						</c:if>
+	         					</c:forEach>
+							  </td>
+			                  <td class="tableset-author">${ o.proName }</td>
+			                  <td class="tableset-order04">${ o.proWriter }</td>
+			                  <td class="tableset-order05"><fmt:formatNumber value="${ o.proPrice }" pattern="#,###" /></td>
+			                  <c:if test="${ o.ordAnother > 0 }">
+				                  <td class="tableset">외 ${ o.ordAnother }개</td>
+			                  </c:if>
+			                  <c:if test="${ o.ordAnother == 0 }">
+				                  <td class="tableset"></td>
+			                  </c:if>
+			                  <td class="tableset-order05">${ fn:split(o.ordDate, ' ')[0] }</td>
+			                  <td class="tableset-progress">${ o.ordStatus }</td>
+			                  <td class="tableset-cancel" onclick="notGoDetail(event)">
+			                  	<input type="hidden" value="${ o.ordDate }" id="orderTableHidden">
+			                  </td>
+			                </tr>
+		                </c:forEach>
+		              </tbody>
+		            </table>
+		          </div>
+		          
+		          <nav class="pagiset pagiset-line">
+					<c:if test="${ pi.currentPage <= 1 }">
+						<div class="pagiset-ctrl">
+							<a class="pagiset-link pagiset-first"> <span
+								class="visually-hidden">처음</span>
+							</a>
+						</div>
+						<div class="pagiset-ctrl">
+							<a class="pagiset-link pagiset-prev"> <span
+								class="visually-hidden">이전</span>
+							</a>
+						</div>
+					</c:if>
+					<c:if test="${ pi.currentPage > 1 }">
+						<div class="pagiset-ctrl">
+							<c:url var="goFirst" value="${ loc }">
+								<c:param name="page" value="${ pi.startPage }"></c:param>
+								<c:param name="cagetory" value="${ s.category }"></c:param>
+								<c:param name="keyword" value="${ s.keyword }"></c:param>
+								<c:param name="strDate" value="${ s.strDate }"></c:param>
+								<c:param name="endDate" value="${ s.endDate }"></c:param>
+							</c:url>
+							<a class="pagiset-link pagiset-first" href="${ goFirst }">
+								<span class="visually-hidden">처음</span>
+							</a>
+						</div>
+						<div class="pagiset-ctrl">
+							<c:url var="goBack" value="${ loc }">
+								<c:param name="page" value="${ pi.currentPage-1 }"></c:param>
+								<c:param name="cagetory" value="${ s.category }"></c:param>
+								<c:param name="keyword" value="${ s.keyword }"></c:param>
+								<c:param name="strDate" value="${ s.strDate }"></c:param>
+								<c:param name="endDate" value="${ s.endDate }"></c:param>
+							</c:url>
+							<a class="pagiset-link pagiset-prev" href="${ goBack }"> 
+								<span class="visually-hidden">이전</span>
+							</a>
+						</div>
+					</c:if>
+					<div class="pagiset-list">
+						<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+							<c:url var="goNum" value="${ loc }">
+								<c:param name="page" value="${ p }"></c:param>
+								<c:param name="cagetory" value="${ s.category }"></c:param>
+								<c:param name="keyword" value="${ s.keyword }"></c:param>
+								<c:param name="strDate" value="${ s.strDate }"></c:param>
+								<c:param name="endDate" value="${ s.endDate }"></c:param>
+							</c:url>
+							<c:choose>
+								<c:when test="${p eq pi.currentPage}">
+									<a class="pagiset-link active-fill" href="${ goNum }">${ p }</a>
+								</c:when>
+								<c:otherwise>
+									<a class="pagiset-link" href="${ goNum }">${ p }</a>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
 					</div>
-					<div class="pagiset-ctrl">
-						<a class="pagiset-link pagiset-prev"> <span
-							class="visually-hidden">이전</span>
-						</a>
-					</div>
-				</c:if>
-				<c:if test="${ pi.currentPage > 1 }">
-					<div class="pagiset-ctrl">
-						<c:url var="goFirst" value="${ loc }">
-							<c:param name="page" value="${ pi.startPage }"></c:param>
-							<c:param name="cagetory" value="${ s.category }"></c:param>
-							<c:param name="keyword" value="${ s.keyword }"></c:param>
-							<c:param name="strDate" value="${ s.strDate }"></c:param>
-							<c:param name="endDate" value="${ s.endDate }"></c:param>
-						</c:url>
-						<a class="pagiset-link pagiset-first" href="${ goFirst }">
-							<span class="visually-hidden">처음</span>
-						</a>
-					</div>
-					<div class="pagiset-ctrl">
-						<c:url var="goBack" value="${ loc }">
-							<c:param name="page" value="${ pi.currentPage-1 }"></c:param>
-							<c:param name="cagetory" value="${ s.category }"></c:param>
-							<c:param name="keyword" value="${ s.keyword }"></c:param>
-							<c:param name="strDate" value="${ s.strDate }"></c:param>
-							<c:param name="endDate" value="${ s.endDate }"></c:param>
-						</c:url>
-						<a class="pagiset-link pagiset-prev" href="${ goBack }"> 
-							<span class="visually-hidden">이전</span>
-						</a>
-					</div>
-				</c:if>
-				<div class="pagiset-list">
-					<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-						<c:url var="goNum" value="${ loc }">
-							<c:param name="page" value="${ p }"></c:param>
-							<c:param name="cagetory" value="${ s.category }"></c:param>
-							<c:param name="keyword" value="${ s.keyword }"></c:param>
-							<c:param name="strDate" value="${ s.strDate }"></c:param>
-							<c:param name="endDate" value="${ s.endDate }"></c:param>
-						</c:url>
-						<c:choose>
-							<c:when test="${p eq pi.currentPage}">
-								<a class="pagiset-link active-fill" href="${ goNum }">${ p }</a>
-							</c:when>
-							<c:otherwise>
-								<a class="pagiset-link" href="${ goNum }">${ p }</a>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
+		
+					<c:if test="${ pi.currentPage >= pi.maxPage }">
+						<div class="pagiset-ctrl">
+							<a class="pagiset-link pagiset-next">
+								<span class="visually-hidden">다음</span>
+							</a>
+						</div>
+						<div class="pagiset-ctrl">
+							<a class="pagiset-link pagiset-last"> 
+								<span class="visually-hidden">마지막</span>
+							</a>
+						</div>
+					</c:if>
+					<c:if test="${ pi.currentPage < pi.maxPage }">
+						<div class="pagiset-ctrl">
+							<c:url var="goNext" value="${ loc }">
+								<c:param name="page" value="${ pi.currentPage+1 }"></c:param>
+								<c:param name="cagetory" value="${ s.category }"></c:param>
+								<c:param name="keyword" value="${ s.keyword }"></c:param>
+								<c:param name="strDate" value="${ s.strDate }"></c:param>
+								<c:param name="endDate" value="${ s.endDate }"></c:param>
+							</c:url>
+							<a class="pagiset-link pagiset-next" href="${ goNext }"> <span
+								class="visually-hidden">다음</span>
+							</a>
+						</div>
+						<div class="pagiset-ctrl">
+							<c:url var="goList" value="${ loc }">
+								<c:param name="page" value="${ pi.maxPage }"></c:param>
+								<c:param name="cagetory" value="${ s.category }"></c:param>
+								<c:param name="keyword" value="${ s.keyword }"></c:param>
+								<c:param name="strDate" value="${ s.strDate }"></c:param>
+								<c:param name="endDate" value="${ s.endDate }"></c:param>
+							</c:url>
+							<a class="pagiset-link pagiset-last" href="${ goList }"> 
+								<span class="visually-hidden">마지막</span>
+							</a>
+						</div>
+					</c:if>
+				</nav>
+	          </c:if>
+	          <c:if test="${ empty list }">
+	          	<div class="EmptySearchResult">
+					<h2>검색 결과가 없습니다.</h2>
+					<p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
 				</div>
-	
-				<c:if test="${ pi.currentPage >= pi.maxPage }">
-					<div class="pagiset-ctrl">
-						<a class="pagiset-link pagiset-next">
-							<span class="visually-hidden">다음</span>
-						</a>
-					</div>
-					<div class="pagiset-ctrl">
-						<a class="pagiset-link pagiset-last"> 
-							<span class="visually-hidden">마지막</span>
-						</a>
-					</div>
-				</c:if>
-				<c:if test="${ pi.currentPage < pi.maxPage }">
-					<div class="pagiset-ctrl">
-						<c:url var="goNext" value="${ loc }">
-							<c:param name="page" value="${ pi.currentPage+1 }"></c:param>
-							<c:param name="cagetory" value="${ s.category }"></c:param>
-							<c:param name="keyword" value="${ s.keyword }"></c:param>
-							<c:param name="strDate" value="${ s.strDate }"></c:param>
-							<c:param name="endDate" value="${ s.endDate }"></c:param>
-						</c:url>
-						<a class="pagiset-link pagiset-next" href="${ goNext }"> <span
-							class="visually-hidden">다음</span>
-						</a>
-					</div>
-					<div class="pagiset-ctrl">
-						<c:url var="goList" value="${ loc }">
-							<c:param name="page" value="${ pi.maxPage }"></c:param>
-							<c:param name="cagetory" value="${ s.category }"></c:param>
-							<c:param name="keyword" value="${ s.keyword }"></c:param>
-							<c:param name="strDate" value="${ s.strDate }"></c:param>
-							<c:param name="endDate" value="${ s.endDate }"></c:param>
-						</c:url>
-						<a class="pagiset-link pagiset-last" href="${ goList }"> 
-							<span class="visually-hidden">마지막</span>
-						</a>
-					</div>
-				</c:if>
-			</nav>
+	          </c:if>
+	          
+			
+			
           </div>
         </div>
       </div>
