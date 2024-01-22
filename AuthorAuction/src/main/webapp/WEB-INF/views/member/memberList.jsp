@@ -29,6 +29,10 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
+.th-layout-main{
+	margin-top: -60px;	
+}
+
 .searchBox {
 	display: flex;
 	align-items: center;
@@ -414,6 +418,10 @@ input.closeModal.can {
 input.closeModal.can:hover {
     background-color: #f1f1f1;
     color: black;
+}
+
+.textset-tit{
+	font-size: 50px !important;
 }
 </style>
 <script>
@@ -920,7 +928,7 @@ const msg = () => {
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="textset textset-h2">
-            <h2 class="textset-tit">회원 목록​<br></h2>
+            <h2 class="textset-tit">MEMBER</h2>
           </div>
           <div class="contents-search">
             <div class="contents-form">

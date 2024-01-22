@@ -179,8 +179,8 @@ const checkRePwd = () =>{
 	let rePwd = document.getElementById("reMemPwd");
 	rePwd.addEventListener("change", function(){
 	 	let memPwd = document.getElementsByName("memPwd")[0].value;
-	 	if(memPwd == this.value){
-	 		this.style.borderBottomColor = '#8FFF8F';
+	 	if(memPwd == this.value && checkPwdFlag){
+		 	this.style.borderBottomColor = '#8FFF8F';
 	 		checkRePwdFlag = true;
 	 	}else{
 	 		this.style.borderBottomColor = 'red';

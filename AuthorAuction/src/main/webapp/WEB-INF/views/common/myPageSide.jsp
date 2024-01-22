@@ -137,7 +137,7 @@ const checkUrl = () =>{
 	top: 142px;
 	left: 172px;
 }
-.sideSideIcon .auction{
+.sideSideIcon .auctionIcon{
 	position: absolute;
 	top: 342px;
 	left: 172px;
@@ -233,7 +233,7 @@ const checkUrl = () =>{
 				<div class="member">
 					<img src="main/icons/user.png">
 				</div>
-				<div class="auction">
+				<div class="auctionIcon">
 					<img src="main/icons/auction.png">
 				</div>
 				<div class="shopping">

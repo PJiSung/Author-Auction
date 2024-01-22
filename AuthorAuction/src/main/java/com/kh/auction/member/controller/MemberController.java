@@ -253,7 +253,7 @@ public class MemberController {
 			checkNum = r.nextInt(888888) + 111111;
 			String subject = "인증 코드";
 			String content = "<h1>Author Auction</h1><br>고객님의 인증 코드는 다음과 같습니다.<br><h1>" + checkNum +"</h1>";
-			String from = "gah_yn@naver.com";
+			String from = "park718513@naver.com";
 			String to = arr[1];
 			
 			try {
@@ -326,7 +326,7 @@ public class MemberController {
 			checkNum = r.nextInt(888888) + 111111;
 			String subject = "인증 코드";
 			String content = "<h1>Author Auction</h1><br>고객님의 인증 코드는 다음과 같습니다.<br><h1>" + checkNum +"</h1>";
-			String from = "gah_yn@naver.com";
+			String from = "park718513@naver.com";
 			String to = arr[1];
 			try {
 				MimeMessage mail = mailSender.createMimeMessage();
@@ -472,7 +472,7 @@ public class MemberController {
 		int checkNum = r.nextInt(888888) + 111111;
 		String subject = "인증 코드";
 		String content = "<h1>Author Auction</h1><br>고객님의 인증 코드는 다음과 같습니다.<br><h1>" + checkNum +"</h1>";
-		String from = "gah_yn@naver.com";
+		String from = "park718513@naver.com";
 		String to = email;
 		try {
 			MimeMessage mail = mailSender.createMimeMessage();

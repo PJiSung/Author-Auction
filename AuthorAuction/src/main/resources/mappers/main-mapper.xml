@@ -44,5 +44,5 @@
 		ORDER BY AUC_FINISH_PRICE DESC
 		FETCH FIRST 5 ROWS ONLY
 	</select>
-	     
+	
 </mapper>

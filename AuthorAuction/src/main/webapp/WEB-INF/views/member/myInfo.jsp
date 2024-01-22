@@ -439,7 +439,7 @@ const checkRePwd = () =>{
 	let rePwd = document.getElementById("reNewPw");
 	rePwd.addEventListener("change", function(){
 	 	let memPwd = document.getElementsByName("newPw")[0].value;
-	 	if(memPwd == this.value){
+	 	if(memPwd == this.value && checkNewPwdFlag){
 	 		this.style.borderBottomColor = '#8FFF8F';
 	 		checkReNewPwd = true;
 	 	}else{
