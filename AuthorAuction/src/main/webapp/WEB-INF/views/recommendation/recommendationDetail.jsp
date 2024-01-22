@@ -403,18 +403,8 @@
 				document.getElementById('style').value = this.value;
 			});
 		}
-		// 글 삭제
-	/* 
-		if(document.getElementById('deleteConfirm') != null){
-			document.getElementById('deleteConfirm').addEventListener('click', () =>{
-			const recommendationForm = document.getElementById('recommendationForm');										
-				recommendationForm.action = 'deleteRecommendation.re';
-				recommendationForm.submit();
-	        });
-		}
-		 */
-		
 	}	
+	// 글 삭제
 	const showModal = () => {
 	    const modal = document.getElementById('myModal');
 	    modal.style.display = 'block';
@@ -552,10 +542,10 @@
 											<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem;">그림추천 문의 삭제</h3>
 										</div>
 										<div class="form-body">
-											<p style="text-align: center;">삭제하시겠습니까?</p>
-											<div class="btn-box">
-												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()" style="float: right; margin-top: 1rem;">네</a>
-												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="cancelBtn" onclick="closeModal()">아니오</a>
+											<p style="text-align: center; font-size: 20px;">삭제하시겠습니까?</p>
+											<div class="btn-box" style="text-align: center;">
+												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()" style="margin-top: 2rem; margin-right: 1rem;">네</a>
+												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="cancelBtn" onclick="closeModal()" style=" margin-left: 1rem;">아니오</a>
 											</div>
 										</div>
 									</div>

@@ -249,6 +249,42 @@
     color: black;
     /* padding: 0 1.6rem; */
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 50%; /* 50%로 수정 */
+  width: 100%;
+  height: 100%; /* height를 auto로 수정 */
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  transform: translateY(-50%); /* 화면 중앙에 맞추기 위한 추가 */
+}
+
+.modal-content {
+  border-radius: 0.6rem;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 200px;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 </head>
 
@@ -422,45 +458,68 @@
 					<c:if test="${ loginUser.memIsAdmin == 'N' }">
 						<c:if test="${ c.conAdmStatus == 'N' }">
 							<div class="contents-sign">
-								<button class="btnset modalset-btn" type="button" id="submitAttm">수정완료</button>
-								<button class="btnset modalset-btn" type="button" id="delete">삭제</button>
+								<button class="btnset modalset-btn" type="button" id="submitAttm" onclick="">수정완료</button>
+								<button class="btnset modalset-btn" type="button" id="delete" onclick="showModal()">삭제</button>
 							</div>
 						</c:if>
 					</c:if>
 	                <c:if test="${ loginUser.memIsAdmin == 'Y' }">
 						<div class="contents-sign">
-							<button class="btnset modalset-btn" type="button" id="submitAttm">수정완료</button>
-							<button class="btnset modalset-btn" type="button" id="delete">삭제</button>
+							<button class="btnset modalset-btn" type="button" id="submitAttm" onclick="showModal2()">수정완료</button>
+							<button class="btnset modalset-btn" type="button" id="delete" onclick="showModal()">삭제</button>
 						</div>
 	                </c:if>
 	                
 					<button class="btnset" onclick="location.href='list.co'" type="button" id="back">이전</button>
 	                
-					<div id="modalSet1" class="modalset">
-						<div class="modal-header">
-							<h6 class="modal-title">수정이 완료되었습니다.</h6>
-						</div>
-						<div class="modal-body">
-							<p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btnset btnset-confirm">확인</button>
-						</div>
-					</div>
 	                
-					<div id="modalSet2" class="modalset">
-						<div class="modal-header">
-							<h6 class="modal-title">삭제하시겠습니까?</h6>
-						</div>
-						<div class="modal-body">
-						  <p>
-						</div>
-						<div class="modal-footer">
-							<button type="reset" class="btnset btnset-ghost modal-close">취소</button>
-							<button type="button" class="btnset btnset-confirm" id="deleteConfirm">확인</button>
+					<div id="myModal2" class="modal">
+						<div class="modal-content">
+							<span class="close" onclick="closeModal()">&times;</span>
+						    <main class="th-layout-main ">
+						    	<div class="bloomcity-N10" data-bid="DDLQevsBR2">
+						    		<div class="content-container">
+										<div class="form-wrap">	
+											<div class="form-header">
+												<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem; margin-top: 2rem;">수정이 완료되었습니다.</h3>
+											</div>
+											<div class="form-body">
+												<div class="btn-box" style="text-align: center;">
+													<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn2()" style="margin-top: 2rem; margin-right: 1rem;">네</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</main>
 						</div>
 					</div>
-	                <div class="modalset-dim"></div>
+					
+					<div id="myModal" class="modal">
+						<div class="modal-content">
+							<span class="close" onclick="closeModal()">&times;</span>
+						    <main class="th-layout-main ">
+						    	<div class="bloomcity-N10" data-bid="DDLQevsBR2">
+						    		<div class="content-container">
+										<div class="form-wrap">	
+											<div class="form-header">
+												<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem; margin-top: 2rem;">그림추천 문의 삭제</h3>
+											</div>
+											<div class="form-body">
+												<p style="text-align: center; font-size: 20px;">삭제하시겠습니까?</p>
+												<div class="btn-box" style="text-align: center;">
+													<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn2()" style="margin-top: 2rem; margin-right: 1rem;">네</a>
+													<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="cancelBtn" onclick="closeModal()" style=" margin-left: 1rem;">아니오</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</main>
+						</div>
+					</div>
+					
+					
 	              	</label>
 	              <a style="display: inline-block; width: 15%; text-align: center;"></a>
 	            </div><a style="display: inline-block; width: 15%; text-align: center;">
@@ -477,13 +536,37 @@
 
 
 	<script>
+		// 글 삭제 모달
+		const showModal = () => {
+		    const modal = document.getElementById('myModal');
+		    modal.style.display = 'block';
+		};
+		/*
+		// 수정 모달
+		const showModal2 = () => {
+		    const modal = document.getElementById('myModal2');
+		    modal.style.display = 'block';
+		};
+		*/
+		const closeModal = () => {
+			const modal = document.getElementById('myModal');
+		    modal.style.display = 'none';
+		};
+		// 삭제완료
+		const submitBtn = () =>{
+			const attmForm = document.getElementById('attmForm');
+			attmForm.action='delete.co';
+			attmForm.submit();
+		}
+		/*
+		// 수정완료
+		const submitBtn2 = () =>{
+			const attmForm = document.getElementById('attmForm');
+			attmForm.action='delete.co';
+			attmForm.submit();
+		}
+		*/
 		window.onload = () => {
-			// 글 삭제
-			const form = document.getElementById('attmForm');										
-			document.getElementById('deleteConfirm').addEventListener('click', () =>{
-	            form.action = 'delete.co';
-	            form.submit();
-	        })
 	        // 등록된 이미지 클릭 방지
  			const delAttms = document.getElementsByClassName('contents-thumbimg');
 			for(const dAtt of delAttms) {

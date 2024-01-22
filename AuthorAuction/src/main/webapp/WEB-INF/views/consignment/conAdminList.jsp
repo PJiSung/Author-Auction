@@ -1038,16 +1038,6 @@ table tr {
 											<td class="tableset-order05">${ c.conWidth }*${ c.conHeight }cm</td>
 											<td><fmt:formatNumber type="number" value="${ c.conHope }" />원</td>
 
-											<%-- 	
-											<c:if test="${ c.conDelStatus == 'Y' }">
-												<td class="tableset-order05">Y</td>
-											</c:if>
-											<c:if test="${ c.conDelStatus == 'N' }">
-												<td class="tableset-order05">N</td>
-											</c:if> 
-											--%>
-
-
 											<c:if test="${ c.conAdmStatus == 'N'}">
 												<td class="tableset-order05">N</td>
 											</c:if>
