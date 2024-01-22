@@ -106,7 +106,7 @@
 </script>
 </head>
 <body>
-	<div style="text-align:center; height:200px;">
+	<div style="text-align:center;">
 		<div id="adminHeader" onclick="location.href='adminMain.adac'" style="font-family: inherit;font-weight: 1000;">골목 대장 김 로 사</div>
 	</div>
     <div style="display:flex; height:90%; width:85%; margin:auto;">
