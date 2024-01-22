@@ -562,6 +562,7 @@
 					%>
 				</div>
 			</c:forEach>
+			</div>
 			
 			<div class="modal" id="aucModal">
 		      <div class="modal_body">
@@ -1174,7 +1175,6 @@
 					    alignItems: 'center',
 					    justifyContent: 'center',
 					    textAlign: 'center',
-					    borderBottom: '1px solid black',
 					    cursor: 'pointer'});
 			})
 			

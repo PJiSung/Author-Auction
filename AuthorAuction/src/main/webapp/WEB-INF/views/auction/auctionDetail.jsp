@@ -31,10 +31,8 @@
 		input::-webkit-inner-spin-button {
 		  -webkit-appearance:none;
 		  margin: 0;
-}
+		}
 		
-		
-	
 		div{
 			border-radius: 5px;
 		}
