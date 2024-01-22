@@ -885,7 +885,11 @@
 	<select id="getAttachment">
 		select *
 		from attachment
-		where att_bno = #{conNo} and (att_fno = 1 or att_fno = 2 or att_fno = 3)
+		where att_bno = #{conNo} and (att_fno = 3 or att_fno = 0 or att_fno = 1)
+        order by CASE att_fno
+        when 3 then 0
+        when 0 then 1
+        end
 	</select>
 	
 	<update id="updateApproval">
