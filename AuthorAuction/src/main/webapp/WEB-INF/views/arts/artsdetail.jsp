@@ -655,6 +655,7 @@ alert('클립보드에 복사되었습니다');
 			        var btn = document.getElementsByClassName('btnset-line')[0];
 			  		 btn.style.backgroundColor = "#bbb";
 			  		 btn.style.cursor = 'not-allowed';
+			  		$("#cartCount").load(location.href + " #cartCount");
 			  		 
 			    },
 			    error: function onError (error) {

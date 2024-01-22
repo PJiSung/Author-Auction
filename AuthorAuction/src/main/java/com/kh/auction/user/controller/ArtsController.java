@@ -23,7 +23,6 @@ import com.kh.auction.user.model.vo.Member;
 import com.kh.auction.user.model.vo.Order;
 import com.kh.auction.user.model.vo.PageInfo;
 import com.kh.auction.user.model.vo.Product;
-import com.kh.auction.user.model.vo.Sellstatic;
 import com.kh.auction.user.model.vo.Wishlist;
 import com.kh.auction.user.service.ArtsService;
 
@@ -348,9 +347,14 @@ public class ArtsController {
 	}
 	
 	@GetMapping("deletewis.ar")
-	public String deletewis(Wishlist deletewis) {
+	public String deletewis(Wishlist deletewis, HttpSession session) {
 		
+		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
 		int result = aService.deletewis(deletewis);
+		if(result > 0) {
+			session.setAttribute("cartCount", aService.getWishCount(memId));
+		}
+
 		
 		return "redirect:wishlist.ar";
 		
@@ -358,15 +362,14 @@ public class ArtsController {
 	
 	
 	@GetMapping("deletewishlist.ar")
-	public String deletewishlist(@RequestParam("memId") String memId, @RequestParam("pronos") Integer[] pronos) {
-		
+	public String deletewishlist(@RequestParam("memId") String memId, @RequestParam("pronos") Integer[] pronos, HttpSession session) {
 		
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		
 		map.put("memId", memId);
 		map.put("pronos", pronos);
 		
-		 int result = aService.deletewishlist(map);
+		int result = aService.deletewishlist(map);
 		 
 		return "redirect:wishlist.ar";
 	}
@@ -374,10 +377,14 @@ public class ArtsController {
 	
 	@ResponseBody
 	@GetMapping("addtowishlist.ar")
-	public String addtowishlist(Wishlist addwis) {
+	public String addtowishlist(Wishlist addwis, HttpSession session) {
+		
+		String memId = ((Member)session.getAttribute("loginUser")).getMemId();
 		
 		int result = aService.addtowishlist(addwis);
-		
+		if(result > 0) {
+			session.setAttribute("cartCount", aService.getWishCount(memId));
+		}
 		
 		
 		

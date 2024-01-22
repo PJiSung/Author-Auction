@@ -423,6 +423,24 @@ input.closeModal.can:hover {
 .textset-tit{
 	font-size: 50px !important;
 }
+
+#page .pagiset-next:hover, #page .pagiset-last:hover{
+	background: none;
+	outline: none;
+	border: 1px solid var(--line-color1);
+	color: black !important;
+}
+#chatPage .pagiset-next:hover, #chatPage .pagiset-last:hover{
+	background: none;
+	outline: none;
+	border: 1px solid var(--line-color1);
+	color: black !important;
+}
+
+#page .active-fill:hover{
+	background: black;
+	color: white !important;
+}
 </style>
 <script>
 window.onload = () =>{
@@ -1214,7 +1232,7 @@ const msg = () => {
 	        <input type="hidden" id="m" value="${ m }">
 	            <table>
 	            	<tr>
-	            		<th><h2>회원 정보</h2></th>
+	            		<th style="width:30%"><h2>회원 정보</h2></th>
 	            		<td>&nbsp;(${ m.memDate })</td>
 	            	</tr>
 	            	<tr>

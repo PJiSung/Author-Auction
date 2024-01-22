@@ -18,7 +18,7 @@
   <meta property="og:description" content="웹사이트입니다">
   <meta property="og:image" content="https://웹사이트/images/opengraph.png">
   <meta property="og:url" content="https://웹사이트">
-  <title>Products | ㅔㅔㅔ</title>
+  <title>Products</title>
   <link rel="stylesheet" href="sunwoo/css/setting.css">
   <link rel="stylesheet" href="sunwoo/css/plugin.css">
   <link rel="stylesheet" href="sunwoo/css/template.css">

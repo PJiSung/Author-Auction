@@ -265,7 +265,7 @@ window.onpopstate = function() {
 	          </div>
           </c:if>
           <c:if test="${ !empty loginUser }">
-          <a href="wishlist.ar" class="btn-cart header-utils-btn">
+          <a href="wishlist.ar" class="btn-cart header-utils-btn" id="cartCount">
             <img src="main/icons/ico_cart_black.svg" alt="쇼핑 아이콘">
             <span class="cartCount">${ cartCount }</span>
           </a>

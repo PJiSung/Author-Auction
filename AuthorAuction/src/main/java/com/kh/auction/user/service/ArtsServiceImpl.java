@@ -292,4 +292,9 @@ public class ArtsServiceImpl implements ArtsService {
 		
 		return aDAO.selectAttmlistforsell(proNo);
 	}
+
+	@Override
+	public int getWishCount(String memId) {
+		return aDAO.getWishCount(memId);
+	}
 }

@@ -315,5 +315,10 @@ from ATTACHMENT
 where ATT_BNO = '9999' AND ATT_STATUS = 'Y' AND ATT_CATEGORY = '4' AND ATT_FNO = '1'
 </select>
 
+<select id="getWishCount">
+	SELECT COUNT(*)
+	FROM WISHLIST
+	WHERE MEM_ID = #{memId}
+</select>
 
 </mapper>

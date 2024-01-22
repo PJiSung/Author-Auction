@@ -164,7 +164,7 @@ let checkPwdFlag = false;
 const checkPwd = () =>{
 	let pwd = document.getElementsByName("memPwd")[0];
 	pwd.addEventListener("change", function(){
-	 	if(pwd.value.length > 0){
+	 	if(pwd.value.length > 6){
 	 		this.style.borderBottomColor = '#8FFF8F';
 	 		checkPwdFlag = true;
 	 	}else{
@@ -188,7 +188,6 @@ const checkRePwd = () =>{
 	 	}
 	});
 }
-	
 </script>
 <body>
 	<main class="th-layout-main">

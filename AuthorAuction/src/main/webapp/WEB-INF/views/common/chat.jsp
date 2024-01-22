@@ -591,8 +591,8 @@ const enterSend = () =>{
 	<div id="chatContainer" class="chatContainer">
 	
 		<input type="hidden" name="userName" id="userName" value="${loginUser.memId}">
-		<input type="text" id="sessionId" value="">
-		<input type="text" id="roomNumber" value="${roomNumber}">
+		<input type="hidden" id="sessionId" value="">
+		<input type="hidden" id="roomNumber" value="${roomNumber}">
 		
 		<div class="chatingHeader">
 			<span class="center">&nbsp;&nbsp;&nbsp;&nbsp;AuthorAuction&nbsp;상담문의</span><span class="right closeBtn" onclick="showChatModal()">X&nbsp;</span>

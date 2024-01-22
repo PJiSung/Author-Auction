@@ -91,5 +91,7 @@ public interface ArtsDAO {
 
 	Attachment selectAttmlistforsell(int proNo);
 
+	int getWishCount(String memId);
+
 	
 }

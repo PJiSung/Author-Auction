@@ -85,6 +85,8 @@ public interface ArtsService {
 
 	Attachment selectAttmlistforsell(int proNo);
 
+	int getWishCount(String memId);
+
 
 
 
