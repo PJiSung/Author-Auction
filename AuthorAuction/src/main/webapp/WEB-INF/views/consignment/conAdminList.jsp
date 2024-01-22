@@ -35,7 +35,13 @@ table {
 }
 
 th {
-	padding: 0 0 0 5%;
+	
+}
+
+button{
+	color:white;
+	background: black;
+	border-radius: 3px;
 }
 
 td {
@@ -51,6 +57,12 @@ td {
 	width: 100%;
 	height: 100%;
 	display: flex;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .modal_content {
@@ -90,6 +102,7 @@ td {
 	justify-content: flex-start;
 }
 
+
 element.style {
 	gap: 1rem;
 }
@@ -112,6 +125,12 @@ table {
 table tr {
 	width: 100%;
 }
+
+#scroll::-webkit-scrollbar {
+   display: none;
+ }
+
+
 .admsearch{border: 1px solid lightgray; background-color: black; color: white; border-radius :0.6rem;} 
 .admcancel{border: 1px solid lightgray; border-radius :0.6rem;}
 .date-box{border-radius: 0.6rem; border: 1px solid lightgray;}
@@ -258,6 +277,7 @@ table tr {
    		})
    		
    		closeAuctionModal.addEventListener('click',function(){
+   			document.body.style.overflow = '';
    			document.querySelector('input[name="aucStartDate"]').value = '';
 			document.querySelector('input[name="aucFinishDate"]').value = '';
    			enrollModal.style.display = 'none';
@@ -731,7 +751,7 @@ table tr {
 	
 	
 	const openEnrollModal = (data) =>{
-		
+		document.body.style.overflow = 'hidden';
     	const $enrollModal = $(".modal_overlay").eq(0);
     	const ajaxConProduct = document.getElementById("ajaxConProduct");
     	const ajaxConAuthor = document.getElementById("ajaxConAuthor");
@@ -773,39 +793,39 @@ table tr {
 	<jsp:include page="../common/adminHeadSide.jsp"/>
 	<!-- 경매 등록 모달 -->
 	<!--  -->
-	<div class="modal_overlay" style="display: none; z-index: 1; height: 150%;">
-		<div id="content-allOver-cover" style="width: 100%; height: 100%; position: fixed; z-index: 1;">
-			<div id="forWidthAndHeight" style="width: 65%; height: 80%; margin: auto; background-color: white; margin-top: 1%; display: table;">
+	<div class="modal_overlay" style="display: block; z-index: 1; height: 150%;">
+		<div id="content-allOver-cover" style="width: 100%; height: 100%; position: fixed; z-index: 1; left:17.5%; top:5%;">
+			<div id="forWidthAndHeight" style="width: 60%; height: 90%; background-color: white;">
 				<form action="insertAuction.adac" method="post" id="auctionForm">
-					<div style="text-align: center;">경매 등록 페이지</div>
+					<div style="text-align: center; color:white; background: black; padding: 10px 0 10px 0;">경매 등록 페이지</div>
 					<div style="display:flex; text-align:center; margin: 2.5% 0 1.25% 5%;">
-						<div id="workNamePlace" style="margin-left: 3%; width: 44%;">
-							작품명 <input type="text" readonly style="width: 50%;" name="conProduct" id="ajaxConProduct" required>
+						<div id="workNamePlace" style="margin-left: 3%; width: 44%; text-align:left;">
+							작품명 <input type="text" readonly style="width: 30%;" name="conProduct" id="ajaxConProduct" required>
 						</div>
-						<div id="artistNamePlace" style="margin-right: 5%; width: 44%;">
-							작가명 <input type="text" readonly style="width: 50%;" name="conAuthor" id="ajaxConAuthor" required>
+						<div id="artistNamePlace" style="margin-right: 5%; width: 44%; text-align:left;">
+							작가명 <input type="text" readonly style="width: 30%;" name="conAuthor" id="ajaxConAuthor" required>
 						</div>
 					</div>
 					
 					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 5%;">
-						<div id="startMoney" style="margin-left: 3%; width: 44%;">
-							시작가 <input type="number" style="width: 50%;" name="aucStartPrice" id="ajaxConHope" required>
+						<div id="startMoney" style="margin-left: 3%; width: 44%; text-align:left;">
+							시작가 <input type="number" style="width: 30%;" name="aucStartPrice" id="ajaxConHope" required>
 						</div>
 						
-						<div style="margin-right: 2%; width: 44%; display: inline-block;">
-							제작 년도<input type="number" style="width: 48%;"  name="conYear" id="ajaxConYear">
+						<div style="margin-right: 2%; width: 44%; display: inline-block; text-align:left;">
+							제작 &nbsp;<input type="number" style="width: 30%; margin-left:2.2%;" name="conYear" id="ajaxConYear">
 						</div>
 					</div>
 					
-					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 7.5%; width:100%;">
+					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 8%; width:100%;  text-align:left;">
 						<div id="startDate" style="width: 40%;">
-							경매 시작일 <input type="text" name="aucStartDate" style="width: 40%;" readonly required>
-							<button type="button" style="position: absolute; class="openCalender" id="startDateCalendar">달력</button>
+							시작일 <input type="text" name="aucStartDate" style="width: 31%;" readonly required>
+							<button type="button" style="position: absolute;"  class="openCalender" id="startDateCalendar">달력</button>
 	
 							<div id="startCalendar"	style="border: 1px black solid; background: white; width: 30%; position: absolute;">
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
-										<button id="previous" type="button" style="width: 100%; background: white; border: 0;">&lt;</button>
+										<button id="previous" type="button" style="width: 100%; background: white; border: 0; !important">&lt;</button>
 									</div>
 									<span id="yearPlace"></span>년 <span id="monthPlace"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
@@ -833,7 +853,7 @@ table tr {
 							</div>
 						</div>
 						<div id="endDate" style="width: 40%; margin-left:1.5%;">
-							경매 종료일  <input type="text" name="aucFinishDate" style="width: 42%;"	readonly required>
+							종료일 &nbsp;<input type="text" name="aucFinishDate" style="width: 30%;"	readonly required>
 							<button type="button" class="openCalender" style="position: absolute;" id="endDateCalendar">달력</button>
 	
 							<div id="endCalendar" style="border: 1px black solid; background: white; width: 30%; position: absolute;">
@@ -868,33 +888,33 @@ table tr {
 						</div>
 					</div>
 					
-					<div style="display:flex; text-align:left; margin: 1.25% 0 1.25% 16.5%;">
-						<div style="width: 40%;">
-							가로길이<input type="number" name="conWidth" id="ajaxConWidth" required style="width:65%;">
+					<div style="display:flex; text-align:left; margin: 1.25% 0 1.25% 8%;">
+						<div style="width: 40%; text-align:left;">
+							가로 &nbsp;<input type="number" name="conWidth" id="ajaxConWidth" required style="width:33%; margin-left: 2.5%;">
 						</div>
-						<div style="width: 40%; margin-left:9%;">
-							세로길이<input type="number" name="conHeight" id="ajaxConHeight" required style="width:65%";>
+						<div style="width: 40%; text-align:left; margin-left:5.5%;">
+							세로 &nbsp;&nbsp;<input type="number" name="conHeight" id="ajaxConHeight" required style="width:33%; margin-left:1.8%;">
 						</div>
 					</div>
 						
-						<div id="explainPlace" style="margin: 1.25% 0 1.25% 16.5%; width:74%;">
+						<div id="explainPlace" style="margin: 1.25% 0 1.25% 8%; width:74%;">
 							<span>작품 설명</span><br>
-							<textarea style="width: 91%; resize: none;" name="conEtc" id="ajaxConEtc" rows="8" required></textarea>
+							<textarea style="width: 85%; resize: none;" name="conEtc" id="ajaxConEtc" rows="8" required></textarea>
 						</div>
 					
-					<div style="display:flex; text-align:center; align-items: center; justify-content: center;">
+					<div style="display:flex; text-align:left; margin-left:8%; align-items: center; justify-content: center;">
 						<div style="width: 100%;">
 							<div style="width: 25%; display: inline-block;">
 								대표 사진<br>
-								<span id="presentPic"><img class="pictures" src="" style="width: 250px; height: 250px;"></span>
+								<span id="presentPic"><img class="pictures" src="" style="width: 200px; height: 200px;"></span>
 							</div>
 							<div style="width: 25%; display: inline-block;">
 								전면 사진<br>
-								<span id="firstPic"><img class="pictures" src="" style="width: 250px; height: 250px;"></span>
+								<span id="firstPic"><img class="pictures" src="" style="width: 200px; height: 200px;"></span>
 							</div>
 							<div style="width: 25%; display: inline-block;">
 								후면 사진<br>
-								<span id="secondPic"><img class="pictures" src="" style="width: 250px; height: 250px;"></span>
+								<span id="secondPic"><img class="pictures" src="" style="width: 200px; height: 200px;"></span>
 							</div>
 						</div>
 						<br>
@@ -906,7 +926,6 @@ table tr {
 						<button type="button" id="closeAuctionModal" style="margin-right: 8%;">취소</button>
 					</div>
 				</div>
-				
 				<input type="hidden" name="aucNo">
 			</form>
 		</div>
@@ -1065,21 +1084,17 @@ table tr {
 															value="${a.AUC_START_DATE}" pattern="yyyy-MM-dd HH:mm:ss" />
 														<fmt:formatDate var="endDate" value="${a.AUC_FINISH_DATE}"
 															pattern="yyyy-MM-dd HH:mm:ss" />
-														<c:choose>
-														<c:when test="${ a.AUC_CNO == c.conNo}">
-															<c:choose>
-															<c:when test="${ startDate > nowDate}">
+														<c:if test="${ a.AUC_CNO == c.conNo}">
+															<c:if test="${ startDate > nowDate}">
 														  	  경매 진행 예정	 
-														  	</c:when>
-															<c:when test="${ startDate < nowDate && endDate > nowDate}">
+														  	</c:if>
+															<c:if test="${ startDate < nowDate && endDate > nowDate}">
 														  	  경매 진행중	
-														  	</c:when>
-															<c:when test="${ startDate < nowDate && endDate < nowDate}">
+														  	</c:if>
+															<c:if test="${ startDate < nowDate && endDate < nowDate}">
 														  	  종료된 경매	
-														  	</c:when>
-														  	</c:choose>
-														</c:when>
-														</c:choose>
+														  	</c:if>
+														</c:if>
 													</c:forEach>
 												</c:if> 
 												<c:if test="${c.conConStatus == 'Z'}">거절</c:if>	
