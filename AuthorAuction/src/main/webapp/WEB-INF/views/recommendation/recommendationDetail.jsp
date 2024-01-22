@@ -267,11 +267,46 @@
     text-align: center;
     margin-bottom: 8rem;
 }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 50%; /* 50%로 수정 */
+  width: 100%;
+  height: 100%; /* height를 auto로 수정 */
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  transform: translateY(-50%); /* 화면 중앙에 맞추기 위한 추가 */
+}
+
+.modal-content {
+  border-radius: 0.6rem;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+  height: 170px;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 </style>
 
 
 <script>
-	
 	window.onload = () => {
 		// 답글 등록
 		if(document.getElementById('enrollReply') != null){
@@ -378,19 +413,21 @@
 	        });
 		}
 		 */
-		const showModal = () => {
-		    const modal = document.getElementById('myModal');
-		    modal.style.display = 'block';
-		  };
-		const closeModal = () => {
-			const modal = document.getElementById('myModal');
-		    modal.style.display = 'none';
-		};
-		const submitBtn = () =>{
-			const recommendationForm = document.getElementById('recommendationForm');
-			recommendationForm.action='deleteRecommendation.re';
-			recommendationForm.submit();
-		}
+		
+	}	
+	const showModal = () => {
+	    const modal = document.getElementById('myModal');
+	    modal.style.display = 'block';
+	  };
+	const closeModal = () => {
+		const modal = document.getElementById('myModal');
+	    modal.style.display = 'none';
+	};
+	const submitBtn = () =>{
+		const recommendationForm = document.getElementById('recommendationForm');
+		recommendationForm.action='deleteRecommendation.re';
+		recommendationForm.submit();
+	}
 </script>
 </head>
 
