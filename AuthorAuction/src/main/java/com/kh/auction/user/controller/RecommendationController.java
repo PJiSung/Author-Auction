@@ -153,10 +153,10 @@ public class RecommendationController {
 	}
 
 	private String saveFile(MultipartFile upload) {
-//		String root = "C:\\";
-//		String savePath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savePath = root + "\\uploadFiles";
 
-		String savePath = "/Users/kimgahyun/uploadFiles"; 				// 맥
+//		String savePath = "/Users/kimgahyun/uploadFiles"; 				// 맥
 
 		File folder = new File(savePath);
 		if (!folder.exists()) {
@@ -186,13 +186,13 @@ public class RecommendationController {
 	}
 
 	private void deleteFile(String fileName) {
-//		String root = "C:\\";
-//		String savePath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savePath = root + "\\uploadFiles";
 
-		String savePath = "/Users/kimgahyun/uploadFiles";				// 맥
-		File f = new File(savePath + File.separator + fileName);		// 맥
+//		String savePath = "/Users/kimgahyun/uploadFiles";				// 맥
+//		File f = new File(savePath + File.separator + fileName);		// 맥
 
-//		File f = new File(savePath + "\\" + fileName);
+		File f = new File(savePath + "\\" + fileName);
 		if (f.exists()) {
 			f.delete();
 		}
