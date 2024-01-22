@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="rs/myReviewList/css/setting.css">
 <link rel="stylesheet" href="rs/myReviewList/css/template.css">
 <link rel="stylesheet" href="rs/myReviewList/css/style.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -101,6 +102,18 @@
 .EmptySearchResult p{
 	margin-top: 10px;
 	color:var(--text-color3)
+}
+
+.resetButton{
+	float: right;
+	background-color: white;
+	color: black;
+	border: 0;
+	display: inline-block;
+	height: 45px;
+	width: 80px;
+	border: 1px solid black;
+	margin-left: 5px;
 }
 
 </style>
@@ -191,6 +204,7 @@
 		              </div>
        				</td>
 	       			<td>
+	       				<button class="resetButton" type="reset" onclick="resetOrder()">초기화</button>
 	       				<button class="searchButton" type="button" onclick="searchOrder()">검색</button>
 	       			</td>
           		</tr>
@@ -405,11 +419,17 @@ for (let i = 0; i < selectedButs.length; i++) {
     }
 }
 
+const resetOrder = () =>{
+	document.getElementById('selectedCategorySpan').innerText = "선택";
+}
+
 const notGoDetail = (event) =>{
 	event.stopPropagation();
 }
  
  const changeOrdStatus = (ordNo, ordStatus) =>{
+	 console.log();
+	 
 	 $.ajax({
 		 url: "updateOrderStatus.adod",
 		 data:{ordNo: ordNo, ordStatus: ordStatus},

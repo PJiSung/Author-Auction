@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,7 @@
 <link rel="stylesheet" href="rs/myOrderdetail/css/setting.css">
 <link rel="stylesheet" href="rs/myOrderdetail/css/template.css">
 <link rel="stylesheet" href="rs/myOrderdetail/css/style.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <title>Insert title here</title>
 
 <style type="text/css">
@@ -140,23 +142,25 @@
                 <table class="userInfo">
             		<tr>
             			<td class="tdA"><h6 class="inputset-tit"> 주문번호 </h6></td>
-            			<td class="tdB"><input type="text" class="inputset-input form-control" value="${ o.ORD_NO }" readonly="readonly"></td>
+            			<td class="tdB"><input type="text" class="inputset-input form-control" value="${ o.ORD_NO }" readonly="readonly" disabled style="background-color: white; color: black;"></td>
             		</tr>
             		<tr>
             			<td><h6 class="inputset-tit"> 주문일자 </h6></td>
-            			<td><input type="text" class="inputset-input form-control" value="${ fn:split(o.ORD_DATE, '.')[0] }" readonly="readonly"></td>
+            			<td><input type="text" class="inputset-input form-control" value="${ fn:split(o.ORD_DATE, '.')[0] }" readonly="readonly" disabled style="background-color: white; color: black;"></td>
             		</tr>
             		<tr>
             			<td><h6 class="inputset-tit"> 주문자명 </h6></td>
-            			<td><input type="text" class="inputset-input form-control" value="${ o.MEM_NAME }" readonly="readonly"></td>
+            			<td><input type="text" class="inputset-input form-control" value="${ o.MEM_NAME }" readonly="readonly" disabled style="background-color: white; color: black;"></td>
             		</tr>
             		<tr>
             			<td><h6 class="inputset-tit"> 연락처 </h6></td>
-            			<td><input type="text" class="inputset-input form-control" value="${ o.MEM_PHONE }" readonly="readonly"></td>
+            			<td>
+            				<input type="text" class="inputset-input form-control" value="${fn:replace(o.MEM_PHONE, '-', '')}" readonly="readonly" disabled style="background-color: white; color: black;">
+            			</td>
             		</tr>
             		<tr>
             			<td><h6 class="inputset-tit"> 주문상태 </h6></td>
-            			<td><input type="text" class="inputset-input form-control" value="${ o.ORD_STATUS }" readonly="readonly"></td>
+            			<td><input type="text" class="inputset-input form-control" value="${ o.ORD_STATUS }" readonly="readonly" disabled style="background-color: white; color: black;"></td>
             		</tr>
             	</table>
               </div>
@@ -177,13 +181,14 @@
 	              				<h6 class="inputset-tit">작품명</h6>
 	              			</td>
 	              			<td class="tdB">
-	              				<input type="text" class="inputset-input form-control" value="${ p.PRO_NAME }" readonly="readonly">
+	              				<input type="text" class="inputset-input form-control" value="${ p.PRO_NAME }" readonly="readonly" disabled style="background-color: white; color: black;">
 	              			</td>
 	              			<td class="tdC">
 	              				<h6 class="inputset-tit">가격</h6>
 	              			</td>
 	              			<td class="tdD">
-	              				<input type="text" class="inputset-input form-control price" value="${ p.PRO_PRICE }" readonly="readonly">
+	              				<fmt:formatNumber value="${ p.PRO_PRICE }" pattern="#,###" var="fomatProPrice" />
+	              				<input type="text" class="inputset-input form-control price" value="${ fomatProPrice }" readonly="readonly" disabled style="background-color: white; color: black;">
 	              			</td>
 	              			<td class="tdE" rowspan="2">
 	              				<div class="proPicDiv">
@@ -200,13 +205,13 @@
 	              				<h6 class="inputset-tit">작가명</h6>
 	              			</td>
 	              			<td>
-	              				<input type="text" class="inputset-input form-control" aria-label="내용" value="${ p.PRO_WRITER }" readonly="readonly">
+	              				<input type="text" class="inputset-input form-control" aria-label="내용" value="${ p.PRO_WRITER }" readonly="readonly" disabled style="background-color: white; color: black;">
 	              			</td>
 	              			<td>
 	              				<h6 class="inputset-tit">수량</h6>
 	              			</td>
 	              			<td>
-	              				<input type="text" class="inputset-input form-control num" aria-label="내용" value="${ p.ODT_NUM }" readonly="readonly">
+	              				<input type="text" class="inputset-input form-control num" aria-label="내용" value="${ p.ODT_NUM }" readonly="readonly" disabled style="background-color: white; color: black;">
 	              			</td>
 	              		</tr>
 	              	</table>
@@ -230,7 +235,7 @@
               				<h6 class="inputset-tit">수령자명 </h6>
               			</td>
               			<td class="tdB">
-              				<input type="text" class="inputset-input form-control" value="${ o.ADD_RECIPIENT }" readonly="readonly">
+              				<input type="text" class="inputset-input form-control" value="${ o.ADD_RECIPIENT }" readonly="readonly" disabled style="background-color: white; color: black;">
               			</td>
               		</tr>
               		<tr>
@@ -238,7 +243,7 @@
               				<h6 class="inputset-tit">연락처</h6>
               			</td>
               			<td>
-              				<input type="text" class="inputset-input form-control" value="${ o.ADD_PHONE }" readonly="readonly">
+              				<input type="text" class="inputset-input form-control" value="${ o.ADD_PHONE }" readonly="readonly" disabled style="background-color: white; color: black;">
               			</td>
               		</tr>
               		<tr>
@@ -246,12 +251,12 @@
               				<h6 class="inputset-tit">배송지</h6>
               			</td>
               			<td>
-              				<input type="text" class="inputset-input form-control" value="${fn:split(o.ADD_ADDRESS, '@')[0]}" readonly="readonly" disabled="">
+              				<input type="text" class="inputset-input form-control" value="${fn:split(o.ADD_ADDRESS, '@')[0]}" readonly="readonly" disabled>
               			</td>
               		</tr>
               		<tr>
               			<td>
-              				<input type="text" class="inputset-input form-control" value="${fn:substringAfter(o.ADD_ADDRESS, '@')}" readonly="readonly">
+              				<input type="text" class="inputset-input form-control" value="${fn:replace(fn:substringAfter(o.ADD_ADDRESS, '@'), '@', ' ')}" readonly="readonly" disabled style="background-color: white; color: black;">
               			</td>
               		</tr>
               		<tr>
@@ -260,10 +265,10 @@
               			</td>
               			<td>
               				<c:if test="${ o.ORD_MESSAGE != 'none' }">
-	              				<input type="text" class="inputset-input form-control" value="${ o.ORD_MESSAGE }" readonly="readonly">
+	              				<input type="text" class="inputset-input form-control" value="${ o.ORD_MESSAGE }" readonly="readonly" disabled style="background-color: white; color: black;">
               				</c:if>
               				<c:if test="${ o.ORD_MESSAGE == 'none' }">
-              					<input type="text" class="inputset-input form-control" value="" readonly="readonly">
+              					<input type="text" class="inputset-input form-control" value="" readonly="readonly" disabled style="background-color: white; color: black;">
               				</c:if>
               			</td>
               		</tr>
@@ -285,14 +290,15 @@
                			<td class="tdA">
                				<h6 class="inputset-tit">상품 금액</h6>
                			</td>
-               			<td class="tdB">
+               			<td class="tdB" id="productPriceTd">
                				<input type="text" class="inputset-input form-control" id="totalProductPrice" value="" readonly="readonly">
                			</td>
                			<td class="tdC">
                				<h6 class="inputset-tit">포인트 결제 금액</h6>
                			</td>
                			<td class="tdD">
-               				<input type="text" class="inputset-input form-control" value="${ o.ORD_PO_PRICE }" readonly="readonly">
+               				<fmt:formatNumber value="${ o.ORD_PO_PRICE }" pattern="#,###" var="formatPoPrice" />
+               				<input type="text" class="inputset-input form-control" value="${ formatPoPrice }" readonly="readonly" disabled style="background-color: white; color: black;">
                			</td>
                			<td class="tdE">
                				<h6 class="finalPrice">최종 결제 금액</h6>
@@ -303,16 +309,17 @@
                				<h6 class="inputset-tit">배송비</h6>
                			</td>
                			<td>
-               				<input type="text" class="inputset-input form-control" readonly="readonly" id="deliveryFree">
+               				<input type="text" class="inputset-input form-control" readonly="readonly" id="deliveryFree" disabled style="background-color: white; color: black;">
                			</td>
                			<td>
                				<h6 class="inputset-tit">카드 결제 금액</h6>
                			</td>
                			<td>
-               				<input type="text" class="inputset-input form-control" value="${ o.ORD_CA_PRICE }" readonly="readonly">
+               				<fmt:formatNumber value="${ o.ORD_CA_PRICE }" pattern="#,###" var="formatCaPrice" />
+               				<input type="text" class="inputset-input form-control" value="${ formatCaPrice }" readonly="readonly" disabled style="background-color: white; color: black;">
                			</td>
                			<td>
-               				<h6 class="finalPrice" id="finalPrice" >${ o.ORD_SUM_PRICE }<small>원</small></h6>
+               				<h6 class="finalPrice" id="finalPrice" ><fmt:formatNumber value="${ o.ORD_SUM_PRICE }" pattern="#,###" /><small>원</small></h6>
                			</td>
                		</tr>
                	</table>
@@ -335,13 +342,19 @@
   	let totalProductPrice = 0;
   	for(i = 0; i < productPrices.length; i++){
   		
-  		const productPrice = productPrices[i].value;
+  		const productPrice = productPrices[i].value.replaceAll(',', "");
   		const productNum = productNums[i].value;
   		
   		productTotal = productPrice * productNum;
   		totalProductPrice += productTotal;
+  		
   	}
-  	document.getElementById('totalProductPrice').value = totalProductPrice;
+  	
+  	const formatNumber = (number) => {
+  	    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  	}
+  	
+  	document.getElementById('productPriceTd').innerHTML = '<input type="text" class="inputset-input form-control" id="totalProductPrice" value="' + formatNumber(totalProductPrice) + '" readonly="readonly" disabled style="background-color: white; color: black;">';
   	
   	const finalPrice = document.getElementById('finalPrice').innerText.replace(/[^0-9]/g, '');
   	document.getElementById('deliveryFree').value = (finalPrice - totalProductPrice);
