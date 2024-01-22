@@ -162,74 +162,93 @@ window.onpopstate = function() {
               </li>
             </ul>
           </li>
+          <c:if test="${ loginUser.memIsAdmin eq 'Y' }">
+	          <li class="header-gnbitem">
+	            <a class="header-gnblink" href="adminMain.adac">
+	              <span>ADMIN</span>
+	            </a>
+	            <ul class="header-sublist">
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="memberList.adme">
+	                  <span>회원 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="adminInquiry.adac">
+	                  <span>경매 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="artsadmin.ar">
+	                  <span>미술품 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="searchList.adco">
+	                  <span>위탁 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="admOrderList.adod">
+	                  <span>주문 관리</span>
+	                </a>
+	              </li>
+	            </ul>
+	          </li>
+          </c:if>
         </ul>
       </div>
       <div class="header-right">
         <div class="header-utils">
            <c:if test="${ empty loginUser }">
-               <a href="loginView"><span class="header-gnblink">LOGIN</span></a>
-           </c:if>
-           <c:if test="${ !empty loginUser }">
-                <a href="logout"><span class="header-gnblink">LOGOUT</span></a>
-          <div class="dropdown btn-user header-utils-btn">
-            <img src="main/icons/ico_user_black.svg" class="dropbtn" alt="유저 아이콘">
-            <div class="dropdown-content-user">
-               <table>
-                  <tr>
-                     <td class="profile">
-                        <div class="profilePic">
-                           <img src="${ loginUser.memFileName }" alt="프로필 사진" class="profileImg">
-                        </div>
-                     </td>
-                     <td style="line-height: 20px; cursor: pointer;" onclick="location.href='myInfo';">
-                        <div class="userText"><b>계정 관리</b></div>
-                        <div class="userText">${ loginUser.memId }</div>
-                     </td>
-                  </tr>
-                  <tr style="height: 50px;">
-                  <!-- 
-                     <td class<div class="dropdown-content-user">
-               <table>
-                  <tr>
-                     <td class="profile">
-                        <div class="profilePic">
-                           <img src="${ loginUser.memFileName }" alt="프로필 사진" class="profileImg">
-                        </div>
-                     </td>
-                     <td style="line-height: 20px; cursor: pointer;" onclick="location.href='myInfo';">
-                        <div class="userText"><b>계정 관리</b></div>
-                        <div class="userText">${ loginUser.memId }</div>
-                     </td>
-                  </tr>
-                  <tr style="height: 50px;">
-                  <!-- 
-                     <td class="cash">
-                        <span>예치금</span><br>
-                                <span onclick="location.href='';" class="cashButton">충전</span>
-                                <span onclick="location.href='';" class="cashButton">출금</span>
-                     </td>
-                  	<td class="cash">
-	                  	<span>예치금</span><br>
-                  	</td>
-                  	-->
-                     <td class="userText" colspan="2">
-                     	<span style="margin-right: 10px; padding-left:15px;">예치금</span>
-                     	<fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원
-                    	<span onclick="location.href='pointpayment.ar';" class="cashButton">충전</span>
-                   	</td>
-                  </tr>
-                  <tr>
-                     <td colspan="2"><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
-                  </tr>
-                  <tr>
-                     <td colspan="2"><a href="myOrderList.od" class="userMenu">나의 주문</a></td>
-                  </tr>
-                  <tr>
-                     <td colspan="2"><a href="myInfo" class="userMenu">마이페이지</a></td>
-                  </tr>
-               </table>
-             </div>
-          </div>
+	         	<a href="loginView"><span class="header-gnblink">LOGIN</span></a>
+        	</c:if>
+        	<c:if test="${ !empty loginUser }">
+          	  <a href="logout"><span class="header-gnblink">LOGOUT</span></a>
+	          <div class="dropdown btn-user header-utils-btn">
+	            <img src="main/icons/ico_user_black.svg" class="dropbtn" alt="유저 아이콘">
+	            <div class="dropdown-content-user">
+	               <table>
+	                  <tr>
+	                     <td class="profile">
+	                        <div class="profilePic">
+	                           <img src="${ loginUser.memFileName }" alt="프로필 사진" class="profileImg">
+	                        </div>
+	                     </td>
+	                     <td style="line-height: 20px; cursor: pointer;" onclick="location.href='myInfo';">
+	                        <div class="userText"><b>계정 관리</b></div>
+	                        <div class="userText">${ loginUser.memId }</div>
+	                     </td>
+	                  </tr>
+	                  <tr style="height: 50px;">
+	                  <!-- 
+	                     <td class="cash">
+	                        <span>예치금</span><br>
+	                                <span onclick="location.href='';" class="cashButton">충전</span>
+	                                <span onclick="location.href='';" class="cashButton">출금</span>
+	                     </td>
+	                  	<td class="cash">
+		                  	<span>예치금</span><br>
+	                  	</td>
+	                  	-->
+	                     <td class="userText" colspan="2" style="text-align: center;">
+	                     	<span style="margin-right: 15px;">예치금</span>
+	                     	<fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원
+	                    	<span onclick="location.href='pointpayment.ar';" class="cashButton">충전</span>
+	                   	</td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2"><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2"><a href="myOrderList.od" class="userMenu">나의 주문</a></td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2"><a href="myInfo" class="userMenu">마이페이지</a></td>
+	                  </tr>
+	               </table>
+	             </div>
+	          </div>
           </c:if>
           <c:if test="${ !empty loginUser }">
           <a href="wishlist.ar" class="btn-cart header-utils-btn">

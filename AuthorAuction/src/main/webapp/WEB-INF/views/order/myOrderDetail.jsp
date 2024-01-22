@@ -245,7 +245,7 @@
               				<h6 class="inputset-tit">연락처</h6>
               			</td>
               			<td>
-              				<input type="text" class="inputset-input form-control" value="${ o.ADD_PHONE }" readonly="readonly" disabled style="background-color: white; color: black;">
+              				<input type="text" class="inputset-input form-control" value="${fn:replace(o.ADD_PHONE, '-', '')}" readonly="readonly" disabled style="background-color: white; color: black;">
               			</td>
               		</tr>
               		<tr>
@@ -253,7 +253,7 @@
               				<h6 class="inputset-tit">배송지</h6>
               			</td>
               			<td>
-              				<input type="text" class="inputset-input form-control" value="${fn:split(o.ADD_ADDRESS, '@')[0]}" readonly="readonly" disabled>
+              				<input type="text" class="inputset-input form-control" value="${fn:split(o.ADD_ADDRESS, '@')[0]}" readonly="readonly" disabled style="background-color: white; color: black;">
               			</td>
               		</tr>
               		<tr>

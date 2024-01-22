@@ -170,6 +170,14 @@
 	color:var(--text-color3)
 }
 
+.orderTableTr{
+	cursor: pointer;
+}
+
+.selectDateDiv input, .selectset.selectset-lg .btn{
+	border-radius: 0.6rem
+}
+
 </style>
 </head>
 <body>

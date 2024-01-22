@@ -496,46 +496,53 @@
       <div class="header-left">
         <h1 class="header-title">
           <a href="/">
-             <h5>AAUCTION</h5>
-           <!-- <img src="main/images/" alt="로고"> -->
+             <h5>A_AUCTION</h5>
+           <!-- <img src="images/" alt="로고"> -->
           </a>
         </h1>
       </div>
       <div class="header-center">
         <ul class="header-member">
+        <c:if test="${ empty loginUser }">
           <li>
             <a href="loginView">로그인</a>
           </li>
           <li>
             <a href="authenticationView">회원가입</a>
           </li>
+         </c:if>
+         <c:if test="${ !empty loginUser }">
+          <li>
+            <a href="logout">로그아웃</a>
+          </li>
+         </c:if>
         </ul>
         <ul class="header-gnblist">
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="javascript:void(0)">
+            <a class="header-gnblink" href="auctionList.ac">
               <span>AUCTION</span>
             </a>
             <ul class="header-sublist">
               <li class="header-subitem">
-                <a class="header-sublink" href="">
+                <a class="header-sublink" href="auctionList.ac">
                   <span>온라인 경매</span>
                 </a>
               </li>
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
+                <a class="header-sublink" href="moveTocal.ac">
                   <span>캘린더</span>
                 </a>
               </li>
             </ul>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="javascript:void(0)">
+            <a class="header-gnblink" href="artslist.ar">
               <span>PRODUCT</span>
             </a>
             <ul class="header-sublist">
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
-                  <span>아트</span>
+                <a class="header-sublink" href="artslist.ar">
+                  <span>미술품</span>
                 </a>
               </li>
             </ul>
@@ -543,29 +550,29 @@
           <li class="header-gnbitem">
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="javascript:void(0)">
+            <a class="header-gnblink" href="recommendationList.re">
               <span>RECOMMEND</span>
             </a>
             <ul class="header-sublist">
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
-                  <span>1:1 추천</span>
+                <a class="header-sublink" href="recommendationList.re">
+                  <span>미술품 추천</span>
                 </a>
               </li>
               <li class="header-subitem">
-                <a class="header-sublink" href="reviewList.jsp">
-                  <span>작품 리뷰</span>
+                <a class="header-sublink" href="reviewList.rv">
+                  <span>구매 후기</span>
                 </a>
               </li>
             </ul>
           </li>
           <li class="header-gnbitem">
-            <a class="header-gnblink" href="javascript:void(0)">
+            <a class="header-gnblink" href="directions.aa">
               <span>HOW TO</span>
             </a>
             <ul class="header-sublist">
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
+                <a class="header-sublink" href="directions.aa">
                   <span>오시는 길</span>
                 </a>
               </li>
@@ -575,56 +582,106 @@
                 </a>
               </li>
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
+                <a class="header-sublink" href="conInfo.co">
                   <span>위탁 안내</span>
                 </a>
               </li>
             </ul>
           </li>
+          <c:if test="${ loginUser.memIsAdmin eq 'Y' }">
+	          <li class="header-gnbitem">
+	            <a class="header-gnblink" href="adminMain.adac">
+	              <span>ADMIN</span>
+	            </a>
+	            <ul class="header-sublist">
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="memberList.adme">
+	                  <span>회원 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="adminInquiry.adac">
+	                  <span>경매 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="artsadmin.ar">
+	                  <span>미술품 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="searchList.adco">
+	                  <span>위탁 관리</span>
+	                </a>
+	              </li>
+	              <li class="header-subitem">
+	                <a class="header-sublink" href="admOrderList.adod">
+	                  <span>주문 관리</span>
+	                </a>
+	              </li>
+	            </ul>
+	          </li>
+          </c:if>
         </ul>
       </div>
       <div class="header-right">
         <div class="header-utils">
-          <a href="loginView"><span class="header-gnblink">LOGIN</span></a>
-          <!-- <a href=""><span class="header-gnblink">LOGOUT</span></a>  -->
-          <div class="dropdown btn-user header-utils-btn">
-            <img src="main/icons/ico_user_black.svg" class="dropbtn" alt="유저 아이콘">
-            <div class="dropdown-content-user">
-               <table>
-                  <tr>
-                     <td class="profile">
-                        <div class="profilePic">
-                           <img src="${ loginUser.memFileName }" alt="프로필 사진" class="profileImg">
-                        </div>
-                     </td>
-                     <td style="line-height: 20px; cursor: pointer;" onclick="location.href='';">
-                        <div class="userText"><b>계정 관리</b></div>
-                        <div class="userText">${ loginUser.memId }</div>
-                     </td>
-                  </tr>
-                  <tr>
-                     <td class="cash">
-                        <span>예치금</span><br>
-                                <span onclick="location.href='';" class="cashButton">충전</span>
-                                <span onclick="location.href='';" class="cashButton">출금</span>
-                     </td>
-                     <td class="userText">250,000,000원</td>
-                  </tr>
-                  <tr>
-                     <td><a href="#" class="userMenu">나의 경매</a></td>
-                     <td></td>
-                  </tr>
-                  <tr>
-                     <td><a href="#" class="userMenu">나의 주문</a></td>
-                     <td></td>
-                  </tr>
-               </table>
-             </div>
-          </div>
-          <a href="javascipt:void(0);" class="btn-cart header-utils-btn">
+          <c:if test="${ empty loginUser }">
+	         	<a href="loginView"><span class="header-gnblink">LOGIN</span></a>
+        	</c:if>
+        	<c:if test="${ !empty loginUser }">
+          	  <a href="logout"><span class="header-gnblink">LOGOUT</span></a>
+	          <div class="dropdown btn-user header-utils-btn">
+	            <img src="main/icons/ico_user_black.svg" class="dropbtn" alt="유저 아이콘">
+	            <div class="dropdown-content-user">
+	               <table>
+	                  <tr>
+	                     <td class="profile">
+	                        <div class="profilePic">
+	                           <img src="${ loginUser.memFileName }" alt="프로필 사진" class="profileImg">
+	                        </div>
+	                     </td>
+	                     <td style="line-height: 20px; cursor: pointer;" onclick="location.href='myInfo';">
+	                        <div class="userText"><b>계정 관리</b></div>
+	                        <div class="userText">${ loginUser.memId }</div>
+	                     </td>
+	                  </tr>
+	                  <tr style="height: 50px;">
+	                  <!-- 
+	                     <td class="cash">
+	                        <span>예치금</span><br>
+	                                <span onclick="location.href='';" class="cashButton">충전</span>
+	                                <span onclick="location.href='';" class="cashButton">출금</span>
+	                     </td>
+	                  	<td class="cash">
+		                  	<span>예치금</span><br>
+	                  	</td>
+	                  	-->
+	                     <td class="userText" colspan="2" style="text-align: center;">
+	                     	<span style="margin-right: 15px;">예치금</span>
+	                     	<fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원
+	                    	<span onclick="location.href='pointpayment.ar';" class="cashButton">충전</span>
+	                   	</td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2"><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2"><a href="myOrderList.od" class="userMenu">나의 주문</a></td>
+	                  </tr>
+	                  <tr>
+	                     <td colspan="2"><a href="myInfo" class="userMenu">마이페이지</a></td>
+	                  </tr>
+	               </table>
+	             </div>
+	          </div>
+          </c:if>
+          <c:if test="${ !empty loginUser }">
+          <a href="wishlist.ar" class="btn-cart header-utils-btn">
             <img src="main/icons/ico_cart_black.svg" alt="쇼핑 아이콘">
-            <span class="cartCount">1</span>
+            <span class="cartCount">${ cartCount }</span>
           </a>
+          </c:if>
           <div class="dropdown btn-search header-utils-btn">
             <img src="main/icons/ico_seach_black.svg" class="dropbtn" alt="검색 아이콘">
             <div class="dropdown-content-keyword">

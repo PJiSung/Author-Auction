@@ -380,6 +380,14 @@ body.modal-open {
 	color:var(--text-color3)
 }
 
+.reviewTableTr, .replyTableTr,.selectDateDiv input{
+	cursor: pointer;
+}
+
+.selectDateDiv input, .selectset.selectset-lg .btn{
+	border-radius: 0.6rem
+}
+
 </style>
 </head>
 <body>
@@ -1158,9 +1166,10 @@ body.modal-open {
 	}
  
  const selectReviewImgUl = () =>{
- 	const reviewImgUl = document.querySelector('.reviewImgUl');
-	const selectImagDiv = document.querySelector('.selectImagDiv');
+ 	const reviewImgUl = document.querySelector('#reviewImgUl');
+	const selectImagDiv = document.querySelector('#selectImagDiv');
 	
+	console.log(selectImagDiv);
 	const reviewImgs = reviewImgUl.querySelectorAll('img');
     for (let i = 0; i < reviewImgs.length; i++) {
         reviewImgs[i].onclick = function() {
@@ -1193,7 +1202,6 @@ body.modal-open {
 
  const selectedButsReply = document.querySelectorAll('#myPage-replyListDiv .selectset-link');
  const revCategoryInputReply = document.getElementById('repCategory');
-console.log(selectedButsReply);
  for (let i = 0; i < selectedButsReply.length; i++) {
      const button = selectedButsReply[i];
 
@@ -1441,7 +1449,6 @@ const updateReply = (btn) => {
     if (btn.innerText === '완료') {
         btn.onclick = () => {
             const newRepContent = repDiv.querySelector('.newRepTextarea').value.trim();
-            console.log(newRepContent);
             $.ajax({
                 url: "updateReply.rv",
                 data: {

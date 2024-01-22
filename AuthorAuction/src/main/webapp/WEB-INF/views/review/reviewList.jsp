@@ -431,6 +431,11 @@ body.modal-open {
 	color:var(--text-color3)
 }
 
+.basic-N50 .contents-sort .tabset .tabset-list, .cardset{
+	cursor: pointer;
+}
+
+
 </style>
 </head>
 <body>

@@ -83,6 +83,10 @@
     font-weight: 500;
 }
 
+.fileset.fileset-lg .fileset-input, .btnset.btnset-line{
+	cursor: pointer;
+}
+
 
 </style>
 </head>

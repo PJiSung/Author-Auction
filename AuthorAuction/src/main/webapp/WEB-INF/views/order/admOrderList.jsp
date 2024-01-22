@@ -116,6 +116,16 @@
 	margin-left: 5px;
 }
 
+.selectDateDiv input, .selectset.selectset-lg .btn{
+	border-radius: 0.6rem;
+	cursor: pointer;
+}
+
+.checkset-wrap .checkset + .checkset, .tableset tbody tr{
+	cursor: pointer;
+}
+
+
 </style>
 </head>
 <body>
@@ -125,7 +135,7 @@
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="textset textset-h2">
-            <h2 class="textset-tit">MANAGER PAGE - ORDER</h2>
+            <h2 class="textset-tit">ORDER</h2>
           </div>
           
           <div class="search-select">

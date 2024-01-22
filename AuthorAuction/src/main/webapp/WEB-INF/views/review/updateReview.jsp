@@ -314,6 +314,10 @@
 	font-size: var(--fs-p2);
 }
 
+.fileset.fileset-lg .fileset-input, .btnset.btnset-line{
+	cursor: pointer;
+}
+
 </style>
 </head>
 <body>
