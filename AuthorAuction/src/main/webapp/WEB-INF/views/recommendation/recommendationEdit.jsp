@@ -347,20 +347,18 @@
 
 			const fileInputs = document.querySelectorAll('.fileset-input');
 			let selectedFileCount = 0;
-			fileInputs.forEach(fileInput => {
-			    // 선택된 파일들 가져오기
-			    const selectedFiles = fileInput.files;
-
-				// 파일이 선택되었는지 확인하고 개수 누적
-			    selectedFileCount += selectedFiles.length;
-			});
 			
-			const imageTags = document.querySelectorAll('.contents-thumbitem.reply img.contents-thumbimg:not(.dark)').length;
-			console.log(imageTags);
+			let check = 0; 
 			
-			if(selectedFileCount + imageTags == 0 ){
+			if(fileInputs[0].value == ''){
+				check++;
+			}
+			
+ 			const imageTags = document.querySelectorAll('.contents-thumbimg.dark').length;
+			
+			if(check == 1 && imageTags == 2){
 				alert('사진을 반드시 첨부해주세요.');
-			} else {
+			}else{
 				attmForm.submit();
 			}
 		});

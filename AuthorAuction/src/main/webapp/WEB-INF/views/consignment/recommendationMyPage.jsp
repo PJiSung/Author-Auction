@@ -62,7 +62,7 @@
       <div class="contents-inner">
         <div class="contents-container container-md">
           <div class="textset" style="text-align: center;">
-            <a class="textset-tit" style="font-size: 50px; margin: 50px;">MY PAGE - RECOMMENDATION</a>
+            <a class="textset-tit" style="font-size: 50px; font-weight: 400; margin: 50px;">MY PAGE - RECOMMENDATION</a>
             <br><br>
             <div class="date-box">
               <div class="date">

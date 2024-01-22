@@ -639,8 +639,10 @@
 					contentType:false,
 					processData:false,
 					success: (data) =>{
+						console.log(data);
 						if(data == "success"){
 							console.log(data);
+							
 						}
 					},
 					error: data => console.log(data)
@@ -648,6 +650,7 @@
 				})
 				let form = document.getElementById("attmForm");
 				form.submit();
+				alert("성공");
 		})
 				
 		const fileInputs = document.querySelectorAll('.fileset-group input[type="file"]');
@@ -676,3 +679,4 @@
 	<script src="consignment/js/script.js"></script>
 </body>
 </html>
+

@@ -44,7 +44,7 @@ tr{cursor: pointer;}
       <div class="contents-inner" style="padding: 6rem 2.4rem 10rem;">
         <div class="contents-container container-md">
           <div class="textset" style="text-align: center; margin-bottom: 1rem; margin-top: 1rem;">
-            <a class="textset-tit" style="font-size: 50px; margin: 50px;">MY PAGE - CONSIGNMENT</a>
+            <a class="textset-tit" style="font-size: 50px; font-weight: 400; margin: 50px;">MY PAGE - CONSIGNMENT</a>
             
             <br><br>
             

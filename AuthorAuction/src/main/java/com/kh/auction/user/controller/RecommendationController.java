@@ -34,22 +34,11 @@ public class RecommendationController {
 
 	@Autowired
 	private RecommendationService rService;
-	
-	//꼭지우세요
-//	@Autowired
-//	MemberService mService;
 
 	// 그림추천 리스트
 	@GetMapping("recommendationList.re")
 	public String moveToRecommendationList(HttpSession session,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) throws Exception {
-		
-//		//꼭지우세요
-//		Member m = new Member();
-//		m.setMemId("starcr222");
-//		Member a = mService.login(m);
-//		session.setAttribute("loginUser", a);
-
 		int listCount = rService.getListCount();
 		int currentPage = page;
 		ArrayList<Attachment> newAlist = new ArrayList<>();
@@ -60,16 +49,13 @@ public class RecommendationController {
 		
 		int beforeBno = 0;
 		for(int i = 0; i<aList.size(); i++) {
-			if(i > 0) {
+			if(i >= 0) {
 				if(aList.get(i).getAttBno() != beforeBno) {
-					newAlist.add(aList.get(i));				// 
+					newAlist.add(aList.get(i));		
 				}
 			}
 			beforeBno = aList.get(i).getAttBno();// 중복제거
 		}
-
-		Member loginUser = (Member) session.getAttribute("loginUser");
-		String memId = (loginUser != null) ? loginUser.getMemId() : null;
 
 		if (aList != null && rList != null) {
 			model.addAttribute("rList", rList);
@@ -334,7 +320,7 @@ public class RecommendationController {
 	    // 파일이 선택되었는지 확인
 	    if(file != null && !file.isEmpty()) {    						// 파일이 있을 경우
 	        String rename = saveFile(file);    							// 파일 저장 및 저장된 파일명을 가져와서 map에 추가
-	        System.out.println(rename);
+
 	        map.put("recNo", r.getRecNo());
 	        map.put("rename", rename);
 	        updateAttmResult = rService.updateAttmReply(map);    		// 첨부파일 업데이트

@@ -322,7 +322,6 @@
 				}
 				if(selectedFileCount < 1){
 					alert('사진을 반드시 첨부해주세요.');
-					
 				} else {
 					form.action = 'insertReply.re';
 					form.submit();
@@ -334,7 +333,7 @@
 			var replyForm2 = document.getElementById('replyForm2');
 	 		var replyForm3 = document.getElementById('replyForm3');
 			document.getElementById('updateReply').addEventListener('click', () =>{
-		console.log(456456456)
+
 				replyForm2.style.display = 'none';
 				replyForm3.style.display = 'block';
 			})
@@ -355,7 +354,6 @@
 				  });
 				
 				const imageTags = document.querySelectorAll('.contents-thumbitem.reply img.contents-thumbimg:not(.dark)').length;
-				console.log(imageTags);
 				
 				if(selectedFileCount + imageTags == 0 ){
 					alert('사진을 반드시 첨부해주세요.');

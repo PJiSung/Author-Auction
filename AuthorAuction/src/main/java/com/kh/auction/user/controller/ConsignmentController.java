@@ -188,8 +188,6 @@ public class ConsignmentController {
 	@GetMapping("searchList.co")
 	public String searchConsignment( @RequestParam(value="page", defaultValue="1") int page, SearchConsignment sc, Model model, HttpSession session) {
 		
-//		System.out.println(sc);
-		
 		// keyword : 입력한 검색어 / select : select에서 가져오는 기준
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String memId = (loginUser != null) ? loginUser.getMemId() : null;
@@ -206,9 +204,6 @@ public class ConsignmentController {
 		
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 10); 
 		ArrayList<Consignment> list = cService.searchList(map, pi);
-		
-		System.out.println(map);
-		System.out.println(list);
 		
 		if (list != null) {
 			model.addAttribute("pi", pi);
@@ -315,7 +310,6 @@ public class ConsignmentController {
 	// 글 수정(글)
 	@PostMapping("updateBoard.co")
 	public String updateBoard(Consignment c, RedirectAttributes ratt) {
-		System.out.println("rrrr");
 		int result = cService.updateConsignment(c);
 		if(result > 0) {
 			ratt.addAttribute("conNo", c.getConNo());
