@@ -767,40 +767,6 @@
 		              </li>
 		            </ul>
 		          </li>
-		          <c:if test="${ loginUser.memIsAdmin eq 'Y' }">
-			          <li class="header-gnbitem">
-			            <a class="header-gnblink" href="adminMain.adac">
-			              <span>ADMIN</span>
-			            </a>
-			            <ul class="header-sublist">
-			              <li class="header-subitem">
-			                <a class="header-sublink" href="memberList.adme">
-			                  <span>회원 관리</span>
-			                </a>
-			              </li>
-			              <li class="header-subitem">
-			                <a class="header-sublink" href="adminInquiry.adac">
-			                  <span>경매 관리</span>
-			                </a>
-			              </li>
-			              <li class="header-subitem">
-			                <a class="header-sublink" href="artsadmin.ar">
-			                  <span>미술품 관리</span>
-			                </a>
-			              </li>
-			              <li class="header-subitem">
-			                <a class="header-sublink" href="searchList.adco">
-			                  <span>위탁 관리</span>
-			                </a>
-			              </li>
-			              <li class="header-subitem">
-			                <a class="header-sublink" href="admOrderList.adod">
-			                  <span>주문 관리</span>
-			                </a>
-			              </li>
-			            </ul>
-			          </li>
-		          </c:if>
 		        </ul>
 		      </div>
 		      <div class="header-right">
@@ -825,22 +791,13 @@
 		                        <div class="userText">${ loginUser.memId }</div>
 		                     </td>
 		                  </tr>
-		                  <tr style="height: 50px;">
-		                  <!-- 
+		                  <tr>
 		                     <td class="cash">
 		                        <span>예치금</span><br>
 		                                <span onclick="location.href='';" class="cashButton">충전</span>
 		                                <span onclick="location.href='';" class="cashButton">출금</span>
 		                     </td>
-		                  	<td class="cash">
-			                  	<span>예치금</span><br>
-		                  	</td>
-		                  	-->
-		                     <td class="userText" colspan="2" style="text-align: center;">
-		                     	<span style="margin-right: 15px;">예치금</span>
-		                     	<fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원
-		                    	<span onclick="location.href='pointpayment.ar';" class="cashButton">충전</span>
-		                   	</td>
+		                     <td class="userText"><fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원</td>
 		                  </tr>
 		                  <tr>
 		                     <td><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
@@ -2025,7 +1982,6 @@ const enterSend = () =>{
 	    	            
 	    	            for (let i = 0; i < jsonResponse.SemaPsgudInfoKorInfo.row.length; i++){
 	    	                let row = jsonResponse.SemaPsgudInfoKorInfo.row[i];
-	    	                
 	    	                
 	                    	if(row.writr_nm == '${ auction.conAuthor }'){
 	    	                	if (row.prdct_cl_nm === '드로잉&판화' || row.prdct_cl_nm === '회화' || row.prdct_cl_nm === '한국화') { 
