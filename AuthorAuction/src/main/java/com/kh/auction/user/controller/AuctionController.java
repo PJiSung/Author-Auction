@@ -164,9 +164,6 @@ public class AuctionController {
 		return aService.updateInterest(hm,result);
 	}
 	
-	
-	
-	
 	@GetMapping("myBidList.ac") //내 입찰 목록을 들고 옴
 	public String moveToMyBIdList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model,
 									@RequestParam(value="aucStatus", required=false) String aucStatus,
@@ -210,9 +207,6 @@ public class AuctionController {
 		model.addAttribute("myBidList", myBidList);
 		model.addAttribute("pi", pi);
 		model.addAttribute("id", id);
-		
-		System.out.println(m.getMemId());
-		System.out.println(detailList);
 		
 		return "/auction/myAuction";
 	}
@@ -302,7 +296,6 @@ public class AuctionController {
 	        ArrayList<Auction> aList = aService.getScheduledAuction(formattedDate);
 	        model.addAttribute("aList", aList);
 	        
-	        System.out.println("null = " + aList);
 		}else {
 			LocalDate parsedDate = LocalDate.parse(date);
 			LocalDateTime specificDateTime = parsedDate.atStartOfDay();
@@ -312,7 +305,6 @@ public class AuctionController {
 			//date가 없을때 오늘 날짜를 기준으로 예정 경매를 들고옴
 	        ArrayList<Auction> aList = aService.getScheduledAuction(formattedDate);
 	        model.addAttribute("aList", aList);
-	        System.out.println("null x = " + aList);
 		}
 	        
 		return "/auction/calendar";

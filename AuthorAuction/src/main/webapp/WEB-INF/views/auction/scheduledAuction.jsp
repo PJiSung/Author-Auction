@@ -166,6 +166,7 @@
 	
 	#explain{
 		font-size: 25px;
+		font-family: inherit;
 	}
 	
 	img{
@@ -1312,7 +1313,7 @@ const enterSend = () =>{
 	<div style="width: 600px; margin-left: 15%;">
 		<div style="font-size:40px; font-weight: 1000;">작품 설명</div>
 		<br>
-		<pre id="explain">${ auction.conEtc }</pre>
+		<pre id="explain" >${ auction.conEtc }</pre>
 	</div>
 
 	

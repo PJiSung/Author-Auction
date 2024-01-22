@@ -587,7 +587,7 @@
 		      	<div><input type="text" disabled  class="modalInput"></div>
 		      	<div>사진<br><img id="picDiv" onclick="getLargePic(this);"/></div>
 		      	<div>
-		      		작품설명<br>
+		      		작품 설명<br>
 		      		<textarea disabled rows="9" cols="40" id="textBox"></textarea>
 		      	</div>
 		      	<div></div>
@@ -911,7 +911,6 @@
 	    }
 	
 		window.onload = () =>{
-			console.log(document.querySelectorAll("input"))
 			const url = window.location.href;
 			const checkAuctionPeriod = document.getElementById("checkAuctionPeriod");
 			const auction = document.querySelectorAll("div[class='auction']");

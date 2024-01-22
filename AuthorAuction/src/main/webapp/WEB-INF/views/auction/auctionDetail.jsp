@@ -1952,7 +1952,7 @@ const enterSend = () =>{
 	        	  if(window.scrollY <= 250){
 	        		contentRightCover.style.marginTop = "-8%";
 	        	  	contentRightCover.style.position = "fixed";
-	        	  }else if(window.scrollY < 250 && distanceFromBottom > 165){
+	        	  }else if(window.scrollY > 250){
 	        		contentRightCover.style.position = "fixed";
 	          	  	contentRightCover.style.marginTop = "-4.5%";
 	        	  }
