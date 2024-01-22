@@ -110,7 +110,7 @@
 		<div id="adminHeader" onclick="location.href='adminMain.adac'" style="font-family: inherit;font-weight: 1000;">골목 대장 김 로 사</div>
 	</div>
     <div style="display:flex; height:90%; width:85%; margin:auto;">
-        <aside style="width:15%;">
+        <aside style="width:15%; margin-top: 3px;">
             <input type="checkbox" id="menuIcon">
             <label for="menuIcon">
             	<span></span>
