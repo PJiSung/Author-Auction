@@ -61,6 +61,17 @@
 	margin-top: 5px;
 	font-weight: 500;
 }
+
+.headerLogoText{
+	padding: 1.2rem; 
+	justify-content:center; 
+	align-items: center; 
+	display: flex;
+    font-size: var(--fs-p1);
+    font-weight: 500;
+    color: var(--text-color5);
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
@@ -389,8 +400,9 @@ window.onpopstate = function() {
       <div class="fullmenu-wrapper">
         <div class="fullmenu-head">
           <h4 class="fullmenu-title">
-            <a href="javascript:void(0)">
-              <img src="main/images/" alt="로고">
+            <a href="/" class="headerLogoText">
+              <!-- <img src="main/icons/logoImage.png" alt="로고"> --> 
+              A_AUCTION
             </a>
           </h4>
           <ul class="fullmenu-member">
