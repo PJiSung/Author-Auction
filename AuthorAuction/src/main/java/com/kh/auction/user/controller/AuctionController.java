@@ -39,6 +39,13 @@ public class AuctionController {
 	@Autowired
 	private MemberService mService;
 	
+	// 경매안내 페이지로 이동
+	@GetMapping("auctionInfo.ac")
+	public String moveToAuctionInfo() {
+		return "auction/auctionInfo";
+	}
+	
+	
 	@GetMapping("auctionList.ac") 
 	public String moveToAuctionList(@RequestParam(value="page", defaultValue="1") int page,@RequestParam(value="sort", required=false) String sort, Model model) {
 		

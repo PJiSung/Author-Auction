@@ -165,7 +165,7 @@ window.onpopstate = function() {
                 </a>
               </li>
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
+                <a class="header-sublink" href="auctionInfo.ac">
                   <span>경매 안내</span>
                 </a>
               </li>

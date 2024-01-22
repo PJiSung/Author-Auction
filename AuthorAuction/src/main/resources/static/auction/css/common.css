@@ -1,0 +1,105 @@
+@charset "utf-8"; 
+
+/* hooms-N48 [kTLqC36ddS] */
+.hooms-N48 .contents-inner { padding: 10rem 2.4rem; }
+.hooms-N48 .textset { padding: 0; margin-top: 0; }
+.hooms-N48 .textset .textset-tit { margin-bottom: 2.4rem; text-align: center; font-size: 30px; }
+@media (max-width: 992px) {
+ .hooms-N48 .contents-inner { padding: 6rem 2.4rem; }
+ .hooms-N48 .textset .textset-tit { margin-bottom: 1.4rem; }
+}
+.btnset { width: 6rem; }
+.date-box { border: 2px solid black; width: 100%; height: 10rem; margin: auto; }
+.cancel { width: 10rem; height: 5rem; font-size: 20px; margin-right: 10rem; }
+.search { width: 10rem; height: 5rem; font-size: 20px; margin-right: 2rem; }
+.date { margin: auto; margin-top: 2.3rem; width: 100%; }
+.rec_startdate { margin-left: 5rem; margin-right: 2rem; width: 20%; }
+.rec_enddate { width: 20%; margin-right: 10rem; margin-left: 2rem; }
+.date a { font-size: 23px; margin-left: 10rem; }
+
+/* hooms-N48 [tr2cLyIIXB5] : 편집됨 */
+.cancel { margin-right: 5rem; }
+.search { margin-right: 2rem; }
+.con_startdate { margin-right: 2rem; width: 15%; }
+.con_enddate { width: 15%; }
+.date a { margin-left: 5rem; margin-right: 2rem; }
+.inputText { width: 20rem; margin-right: 5rem; }
+.con_enroll { float: right; margin-bottom: 2rem; width: 10rem; height: 5rem; background: black; color: white; }
+
+/* hooms-N48 [no2CLZNtZF5] : 편집됨 */
+.admcancel { width: 10rem; height: 5rem; font-size: 20px; }
+.admsearch { width: 10rem; height: 5rem; font-size: 20px; margin-right: 2rem; }
+.adm_startdate { margin-right: 1rem; width: 20%; }
+.adm_enddate { width: 20%; margin-right: 3rem; margin-left: 1rem; }
+.tab { font-size: 23px; margin-left: 10rem; }
+
+/* hooms-N58 [WGlQcEQ7wp] */
+.hooms-N58 { border-bottom: 1px solid var(--border-color); }
+.hooms-N58 .tabset.tabset-solid { border-bottom: 0; }
+
+/* hooms-N39 [uqLqcFv4LT] */
+.hooms-N39 .contents-inner { padding: 10rem 2.4rem; }
+.hooms-N39 .textset { margin-top: 0; margin-bottom: 10rem; }
+.hooms-N39 .tabset.tabset-brick { margin-bottom: 4rem; }
+.hooms-N39 .contents-form-top { padding: 4rem 0; border-top: 1px solid var(--line-color4); }
+.hooms-N39 .contents-form-top .contents-radioset { display: flex; align-items: center; }
+.hooms-N39 .contents-form-top .radioset+.radioset { margin-top: 0; margin-left: 4rem; }
+.hooms-N39 .contents-form-top .radioset .radioset-input+.radioset-label { width: 2.4rem; height: 2.4rem; }
+.hooms-N39 .contents-form-top .radioset .radioset-input.input-line:checked+.radioset-label::before { font-size: 2.4rem; }
+.hooms-N39 .radioset .radioset-text { font-size: var(--fs-p1); color: var(--text-color2); }
+.hooms-N39 .contents-form-middle { padding: 2rem 0; margin-top: 1rem; border-top: 1px solid black; }
+.body { padding: 2rem 0; margin-top: 1rem; border-top: 1px solid black; }
+.dfoot { padding: 2rem 0; margin-top: 1rem; border-top: 1px solid black; }
+.dbody { margin-top: 4rem; margin-bottom: 4rem; }
+.hooms-N39 .contents-form-middle .inputset { margin-bottom: 2rem; }
+.hooms-N39 .contents-form-middle .inputset+.inputset { margin-top: 0; }
+.hooms-N39 .contents-form-middle .inputset-textarea { height: 24rem; }
+.hooms-N39 .contents-form-bottom { padding: 4rem 0; }
+.hooms-N39 .checkset { margin-top: 1.2rem; }
+.hooms-N39 .checkset .checkset-input+.checkset-label { width: 2.4rem; height: 2.4rem; border-color: var(--primary); }
+.hooms-N39 .checkset .checkset-input.input-fill+.checkset-label::before { font-size: 2.4rem; }
+.hooms-N39 .checkset-text { font-size: 1.8rem; }
+.hooms-N39 .contents-sign { margin-top: 6rem; text-align: center; }
+.hooms-N39 .contents-sign .btnset { min-width: 26rem; }
+.hooms-N39 .modalset { display: flex; flex-direction: column; align-items: center; position: fixed; transition: 0.3s; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; max-width: 62rem; padding: 8rem 2rem; background-color: var(--white); visibility: hidden; opacity: 0; z-index: 999; }
+.hooms-N39 .modalset.modalset2 .modal-footer { width: 100%; max-width: 26rem; }
+.hooms-N39 .modalset.modalset2 .modal-footer .btnset { width: 100%; max-width: 100%; }
+.hooms-N39 .modalset.modalset-active { visibility: visible; opacity: 1; }
+.hooms-N39 .modal-header { margin-bottom: 1.2rem; }
+.hooms-N39 .modal-title { font-size: var(--fs-h6); font-weight: 700; text-align: center; }
+.hooms-N39 .modal-body { max-height: 26rem; overflow-y: auto; }
+.hooms-N39 .modal-body p { padding: 0 1.7rem; text-align: center; font-size: var(--fs-p1); line-height: var(--lh-p1); font-weight: 400; }
+.hooms-N39 .modal-footer { width: 100%; margin-top: 4rem; text-align: center; }
+.hooms-N39 .modal-footer .btnset { width: 100%; max-width: 17.6rem; }
+.hooms-N39 .modalset-dim { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(17, 17, 17, 0.5); z-index: 300; }
+@media (max-width: 992px) {
+ .hooms-N39 .contents-inner { padding: 6rem 2.4rem; }
+ .hooms-N39 .textset-tit { text-align: left; }
+ .hooms-N39 .textset { margin-bottom: 1.4rem; text-align: left; }
+ .hooms-N39 .tabset.tabset-brick { margin-bottom: 2.4rem; }
+ .hooms-N39 .contents-form-top .contents-radioset .radioset+.radioset { margin-left: 0; margin-top: 0.8rem; }
+ .hooms-N39 .contents-form-top .radioset .radioset-input+.radioset-label { width: 2rem; height: 2rem; }
+ .hooms-N39 .contents-form-top .radioset .radioset-input.input-line:checked+.radioset-label::before { font-size: 2rem; }
+ .hooms-N39 .contents-form-top { padding: 2.4rem 0; }
+ .hooms-N39 .contents-form-top .contents-radioset { flex-direction: column; align-items: flex-start; }
+ .hooms-N39 .contents-form-middle { padding: 1.4rem 0; }
+ .hooms-N39 .contents-form-middle .inputset { margin-bottom: 2.4rem; }
+ .hooms-N39 .contents-form-middle .inputset-textarea { height: 15.2rem; }
+ .hooms-N39 .contents-form-bottom { padding: 2.4rem 0; }
+ .hooms-N39 .checkset .checkset-input+.checkset-label { width: 2rem; height: 2rem; }
+ .hooms-N39 .checkset .checkset-input.input-fill+.checkset-label::before { font-size: 2rem; }
+ .hooms-N39 .checkset-text { font-size: 1.4rem; }
+ .hooms-N39 .contents-sign { margin-top: 4rem; }
+ .hooms-N39 .contents-sign .btnset { min-width: 23rem; height: 3.6rem; }
+ .hooms-N39 .modalset { width: calc(100% - 4.8rem); padding: 4rem 2rem; }
+ .hooms-N39 .modal-footer { width: 100%; margin-top: 2rem; }
+ .hooms-N39 .modal-footer .btnset { width: calc(100% / 2 - 0.4rem); height: 3.6rem; }
+ .hooms-N39 .modal-footer .btnset+.btnset { margin-left: 0.4rem; }
+ .fileset { margin-bottom: 20rem; }
+}
+
+/* hooms-N39 [xg2cm14RUHX] : 편집됨 */
+.hooms-N39[data-bid=xg2cm14RUHX] .contents-sign .btnset { min-width: 20rem; }
+
+/* hooms-N39 [ka2cm2jQlm2] : 편집됨 */
+.hooms-N39[data-bid=ka2cm2jQlm2] .contents-sign .btnset { min-width: 20rem; }
