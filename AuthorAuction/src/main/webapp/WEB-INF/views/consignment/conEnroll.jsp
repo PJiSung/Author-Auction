@@ -24,7 +24,7 @@
   left: 0;
   top: 50%; /* 50%로 수정 */
   width: 100%;
-  height: auto; /* height를 auto로 수정 */
+  height: 100%; /* height를 auto로 수정 */
   overflow: auto;
   background-color: rgb(0,0,0);
   background-color: rgba(0,0,0,0.4);
@@ -32,11 +32,13 @@
 }
 
 .modal-content {
+  border-radius: 0.6rem;
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 40%;
+  width: 30%;
+  height: 170px;
 }
 .close {
   color: #aaa;
@@ -53,13 +55,7 @@
 }
 </style>  
  </head>
- <script>
- window.onload = () =>{
-		document.querySelector('body').addEventListener('click', (e) =>{
-			console.log(e.target);
-		});
-	}
- </script>
+ 
 <body>
 <jsp:include page="../common/header.jsp"/>
 
@@ -194,7 +190,7 @@
 	                  
 	                  <div class="fileset fileset-lg fileset-label">
 	                    <label>
-	                      <div class="fileset-body" >
+	                      <div class="fileset-body">
 	                        <div class="fileset-group" data-order="5">
 	                          <a style="display: inline-block; width: 15%; text-align: center;">상세사진</a>
 	                          <input type="file" class="fileset-input" name="file" style="width: 83%;" name="file"  accept="image/*">
@@ -204,13 +200,12 @@
 	                      </div>
 	                    </label>
 	                  </div>
-	                  </label><a style="display: inline-block; width: 15%; text-align: center;">
-	              </a>
 	                  <br>
+	                  
 	                </div>
 	                
 	                
-	                <div class="contents-sign" onclick='javascript:event.stopPropagation()';>
+	                <div class="contents-sign">
 	                  <button type="button" class="btnset modalset-btn2" id="submitAttm" onclick="showModal()">등록하기</button>
 	                </div>
 	                
@@ -222,12 +217,12 @@
 								<div class="content-container">
 									<div class="form-wrap">
 										<div class="form-header">
-											<h3 class="form-tit">문의사항 등록</h3>
+											<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem;">문의사항 등록</h3>
 										</div>
 										<div class="form-body">
 											<p>성공적으로 문의를 등록했습니다. <br> 빠른 시간내로 답변을 드리도록 하겠습니다.</p>
 											<div class="btn-box">
-												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()">확인</a>
+												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()" style="float: right; margin-top: 1rem;">확인</a>
 											</div>
 										</div>
 									</div>
@@ -236,6 +231,8 @@
 						</main>
 					  </div>
 					</div>	                
+	              </label><a style="display: inline-block; width: 15%; text-align: center;">
+	              </a>
 	            </div><a style="display: inline-block; width: 15%; text-align: center;">
 	            </a>
 	          </div><a style="display: inline-block; width: 15%; text-align: center;">

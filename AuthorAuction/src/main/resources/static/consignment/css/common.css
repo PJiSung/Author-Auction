@@ -24,7 +24,7 @@
 .con_enddate { width: 15%; }
 .date a { margin-left: 5rem; margin-right: 2rem; }
 .inputText { width: 20rem; margin-right: 5rem; }
-.con_enroll { float: right; margin-bottom: 4rem; width: 10rem; height: 5rem; background: black; color: white; }
+.con_enroll { float: right; width: 10rem; height: 5rem; background: black; color: white; }
 
 /* hooms-N48 [no2CLZNtZF5] : 편집됨 */
 .admcancel { width: 10rem; height: 5rem; font-size: 20px; }
