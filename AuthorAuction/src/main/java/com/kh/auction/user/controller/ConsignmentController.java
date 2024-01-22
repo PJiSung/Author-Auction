@@ -113,10 +113,10 @@ public class ConsignmentController {
 	}
 
 	public String saveFile(MultipartFile upload, int i) {
-//		String root = "C:\\";
-//		String savePath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savePath = root + "\\uploadFiles";
 
-		String savePath = "/Users/kimgahyun/uploadFiles"; 				// 맥
+		//String savePath = "/Users/kimgahyun/uploadFiles"; 				// 맥
 
 		File folder = new File(savePath);
 		if (!folder.exists()) {

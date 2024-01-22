@@ -296,9 +296,9 @@
 		window.onload = () =>{
 			const sortingDetail = document.querySelectorAll("span[class='sortingDetail']")
 			if(window.location.href.includes("sort=low")){
-				sortingDetail[0].style.color = 'orange';
+				sortingDetail[0].style.fontWeight = '1000';
 			}else if(window.location.href.includes("sort=high")){
-				sortingDetail[1].style.color = 'orange';
+				sortingDetail[1].style.fontWeight = '1000';
 			}
 		}
 		
@@ -310,7 +310,7 @@
         	let url = window.location.href;
         	for(const sortBtn of document.querySelectorAll("span[class='sortingDetail']")){
         		if(sortBtn == event.target){
-        			sortBtn.style.color = 'orange';
+        			sortBtn.style.fontWeight = '1000';
         			
         			newUrl = null;
         			switch(true){
@@ -343,7 +343,7 @@
         			}
         		
         		} else{
-        			sortBtn.style.color = 'black';
+        			sortBtn.style.fontWeight = '500';
         		}
         	}
         	

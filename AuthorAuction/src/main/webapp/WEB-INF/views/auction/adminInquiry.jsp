@@ -925,9 +925,9 @@
     		})
 			
 			if(url.includes("sort=low")){
-				document.querySelectorAll("span[class='sorting']")[1].style.color = 'orange';
+				document.querySelectorAll("span[class='sorting']")[1].style.fontWeight = '1000';
 			}else if(url.includes("sort=high")){
-				document.querySelectorAll("span[class='sorting']")[0].style.color = 'orange';
+				document.querySelectorAll("span[class='sorting']")[0].style.fontWeight = '1000';
 			}
 			
 			//체크박스 컨트롤
@@ -1114,9 +1114,9 @@
 		function sortingPrice(data){
 			for(const sortBtn of document.querySelectorAll("span[class='sorting']")){
 				if(event.target == sortBtn){
-					event.target.style.color = 'orange';
+					event.target.style.fontWeight = '1000';
 				}else{
-					sortBtn.style.color = 'black';
+					sortBtn.style.fontWeight = '500';
 				}
 			}
 			

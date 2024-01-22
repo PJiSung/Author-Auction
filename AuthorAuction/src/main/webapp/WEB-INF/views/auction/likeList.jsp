@@ -360,9 +360,9 @@
 		window.onload = () =>{
 			const url = window.location.href;
 			if(url.includes("sort=low")){
-				document.querySelectorAll("span[class='price']")[1].style.color='orange';
+				document.querySelectorAll("span[class='price']")[1].style.fontWeight = '1000';;
 			}else if(url.includes("sort=high")){
-				document.querySelectorAll("span[class='price']")[0].style.color='orange';
+				document.querySelectorAll("span[class='price']")[0].style.fontWeight = '1000';;
 			}
 			
 			switch(true){
@@ -394,14 +394,6 @@
 					seeWhich[i].style.background = 'lightgray'
 				}
 			}
-			
-			/* for(const change of seeWhich){
-				if(change[data]){
-					change[data].style.background = 'gray'
-				}else{
-					change.style.background = 'lightgray'
-				}
-			} */
 			
 		}
 		
@@ -472,7 +464,7 @@
 		const chooseAuction = (data) =>{
 		
 			for(const priceBtn of document.querySelectorAll("span[class='price']")){
-				priceBtn.style.color = 'black';
+				priceBtn.style.fontWeight = '500';
 			}
 			const url = window.location.href;
 			
@@ -549,9 +541,9 @@
 			refreshData();
 			for(const sortBtn of document.querySelectorAll("span[class='price']")){
 				if(sortBtn == event.target){
-					sortBtn.style.color = 'orange';
+					sortBtn.style.fontWeight = '1000';
 				}else{
-					sortBtn.style.color = 'black';
+					sortBtn.style.fontWeight = '500';
 				}
 			}	    
 		}

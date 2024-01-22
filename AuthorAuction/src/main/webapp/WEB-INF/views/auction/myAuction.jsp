@@ -289,9 +289,9 @@
 		window.onload = () =>{
 			const url = window.location.href;
 			if(url.includes("sort=low")){
-				document.querySelectorAll("span[class='price']")[1].style.color='orange';
+				document.querySelectorAll("span[class='price']")[1].style.fontWeight = '1000';
 			}else if(url.includes("sort=high")){
-				document.querySelectorAll("span[class='price']")[0].style.color='orange';
+				document.querySelectorAll("span[class='price']")[0].style.fontWeight = '1000';
 			}
 			
 			switch(true){
@@ -335,10 +335,9 @@
 			}
 			
 			for(const priceBtn of document.querySelectorAll("span[class='price']")){
-				priceBtn.style.color = 'black';
+				priceBtn.style.fontWeight = '500';
 			}
         }
-        
         
         function refresh(){
         	$("#forLoad").load(location.href + " #forLoad");
@@ -405,9 +404,9 @@
         	
         	for(const priceBtn of document.querySelectorAll("span[class='price']")){
         		if(event.target == priceBtn){
-        			priceBtn.style.color = 'orange';
+        			priceBtn.style.fontWeight = '1000';
         		}else{
-        			priceBtn.style.color = 'black';
+        			priceBtn.style.fontWeight = '500';
         		}
         	}
         }
