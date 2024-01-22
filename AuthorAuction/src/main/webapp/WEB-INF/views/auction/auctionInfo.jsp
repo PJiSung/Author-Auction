@@ -10,21 +10,28 @@
   <link rel="stylesheet" href="auction/css/template.css">
   <link rel="stylesheet" href="auction/css/common.css">
   <link rel="stylesheet" href="auction/css/style.css">
+<style>
+.hooms-N42 .contents-inner {
+    padding: 4rem 2.4rem;
+}
+</style>  
 </head>
 
 <body>
+<jsp:include page="../common/header.jsp"/>
   <main class="th-layout-main ">
-    <!-- [S]hooms-N24 -->
     <div class="hooms-N24" data-bid="gFlqG63e38">
       <div class="contents-container container-md">
         <div class="textset">
-          <h2 class="h2">중 제목 H2</h2>
+          <h2 class="h2" style="margin-bottom: 5rem;">경매 안내</h2>
+          <div style="color: #767676;">
+	      어서 옥션이 국내 최초로 시작한 온라인 경매는 폭넓은 작가군과 합리적인 가격의 작품을 선보입니다.<br>
+	      미술품과 더불어 명품 및 주얼리, 오디오, 디자인가구, 피규어 등 누구나 쉽게 경매에 참여할 수 있는 라이프스타일 아이템을 선보입니다.
+	      </div>
         </div>
       </div>
-      <br><br><br><br>
-    </div>
-    <!-- [E]hooms-N24 -->
-    <!-- [S]hooms-N58 -->
+      </div>
+
     <div class="hooms-N58" data-bid="brlqg6jlsc">
       <div class="contents-container container-md">
         <div class="tabset tabset-solid">
@@ -41,7 +48,8 @@
             </li>
             <li class="tabset-item">
               <a class="tabset-link" href="javascript:void(0)">
-                <span>STEP 3. 응찰방법/span&gt; </span></a>
+                <span>STEP 3. 응찰방법</span>
+              </a>
             </li>
             <li class="tabset-item">
               <a class="tabset-link" href="javascript:void(0)">
@@ -57,26 +65,30 @@
         </div>
       </div>
     </div>
-    <!-- [E]hooms-N58 -->
-    <!-- [S]hooms-N42 -->
+
     <div class="hooms-N42" data-bid="VWlqg6q14D">
       <div>
         <div class="contents-inner">
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
-                <h3 class="h3">STEP 1 회원가입</h3>
+                <h4 class="h4">STEP 1 회원가입</h4>
                 <br>
-                <p class="contents-desc"> 서울옥션 미술품 온라인 경매는 별도의 가입비 없이 홈페이지에서 회원 가입 후 경매 전 인증을 마치면 누구나 참여 가능합니다. </p>
-                <p class="contents-desc"> 단, 오프라인 미술품 경매는 정회원(유료 회원)에 가입한 회원에 한해 응찰에 참여하실 수 있습니다. </p>
+                <p style="font-size: 1.8rem; margin-bottom: 5px;"> 어서옥션 미술품 온라인 경매는 별도의 가입비 없이 홈페이지에서 회원 가입 후 경매 전 인증을 마치면 누구나 참여 가능합니다. </p>
+                <p style="font-size: 1.8rem;"> 단, 오프라인 미술품 경매는 정회원(유료 회원)에 가입한 회원에 한해 응찰에 참여하실 수 있습니다. </p>
+                <br><br>
+                <img class="img" src="auction/images/ICon.png" style="width: 20px; height: 20px; inline-block">어서옥션 홈페이지 회원 가입 절차에 따라 작성을 완료해 주시기 바랍니다.
               </li>
-              <div style="border: 1px solid black; margin-top: 3rem; margin-bottom: 3rem; padding: 3rem 3rem 3rem;">
+              <br>
+              <div style="border: 1px solid black;">
                 <li class="contents-item">
-                  <img class="img" src="../resources/images/image.png" alt="이미지">
+                  <img class="img" src="auction/images/tab1.png" alt="이미지" style=" height: 250px;">
                 </li>
                 <div>
-                  <a href="javascript:void(0)" class="btnset btnset-lg">확인</a>
-                  <a href="javascript:void(0)" class="btnset btnset-lg">확인</a>
+                	<div style="text-align: center; margin-bottom: 3rem;">
+	                  <a href="authenticationView" class="btnset btnset-lg" style="min-width: 12rem; padding: 0 2rem;">회원가입</a>
+	                  <a href="auctionList.ac" class="btnset btnset-lg" style="min-width: 12rem; padding: 0 2rem;">경매 계획</a>
+                	</div>
                 </div>
               </div>
             </ul>
@@ -86,13 +98,14 @@
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
-                <h3 class="h3">STEP 2 프리뷰</h3>
+                <h4 class="h4">STEP 2 프리뷰</h4>
                 <br>
                 <p class="contents-desc"> 프리뷰는 경매에 출품된 모든 작품을 감상하고 상태를 확인할 수 있는 전시회입니다. </p>
                 <p class="contents-desc"> 프리뷰 관람은 경매 응찰과 관계없이 누구나 무료로 관람이 가능합니다. </p>
                 <p class="contents-desc"> 프리뷰 전시장에서 스페셜리스트에게 요청하시면 경매 작품에 대한 안내를 받으실 수 있습니다. </p>
                 <p class="contents-desc"> 프리뷰 일정은 문자, SNS, 홈페이지, 도록(초대장) 등을 통해 공지 됩니다. </p>
-                <br> 이미지 들어가야함
+                <br><br>
+                <img class="img" src="auction/images/tab2.png" alt="이미지" style="border: 1px solid black; padding: 3rem; ">
               </li>
             </ul>
           </div>
@@ -107,7 +120,12 @@
                 <p class="contents-desc"> 경매 마감시간 30초 전에 응찰이 있을 경우, 자동으로 30초 연장 됩니다. </p>
                 <p class="contents-desc"> 온라인 경매 회차에 따라 위 마감 시간이 다를 수 있습니다. </p>
                 <p class="contents-desc"> 동의 절차를 거친 뒤 온라인 응찰을 진행하실 수 있습니다. </p>
-                <br> 이미지 들어가야함<br><br> 다음과 같이 온라인 경매 응찰 금액대별 호가단위가 자동 변경됩니다.<br> 이는 2019년 11월 1일자 기준, 온라인 상에서 진행되는 모든 경매부터 적용됩니다.<br><br> 호가표 들어가야함
+                <br>
+				<img class="img" src="auction/images/ICon.png" style="width: 20px; height: 20px; inline-block"> 온라인 경매 전, 익스플로러를 사용 하시는 경우 설정을 확인해 주시기 바랍니다.
+				<br><br> 다음과 같이 온라인 경매 응찰 금액대별 호가단위가 자동 변경됩니다.<br> 
+				이는 2019년 11월 1일자 기준, 온라인 상에서 진행되는 모든 경매부터 적용됩니다.<br><br>
+				<img class="img" src="auction/images/list.png" style="width: 50%;">
+
               </li>
             </ul>
           </div>
@@ -149,6 +167,7 @@
     </div>
     <!-- [E]hooms-N42 -->
   </main>
+<jsp:include page="../common/footer.jsp"/>  
   <script src="auction/js/setting.js"></script>
   <script src="auction/js/plugin.js"></script>
   <script src="auction/js/template.js"></script>
