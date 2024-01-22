@@ -23,9 +23,6 @@
 	type="text/javascript"></script>
 <style type="text/css">
 
-	body{
-		background: rgba(240, 240, 240, 1);
-	}
 	table {
 		width: 100%;
 	}
@@ -250,6 +247,7 @@
 	<div style="width: 70%; margin-left:15%; background:white; padding:2% 0 1.5% 0;">
 		<form action="search.adac" method="get">
 			<div id="coverAll">
+				<h1 style="text-align: center; font-size: 80px; margin-bottom: 8%;">Admin - Auction</h1>
 				<div id="searchBox">
 					<div id="checkBoxAll">
 						<input type="checkBox" id="all"><label for="all">전체</label>
