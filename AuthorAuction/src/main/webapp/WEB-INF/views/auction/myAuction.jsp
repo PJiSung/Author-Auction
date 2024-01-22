@@ -47,7 +47,7 @@
 	}
 	
 	.infoCover{
-		background: lightgray;
+		background: #f0f0f0;
 	}
 	
 	.seeWhich{
@@ -81,9 +81,9 @@
 					경매 목록</div>
 				<div id="btnPlace" style="width: 100%;">
 					<div class="seeWhich" style="background: gray;" onclick="auctions('all');">전체 보기</div>
-					<div class="seeWhich" style="background: lightgray;" onclick="auctions('ongoing');">진행 경매</div>
-					<div class="seeWhich" style="background: lightgray;" onclick="auctions('end');">종료 경매</div>
-					<div class="seeWhich" style="background: lightgray;" onclick="auctions('successBid');">낙찰 경매</div>
+					<div class="seeWhich" style="background: #f0f0f0;" onclick="auctions('ongoing');">진행 경매</div>
+					<div class="seeWhich" style="background: #f0f0f0;" onclick="auctions('end');">종료 경매</div>
+					<div class="seeWhich" style="background: #f0f0f0;" onclick="auctions('successBid');">낙찰 경매</div>
 					<span class="price" style="float:right; margin-left:1%;" onclick="sortingPrice('high');">금액 높은순</span>
 					<span class="price" style="float:right;" onclick="sortingPrice('low');">금액 낮은순</span>
 				</div>
@@ -296,23 +296,43 @@
 			
 			switch(true){
 			case url.includes("aucStatus=all"):
+				changeSee(0);
 				break;
 			case url.includes("aucStatus=ongoing"):
+				changeSee(1);
 				break;
 			case url.includes("aucStatus=end"):
+				changeSee(2);
 				break;
 			case url.includes("aucStatus=successBid"):
+				changeSee(3);
 				break;
-			
+			default:
+				changeSee(0);
+				break;
 			}
 		}
+		
+		
+		function changeSee(data) {
+			const seeWhich = document.querySelectorAll("div[class='seeWhich']");
+			seeWhich[data].style.background = 'gray'
+			
+			for (let i = 0; i < seeWhich.length; i++){
+				if(seeWhich[i] != seeWhich[data]){
+					seeWhich[i].style.background = '#f0f0f0'
+				}
+			}
+			
+		}
+		
 		
 		function reloadSearch(data){
 			for(let i = 0; i < document.querySelectorAll("div[class='seeWhich']").length; i++){
 				if(i == data){
 					document.querySelectorAll("div[class='seeWhich']")[i].style.background = 'gray';
 				}else{
-					document.querySelectorAll("div[class='seeWhich']")[i].style.background = 'lightgray';
+					document.querySelectorAll("div[class='seeWhich']")[i].style.background = '#f0f0f0';
 				}
 			}
 		}
@@ -329,7 +349,7 @@
 
                    for(let b of document.getElementsByClassName('seeWhich')){
                    	if(b != clickedElement) {
-                       	b.style.background = 'lightgray';
+                       	b.style.background = '#f0f0f0';
 					}
 				}
 			}

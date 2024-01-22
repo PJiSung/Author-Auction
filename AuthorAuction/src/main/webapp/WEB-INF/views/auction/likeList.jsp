@@ -32,7 +32,7 @@
 		text-align: center;
 		border-top: 1px black solid;
 		border-bottom: 1px black solid;
-		background: lightgray;
+		background: #f0f0f0;
 		font-weight: 800;
 	}
 	
@@ -139,16 +139,16 @@
 					경매 목록</div>
 				<div id="btnPlace" style="width: 100%;">
 					<div class="seeWhich"
-						style="background: gray;"
+						style="background: #f0f0f0;"
 						onclick="chooseAuction('all');">전체 보기</div>
 					<div class="seeWhich"
-						style="background: lightgray"
+						style="background: #f0f0f0"
 						id="scheduled" onclick="chooseAuction('scheduled');">예정 경매</div>
 					<div class="seeWhich"
-						style="background: lightgray;"
+						style="background: #f0f0f0;"
 						id="ongoing" onclick="chooseAuction('ongoing');">진행 경매</div>
 					<div class="seeWhich"
-						style="background: lightgray;"
+						style="background: #f0f0f0;"
 						id="end" onclick="chooseAuction('end');">종료 경매</div>
 					<span class="price" style="float:right; margin-left:1%;" onclick="sortPrice('high');">금액 높은순</span>
 					<span class="price" style="float:right;" onclick="sortPrice('low');">금액 낮은순</span>
@@ -391,7 +391,7 @@
 			
 			for (let i = 0; i < seeWhich.length; i++){
 				if(seeWhich[i] != seeWhich[data]){
-					seeWhich[i].style.background = 'lightgray'
+					seeWhich[i].style.background = '#f0f0f0'
 				}
 			}
 			
@@ -494,7 +494,7 @@
 
                     for(let b of document.getElementsByClassName('seeWhich')){
                     	if(b != clickedElement) {
-                        	b.style.background = 'lightgray';
+                        	b.style.background = '#f0f0f0';
 						}
 					}
 				}
