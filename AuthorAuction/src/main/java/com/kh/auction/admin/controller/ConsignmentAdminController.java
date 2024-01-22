@@ -107,10 +107,10 @@ public class ConsignmentAdminController {
 	@PostMapping("updateConConStatus.adco")
 	@ResponseBody
 	public String updateConConStatus(@RequestParam("conNo") int conNo, @RequestParam("value") String value) {
+		System.out.println(conNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("value", value);
 		map.put("conNo", conNo);
-		
 		int result = cService.updateConConStatus(map);
 		if(result > 0) {
 			return "success";

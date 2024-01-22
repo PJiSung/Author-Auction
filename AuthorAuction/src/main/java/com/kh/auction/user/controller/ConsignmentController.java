@@ -113,10 +113,10 @@ public class ConsignmentController {
 	}
 
 	public String saveFile(MultipartFile upload, int i) {
-//		String root = "C:\\";
-//		String savePath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savePath = root + "\\uploadFiles";
 
-		String savePath = "/Users/kimgahyun/uploadFiles"; 				// 맥
+//		String savePath = "/Users/kimgahyun/uploadFiles"; 				// 맥
 
 		File folder = new File(savePath);
 		if (!folder.exists()) {
@@ -134,9 +134,9 @@ public class ConsignmentController {
 		String renameFileName = sdf.format(time) + ranNum + newName.substring(originFileName.lastIndexOf("."));
 
 		// rename된 파일 저장소에 저장
-//		String renamePath = folder + "\\" + renameFileName; // 이름 변경
+		String renamePath = folder + "\\" + renameFileName; // 이름 변경
 
-		String renamePath = folder + File.separator + renameFileName;	// 맥
+//		String renamePath = folder + File.separator + renameFileName;	// 맥
 
 		try {
 			upload.transferTo(new File(renamePath));
@@ -150,12 +150,12 @@ public class ConsignmentController {
 	}
 
 	public void deleteFile(String fileName) {
-//		String root = "C:\\";
-//		String savePath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savePath = root + "\\uploadFiles";
 		
-		String savePath = "/Users/kimgahyun/uploadFiles";				// 맥
-		File f = new File(savePath + File.separator + fileName);		// 맥
-//		File f = new File(savePath + "\\" + fileName.split("localhost/")[1]);
+//		String savePath = "/Users/kimgahyun/uploadFiles";				// 맥
+//		File f = new File(savePath + File.separator + fileName);		// 맥
+		File f = new File(savePath + "\\" + fileName.split("localhost/")[1]);
 		if (f.exists()) {
 			f.delete();
 		}

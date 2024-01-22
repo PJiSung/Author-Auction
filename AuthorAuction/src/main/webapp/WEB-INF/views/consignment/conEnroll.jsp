@@ -53,7 +53,13 @@
 }
 </style>  
  </head>
- 
+ <script>
+ window.onload = () =>{
+		document.querySelector('body').addEventListener('click', (e) =>{
+			console.log(e.target);
+		});
+	}
+ </script>
 <body>
 <jsp:include page="../common/header.jsp"/>
 
@@ -188,7 +194,7 @@
 	                  
 	                  <div class="fileset fileset-lg fileset-label">
 	                    <label>
-	                      <div class="fileset-body">
+	                      <div class="fileset-body" >
 	                        <div class="fileset-group" data-order="5">
 	                          <a style="display: inline-block; width: 15%; text-align: center;">상세사진</a>
 	                          <input type="file" class="fileset-input" name="file" style="width: 83%;" name="file"  accept="image/*">
@@ -198,12 +204,13 @@
 	                      </div>
 	                    </label>
 	                  </div>
+	                  </label><a style="display: inline-block; width: 15%; text-align: center;">
+	              </a>
 	                  <br>
-	                  
 	                </div>
 	                
 	                
-	                <div class="contents-sign">
+	                <div class="contents-sign" onclick='javascript:event.stopPropagation()';>
 	                  <button type="button" class="btnset modalset-btn2" id="submitAttm" onclick="showModal()">등록하기</button>
 	                </div>
 	                
@@ -229,8 +236,6 @@
 						</main>
 					  </div>
 					</div>	                
-	              </label><a style="display: inline-block; width: 15%; text-align: center;">
-	              </a>
 	            </div><a style="display: inline-block; width: 15%; text-align: center;">
 	            </a>
 	          </div><a style="display: inline-block; width: 15%; text-align: center;">
