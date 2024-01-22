@@ -360,8 +360,6 @@
 			
 			if(selectedFileCount + imageTags == 0 ){
 				alert('사진을 반드시 첨부해주세요.');
-			} else if(selectedFileCount + imageTags > 1) {
-				alert('사진은 1장만 첨부가능합니다.');
 			} else {
 				attmForm.submit();
 			}

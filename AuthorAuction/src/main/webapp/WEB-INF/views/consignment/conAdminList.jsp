@@ -669,7 +669,7 @@ table tr {
 		$.ajax ({
 			url: 'updateConConStatus.adco',
 			type: 'post',
-			data: {conNo: /*document.getElementById('conNo').value*/conNo, value: 'D'},
+			data: {conNo: /*document.getElementById('conNo').value*/conNo, value: 'Z'},
 			success: (data) =>{
 				console.log(data)
 				if(data === "success"){
