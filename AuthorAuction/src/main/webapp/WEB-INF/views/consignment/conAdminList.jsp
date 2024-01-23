@@ -35,7 +35,7 @@ table {
 }
 
 th {
-	
+	text-align: center;
 }
 
 button{
@@ -793,7 +793,7 @@ table tr {
 	<jsp:include page="../common/adminHeadSide.jsp"/>
 	<!-- 경매 등록 모달 -->
 	<!--  -->
-	<div class="modal_overlay" style="display: block; z-index: 1; height: 150%;">
+	<div class="modal_overlay" style="display: none; z-index: 1; height: 150%;">
 		<div id="content-allOver-cover" style="width: 80%; height: 100%; position: fixed; z-index: 1; left:25%; top:5%;">
 		
 			<div id="forWidthAndHeight" style="width: 50%; height: 90%; background-color: white;">
