@@ -157,8 +157,8 @@ public class RecommendationController {
 		String renameFileName = sdf.format(time) + ranNum + originFileName.substring(originFileName.lastIndexOf("."));
 
 		// rename된 파일 저장소에 저장
-//		String renamePath = folder + "\\" + renameFileName; // 이름 변경
-		String renamePath = folder + File.separator + renameFileName;	// 맥
+		String renamePath = folder + "\\" + renameFileName; // 이름 변경
+//		String renamePath = folder + File.separator + renameFileName;	// 맥
 
 		try {
 			upload.transferTo(new File(renamePath));

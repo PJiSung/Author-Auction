@@ -39,7 +39,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 30%;
-  height: 170px;
+  height: 200px;
 }
 .close {
   color: #aaa;
@@ -47,12 +47,18 @@
   font-size: 28px;
   font-weight: bold;
 }
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+ .btnset2 {
+  width: 20%;
+  min-width: 3rem;
+  border-radius: 0.6rem;
+  height: 4rem;
+  font-weight: 500;
+  color: white;
+  background-color: black;
+  line-height: 4rem;
+}
+ .btnset2:hover{
+  color:white;
 }
 </style>  
  </head>
@@ -222,8 +228,8 @@
 										</div>
 										<div class="form-body">
 											<p>성공적으로 문의를 등록했습니다. <br> 빠른 시간내로 답변을 드리도록 하겠습니다.</p>
-											<div class="btn-box">
-												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()" style="float: right; margin-top: 1rem;">확인</a>
+											<div class="btn-box" style="text-align: center;">
+												<a class="btnset2 btnset-lg btnset-rect" href="javascript:void(0)" id="submitBtn" onclick="submitBtn()" style="text-align: center; margin-top: 1rem; margin-bottom: 2rem;">확인</a>
 											</div>
 										</div>
 									</div>
