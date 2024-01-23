@@ -219,7 +219,7 @@ window.onpopstate = function() {
                 </a>
               </li>
               <li class="header-subitem">
-                <a class="header-sublink" href="javascript:void(0)">
+                <a class="header-sublink" href="auctionInfo.ac">
                   <span>경매 안내</span>
                 </a>
               </li>
@@ -570,7 +570,7 @@ window.onpopstate = function() {
                 <img class="contents-backimg img-pc" src="main/mainPic/mSlide3.jpeg" alt="PC 비주얼 이미지">
                 <div class="contents-slide-group" style="left:10rem;">
                   <div class="textset textset-visual">
-                    <h3 class="textset-tit"> INVITATION <br> TO CONSIGN </h3>
+                    <h3 class="textset-tit"> INVITATION <br> TO CONSIGNMENT </h3>
                     <p class="textset-desc"> 당신의 소중한 작품,  AUTHOR AUCTION이 그 가치를 높여드립니다. <br> 위탁안내 | art@aauction.co.kr</p>
                   </div>
                   <a class="btnset btnset-line btnset-round" href="javascript:void(0)">자세히보기</a>
