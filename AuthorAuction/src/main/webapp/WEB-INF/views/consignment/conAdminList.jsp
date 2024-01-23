@@ -26,7 +26,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <style type="text/css">
-.con_startdate, .con_enddate, .pagiset-line, .select, .tabset-item, .input-fill {cursor:pointer;}
+.con_startdate, .con_enddate, .pagiset-line, #select, .tabset-item, .input-fill {cursor:pointer;}
 .tableset tr:hover{
    background: #dcdcdc;
    cursor: pointer;
@@ -965,7 +965,7 @@ table tr {
 									</span> 
 									<span> 
 										<a>검색어</a> 
-										<select style="width: 5%; border-radius :0.6rem; border: 1px solid lightgray; height: 5rem;" name="select">
+										<select style="width: 5%; border-radius :0.6rem; border: 1px solid lightgray; height: 5rem;" name="select" id="select">
 											<option value="전체">전체</option>
 											<option value="작가명">작가명</option>
 											<option value="작품명">작품명</option>
