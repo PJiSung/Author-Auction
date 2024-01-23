@@ -276,34 +276,36 @@
 		              </thead>
 		              <tbody>
 		                <c:forEach items="${ list }" var="o">
-	                		<input type="hidden" value="${ o.ordNo }" name="ordNo">
-			                <tr class="orderTableTr" onclick="selectOrderDetail(event, this)">
-			                  <td class="tableset-mobile">
-			                  	${ o.ordNo }
-			                  	<input type="hidden" value="${ o.proNo }" id="proNo">
-			                  </td>
-			                  <td class="tableset-proImg">
-			                  	<c:forEach items="${ aList }" var="a">
-	         						<c:if test="${a.attBno == o.proNo && a.attCategory == 4 && a.attFno == 1}">
-	            						<img alt="상품" src="${ a.attRename }">
-	         						</c:if>
-	         					</c:forEach>
-							  </td>
-			                  <td class="tableset-author">${ o.proName }</td>
-			                  <td class="tableset-order04">${ o.proWriter }</td>
-			                  <td class="tableset-order05"><fmt:formatNumber value="${ o.proPrice }" pattern="#,###" /></td>
-			                  <c:if test="${ o.ordAnother > 0 }">
-				                  <td class="tableset">외 ${ o.ordAnother }개</td>
-			                  </c:if>
-			                  <c:if test="${ o.ordAnother == 0 }">
-				                  <td class="tableset"></td>
-			                  </c:if>
-			                  <td class="tableset-order05">${ fn:split(o.ordDate, ' ')[0] }</td>
-			                  <td class="tableset-progress">${ o.ordStatus }</td>
-			                  <td class="tableset-cancel" onclick="notGoDetail(event)">
-			                  	<input type="hidden" value="${ o.ordDate }" id="orderTableHidden">
-			                  </td>
-			                </tr>
+		                	<form id="cancelOrderForm">
+		                		<input type="hidden" value="${ o.ordNo }" name="ordNo">
+				                <tr class="orderTableTr" onclick="selectOrderDetail(event, this)">
+				                  <td class="tableset-mobile">
+				                  	${ o.ordNo }
+				                  	<input type="hidden" value="${ o.proNo }" id="proNo">
+				                  </td>
+				                  <td class="tableset-proImg">
+				                  	<c:forEach items="${ aList }" var="a">
+		         						<c:if test="${a.attBno == o.proNo && a.attCategory == 4 && a.attFno == 1}">
+		            						<img alt="상품" src="${ a.attRename }">
+		         						</c:if>
+		         					</c:forEach>
+								  </td>
+				                  <td class="tableset-author">${ o.proName }</td>
+				                  <td class="tableset-order04">${ o.proWriter }</td>
+				                  <td class="tableset-order05"><fmt:formatNumber value="${ o.proPrice }" pattern="#,###" /></td>
+				                  <c:if test="${ o.ordAnother > 0 }">
+					                  <td class="tableset">외 ${ o.ordAnother }개</td>
+				                  </c:if>
+				                  <c:if test="${ o.ordAnother == 0 }">
+					                  <td class="tableset"></td>
+				                  </c:if>
+				                  <td class="tableset-order05">${ fn:split(o.ordDate, ' ')[0] }</td>
+				                  <td class="tableset-progress">${ o.ordStatus }</td>
+				                  <td class="tableset-cancel" onclick="notGoDetail(event)">
+				                  	<input type="hidden" value="${ o.ordDate }" id="orderTableHidden">
+				                  </td>
+				                </tr>
+		                	</form>
 		                </c:forEach>
 		              </tbody>
 		            </table>
@@ -459,7 +461,7 @@ const cancelOrder = () =>{
 }
 
 document.getElementById('canConfirmButton').addEventListener('click', ()=>{
-	const form = document.getElementById('myOrderListForm');
+	const form = document.getElementById('cancelOrderForm');
 	form.action = "cancelOrder.od";
 	form.method = 'post';
 	form.submit();
