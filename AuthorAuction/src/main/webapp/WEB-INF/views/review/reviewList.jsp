@@ -313,7 +313,6 @@ body.modal-open {
 	overflow: hidden;
  }
  
-
 .modal {
 	display: none;
 	position: fixed;
@@ -321,7 +320,6 @@ body.modal-open {
 	left: 0;
 	top: 50%;
 	width: 100%;
-	height: 100%;
 	overflow: auto;
 	background-color: rgb(0, 0, 0);
 	background-color: rgba(0, 0, 0, 0.4);
@@ -369,7 +367,6 @@ body.modal-open {
 #contentsRightId {
 	overflow: auto;
 	height: 670px;
-	
 }
 
 #contentsRightId {
@@ -436,7 +433,24 @@ body.modal-open {
 }
 
 
+.reviewDetail .contents-thumblist::-webkit-scrollbar {
+    width: 5px;
+    height: 12px;
+}
+
+.reviewDetail .contents-thumblist::-webkit-scrollbar-thumb {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px;
+    background-clip: padding-box;
+}
+
+.reviewDetail .contents-thumblist::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+
 </style>
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
@@ -1050,7 +1064,10 @@ const showModal = (value) =>{
    $("#reviewDetail").load(location.href + " #reviewDetail");
    
    let modal = document.getElementById('myModal');
+   const body = document.body;
+   
    modal.style.display = 'block';
+   body.style.overflow = 'hidden';
 }
 
 const closeModal = (value) =>{
@@ -1064,8 +1081,10 @@ const closeModal = (value) =>{
       url = url.replace("&revNo="+revNo, "");
    }
    window.history.pushState({}, "Title", url);
+   const body = document.body;
    
    modal.style.display = 'none';
+   body.style.overflow = 'auto';
 };
 
 //삭제 모달

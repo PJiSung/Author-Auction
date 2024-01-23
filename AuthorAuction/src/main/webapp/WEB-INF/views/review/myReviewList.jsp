@@ -388,6 +388,21 @@ body.modal-open {
 	border-radius: 0.6rem
 }
 
+.reviewDetail .contents-thumblist::-webkit-scrollbar {
+    width: 5px;
+    height: 12px;
+}
+
+.reviewDetail .contents-thumblist::-webkit-scrollbar-thumb {
+    background-color: rgb(0,0,0,0.1);
+    border-radius: 10px;
+    background-clip: padding-box;
+}
+
+.reviewDetail .contents-thumblist::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
 </style>
 </head>
 <body>
@@ -1298,7 +1313,9 @@ const showModal = (value) =>{
 	$("#reviewDetail").load(location.href + " #reviewDetail");
 	
 	let modal = document.getElementById('myModal');
+	const body = document.body;
 	modal.style.display = 'block';
+	body.style.overflow = 'hidden';
 }
 
 const closeModal = (value) =>{
@@ -1312,8 +1329,10 @@ const closeModal = (value) =>{
 		url = url.replace("&revNo="+revNo, "");
 	}
 	window.history.pushState({}, "Title", url);
+	const body = document.body;
    
-   modal.style.display = 'none';
+	modal.style.display = 'none';
+	body.style.overflow = 'auto';
 };
 
 //삭제 모달
