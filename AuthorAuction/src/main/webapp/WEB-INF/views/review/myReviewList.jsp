@@ -403,6 +403,10 @@ body.modal-open {
     border-radius: 10px;
 }
 
+#repContent{
+	padding: 3%;
+}
+
 </style>
 </head>
 <body>

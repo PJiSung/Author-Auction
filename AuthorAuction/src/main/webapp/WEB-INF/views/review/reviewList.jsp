@@ -448,6 +448,9 @@ body.modal-open {
     border-radius: 10px;
 }
 
+#repContent{
+	padding: 3%;
+}
 
 </style>
 
@@ -1297,6 +1300,20 @@ const goAnotherReview = (value) =>{
 	   window.history.pushState({}, "Title", url);
 	   
 	   $("#reviewDetail").load(location.href + " #reviewDetail", function() {
+		   
+		   const memId = document.querySelector('#reviewMemId').value;
+		   if( '${loginUser.memId}' != memId ){
+		      $.ajax({
+		         url: 'updateReviewCount.rv',
+		         data:{revNo: revNo},
+		         success: data =>{
+		            const count = document.querySelector('#reviewCount');
+		            count.innerText = "조회수 " + data;
+		         },
+		         error: data => console.log(data)
+		      })
+		   };
+		   
            const reviewImgUl = document.getElementById('reviewImgUl');
            const selectImagDiv = document.getElementById('selectImagDiv');
 
