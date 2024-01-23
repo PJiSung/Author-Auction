@@ -542,13 +542,11 @@
 		    const modal = document.getElementById('myModal');
 		    modal.style.display = 'block';
 		};
-		/*
 		// 수정 모달
 		const showModal2 = () => {
 		    const modal = document.getElementById('myModal2');
 		    modal.style.display = 'block';
 		};
-		*/
 		const closeModal = () => {
 			const modal = document.getElementById('myModal');
 		    modal.style.display = 'none';
@@ -559,14 +557,12 @@
 			attmForm.action='delete.co';
 			attmForm.submit();
 		}
-		/*
 		// 수정완료
 		const submitBtn2 = () =>{
 			const attmForm = document.getElementById('attmForm');
 			attmForm.action='delete.co';
 			attmForm.submit();
 		}
-		*/
 		window.onload = () => {
 	        // 등록된 이미지 클릭 방지
  			const delAttms = document.getElementsByClassName('contents-thumbimg');

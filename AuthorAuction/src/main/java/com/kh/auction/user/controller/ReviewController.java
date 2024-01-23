@@ -174,10 +174,10 @@ public class ReviewController {
 	}
 	
 	public String saveFile(MultipartFile upload) {
-//		String root = "C:\\";
-//		String savaPath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savaPath = root + "\\uploadFiles";
 		
-		String savaPath = "/Users/rosa/uploadFiles"; 
+//		String savaPath = "/Users/rosa/uploadFiles"; 
 		
 		
 		File folder = new File(savaPath);
@@ -192,8 +192,8 @@ public class ReviewController {
 		String originFileName = upload.getOriginalFilename(); 
 		String renameFileName = sdf.format(time) + ranNum + originFileName.substring(originFileName.lastIndexOf("."));
 																	
-//		String renamePath = folder + "\\" + renameFileName;
-		String renamePath = folder + File.separator + renameFileName;
+		String renamePath = folder + "\\" + renameFileName;
+//		String renamePath = folder + File.separator + renameFileName;
 		try {
 			upload.transferTo(new File(renamePath));
 		} catch (IllegalStateException e) {
@@ -206,13 +206,13 @@ public class ReviewController {
 	}
 	
 	public void deleteFile(String fileName) {
-//		String root = "C:\\";
-//		String savaPath = root + "\\uploadFiles";
+		String root = "C:\\";
+		String savaPath = root + "\\uploadFiles";
 		
-		String savaPath = "/Users/rosa/uploadFiles"; 
+//		String savaPath = "/Users/rosa/uploadFiles"; 
 		
-//		File f = new File(savaPath + "\\" + fileName);
-		File f = new File(savaPath + File.separator  + fileName);
+		File f = new File(savaPath + "\\" + fileName);
+//		File f = new File(savaPath + File.separator  + fileName);
 		if(f.exists()) {
 			f.delete();
 		}
