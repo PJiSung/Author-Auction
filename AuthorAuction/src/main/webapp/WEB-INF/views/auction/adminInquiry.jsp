@@ -138,8 +138,7 @@
 	  transform: translateX(-50%) translateY(-50%);
 	  width: 700px;
 	  height: 700px;
-	  padding: 50px 100px 0 50px;
-	  padding-bottom: 720px;
+	  padding: 50px 50px 750px 50px;
 	  background-color: rgb(255, 255, 255);
 	  border-radius: 10px;
 	  box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
@@ -149,7 +148,7 @@
 	  align-items: flex-start;
 	  justify-content: space-between; 
 	}
-	
+		
 	.modal_body div{
 		width:50%;
 		margin-bottom: 10px;
@@ -569,6 +568,7 @@
 			
 			<div class="modal" id="aucModal">
 		      <div class="modal_body">
+		      	<h1 style="text-align: center; color: white; background: black; width:650px; margin-top: -3%; padding: 5px 0 5px 0;">경매품 정보</h1>
 		      	<div>경매 번호</div>
 		      	<div>작품명</div>
 		      	<div><input type="text" disabled  class="modalInput"></div>
@@ -592,7 +592,7 @@
 		      	<div>사진<br><img id="picDiv" onclick="getLargePic(this);"/></div>
 		      	<div>
 		      		작품 설명<br>
-		      		<textarea disabled rows="9" cols="40" id="textBox"></textarea>
+		      		<textarea disabled rows="9" cols="33" id="textBox"></textarea>
 		      	</div>
 		      	<div></div>
 		      	<div id="closeCover">
