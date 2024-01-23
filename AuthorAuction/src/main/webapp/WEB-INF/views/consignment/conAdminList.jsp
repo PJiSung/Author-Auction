@@ -794,32 +794,34 @@ table tr {
 	<!-- 경매 등록 모달 -->
 	<!--  -->
 	<div class="modal_overlay" style="display: block; z-index: 1; height: 150%;">
-		<div id="content-allOver-cover" style="width: 100%; height: 100%; position: fixed; z-index: 1; left:17.5%; top:5%;">
-			<div id="forWidthAndHeight" style="width: 60%; height: 90%; background-color: white;">
+		<div id="content-allOver-cover" style="width: 80%; height: 100%; position: fixed; z-index: 1; left:25%; top:5%;">
+		
+			<div id="forWidthAndHeight" style="width: 50%; height: 90%; background-color: white;">
+			
 				<form action="insertAuction.adac" method="post" id="auctionForm">
 					<div style="text-align: center; color:white; background: black; padding: 10px 0 10px 0;">경매 등록 페이지</div>
-					<div style="display:flex; text-align:center; margin: 2.5% 0 1.25% 5%;">
+					<div style="display:flex; text-align:center; margin: 2.5% 0 1.25% 15%;">
 						<div id="workNamePlace" style="margin-left: 3%; width: 44%; text-align:left;">
-							작품명 <input type="text" readonly style="width: 30%;" name="conProduct" id="ajaxConProduct" required>
+							작품명 <input type="text" readonly style="width: 50%;" name="conProduct" id="ajaxConProduct" required>
 						</div>
 						<div id="artistNamePlace" style="margin-right: 5%; width: 44%; text-align:left;">
-							작가명 <input type="text" readonly style="width: 30%;" name="conAuthor" id="ajaxConAuthor" required>
+							작가명 <input type="text" readonly style="width: 50%;" name="conAuthor" id="ajaxConAuthor" required>
 						</div>
 					</div>
 					
-					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 5%;">
+					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 15%;">
 						<div id="startMoney" style="margin-left: 3%; width: 44%; text-align:left;">
-							시작가 <input type="number" style="width: 30%;" name="aucStartPrice" id="ajaxConHope" required>
+							시작가 <input type="number" style="width: 50%;" name="aucStartPrice" id="ajaxConHope" required>
 						</div>
 						
 						<div style="margin-right: 2%; width: 44%; display: inline-block; text-align:left;">
-							제작 &nbsp;<input type="number" style="width: 30%; margin-left:2.2%;" name="conYear" id="ajaxConYear">
+							제작 &nbsp;&nbsp;<input type="number" style="width: 50%; margin-left:2.2%;" name="conYear" id="ajaxConYear">
 						</div>
 					</div>
 					
-					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 8%; width:100%;  text-align:left;">
+					<div style="display:flex; text-align:center; margin: 1.25% 0 1.25% 17.5%; width:80%;  text-align:left;">
 						<div id="startDate" style="width: 40%;">
-							시작일 <input type="text" name="aucStartDate" style="width: 31%;" readonly required>
+							시작일 <input type="text" name="aucStartDate" style="width: 59%;" readonly required>
 							<button type="button" style="position: absolute;"  class="openCalender" id="startDateCalendar">달력</button>
 	
 							<div id="startCalendar"	style="border: 1px black solid; background: white; width: 30%; position: absolute;">
@@ -852,8 +854,8 @@ table tr {
 								</div>
 							</div>
 						</div>
-						<div id="endDate" style="width: 40%; margin-left:1.5%;">
-							종료일 &nbsp;<input type="text" name="aucFinishDate" style="width: 30%;"	readonly required>
+						<div id="endDate" style="width: 40%; margin-left:6.5%;">
+							종료일 &nbsp;<input type="text" name="aucFinishDate" style="width: 59%;"	readonly required>
 							<button type="button" class="openCalender" style="position: absolute;" id="endDateCalendar">달력</button>
 	
 							<div id="endCalendar" style="border: 1px black solid; background: white; width: 30%; position: absolute;">
@@ -888,40 +890,40 @@ table tr {
 						</div>
 					</div>
 					
-					<div style="display:flex; text-align:left; margin: 1.25% 0 1.25% 8%;">
+					<div style="display:flex; text-align:left; margin: 1.25% 0 1.25% 17.5%;">
 						<div style="width: 40%; text-align:left;">
-							가로 &nbsp;<input type="number" name="conWidth" id="ajaxConWidth" required style="width:33%; margin-left: 2.5%;">
+							가로 &nbsp;&nbsp;&nbsp;<input type="number" name="conWidth" id="ajaxConWidth" required style="width:60%; margin-left: 2.5%;">
 						</div>
-						<div style="width: 40%; text-align:left; margin-left:5.5%;">
-							세로 &nbsp;&nbsp;<input type="number" name="conHeight" id="ajaxConHeight" required style="width:33%; margin-left:1.8%;">
+						<div style="width: 40%; text-ali	gn:left; margin-left:5.5%;">
+							세로 &nbsp;&nbsp;&nbsp;<input type="number" name="conHeight" id="ajaxConHeight" required style="width:60%; margin-left:1.8%;">
 						</div>
 					</div>
 						
-						<div id="explainPlace" style="margin: 1.25% 0 1.25% 8%; width:74%;">
+						<div id="explainPlace" style="margin: 1.25% 0 1.25% 17.5%; width:74%;">
 							<span>작품 설명</span><br>
-							<textarea style="width: 85%; resize: none;" name="conEtc" id="ajaxConEtc" rows="8" required></textarea>
+							<textarea style="width: 87%; resize: none;" name="conEtc" id="ajaxConEtc" rows="8" required></textarea>
 						</div>
 					
-					<div style="display:flex; text-align:left; margin-left:8%; align-items: center; justify-content: center;">
-						<div style="width: 100%;">
-							<div style="width: 25%; display: inline-block;">
+					<div style="margin-left:8%; width:100%; ">
+						<div style="width: 80%; display: flex; justify-content: center; align-items: center; text-align: center;">
+							<div style="width: 20%; display: inline-block;">
 								대표 사진<br>
-								<span id="presentPic"><img class="pictures" src="" style="width: 200px; height: 200px;"></span>
+								<span id="presentPic"><img class="pictures" src="" style="width: 150px; height: 150px;"></span>
 							</div>
-							<div style="width: 25%; display: inline-block;">
+							<div style="width: 20%; display: inline-block; margin-left:100px;">
 								전면 사진<br>
-								<span id="firstPic"><img class="pictures" src="" style="width: 200px; height: 200px;"></span>
+								<span id="firstPic"><img class="pictures" src="" style="width: 150px; height: 150px;"></span>
 							</div>
-							<div style="width: 25%; display: inline-block;">
+							<div style="width: 20%; display: inline-block; margin-left:100px;">
 								후면 사진<br>
-								<span id="secondPic"><img class="pictures" src="" style="width: 200px; height: 200px;"></span>
+								<span id="secondPic"><img class="pictures" src="" style="width: 150px; height: 150px;"></span>
 							</div>
 						</div>
 						<br>
 						<div>
 						</div>
 					</div>
-					<div style="width: 20%; float: right; margin: 2% 0 2% 50%;">
+					<div style="width: 20%;margin: 2% 0 2% 30%; float:right;">
 						<button type="button" id="insertAuctionBtn">등록</button>
 						<button type="button" id="closeAuctionModal" style="margin-right: 8%;">취소</button>
 					</div>
