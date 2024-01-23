@@ -271,7 +271,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 999;
   left: 0;
   top: 50%; /* 50%로 수정 */
   width: 100%;
@@ -289,7 +289,7 @@
   padding: 20px;
   border: 1px solid #888;
   width: 30%;
-  height: 170px;
+  height: 200px;
 }
 .close {
   color: #aaa;
@@ -297,13 +297,20 @@
   font-size: 28px;
   font-weight: bold;
 }
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+ .btnset2 {
+  width: 20%;
+  min-width: 3rem;
+  border-radius: 0.6rem;
+  height: 4rem;
+  font-weight: 500;
+  color: white;
+  background-color: black;
+  line-height: 4rem;
 }
+ .btnset2:hover{
+  color:white;
+}
+
 </style>
 
 

@@ -253,7 +253,7 @@
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
+  z-index: 999;
   left: 0;
   top: 50%; /* 50%로 수정 */
   width: 100%;
@@ -279,12 +279,18 @@
   font-size: 28px;
   font-weight: bold;
 }
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+ .btnset2 {
+  width: 20%;
+  min-width: 3rem;
+  border-radius: 0.6rem;
+  height: 4rem;
+  font-weight: 500;
+  color: white;
+  background-color: black;
+  line-height: 4rem;
+}
+ .btnset2:hover{
+  color:white;
 }
 </style>
 </head>
@@ -306,7 +312,7 @@
 		<div class="contents-inner">
 			<div class="contents-container container-md">
 			  <div class="textset textset-h2">
-			    <a class="textset-tit" style="font-size: 40px;">위탁 문의 내역(수정)</a>
+			    <h1 style="font-size: 40px;">위탁 문의 내역</h1>
 			</div>
           
           	<form action="updateBoard.co" enctype="multipart/form-data" method="post" id="attmForm">
@@ -504,7 +510,7 @@
 						    		<div class="content-container">
 										<div class="form-wrap">	
 											<div class="form-header">
-												<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem; margin-top: 2rem;">그림추천 문의 삭제</h3>
+												<h3 class="form-tit" style="text-align:center; font-size: 30px; margin-bottom: 2rem; margin-top: 2rem;">위탁 문의 삭제</h3>
 											</div>
 											<div class="form-body">
 												<p style="text-align: center; font-size: 20px;">삭제하시겠습니까?</p>

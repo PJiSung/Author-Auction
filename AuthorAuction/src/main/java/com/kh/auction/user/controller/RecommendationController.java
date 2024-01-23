@@ -311,7 +311,7 @@ public class RecommendationController {
 							  @RequestParam(value= "deleteReplyAttm", required = false) String deleteAttm, RedirectAttributes redirct,
 							  @RequestParam("beforeURL") String beforeURL) throws Exception {
 		
-		// 업데이트할 첨부 파일 및 답글 삭제 결과 변수 초기화
+		// 업데이트할 첨부 파일 및 답글 삭제 결과를 저장하기 위한 변수 초기화
 		int updateAttmResult = 0;    // 첨부파일 업데이트 결과
 	    int deleteAttmResult = 0;    // 첨부파일 삭제 결과
 
