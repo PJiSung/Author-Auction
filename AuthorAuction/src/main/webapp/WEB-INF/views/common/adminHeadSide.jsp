@@ -95,7 +95,7 @@
          justify-content: center;
          font-size: xxx-large;
          align-items: center;
-         height:180px;
+         height:90px;
          color:white;
          background:black;
          cursor:pointer;
@@ -107,7 +107,7 @@
 </head>
 <body>
 	<div style="text-align:center;">
-		<div id="adminHeader" onclick="location.href='adminMain.adac'" style="font-family: inherit;font-weight: 1000;">골목 대장 김 로 사</div>
+		<div id="adminHeader" onclick="location.href='adminMain.adac'" style="font-family: inherit;font-weight: 1000;">A_Auction Manager</div>
 	</div>
     <div style="display:flex; height:90%; width:85%; margin:auto;">
         <aside style="width:15%; margin-top: 3px;">

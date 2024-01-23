@@ -882,21 +882,18 @@ const msg = () => {
 	let sId = null;
 	let preDiv = null; 
     let message = document.getElementById("chatMsg").value;
-    console.log("ssss="+message);
-    var regex = /\[([^\]]+)\] (\d+)/g;
-    var matches = [];
-    var match;
-
+    const regex = /\[([^\]]+)\] ([^\[]+)/g;
+    let matches = [];
+    let match;
     while ((match = regex.exec(message)) !== null) {
-        var id = match[1];
-        var msg = parseInt(match[2], 10);
-        
+        let id = match[1];
+        let msg = match[2].replace(/,\s*$/, '');
         matches.push({ id: id, msg: msg });
     }
-    console.log(matches);
-    if (matches.length > 0) {
-        matches[0].id = matches[0].id.replace('[', '');
-         
+    if (matches.length >0) {
+        matches[0].id = matches[0].id.replaceAll('[', '');
+        matches[matches.length-1].msg = matches[matches.length-1].msg.replaceAll(']', '');
+        
         let id = document.getElementById("tab1Content").children[0].children[1].children[0].children[1].children[1].innerText;
         for (let i = 0; i < matches.length; i++) {
         	let mainDiv = document.getElementById("msg");

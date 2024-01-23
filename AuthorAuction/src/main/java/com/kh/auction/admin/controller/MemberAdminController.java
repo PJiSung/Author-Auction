@@ -80,9 +80,10 @@ public class MemberAdminController {
 		    while((str = reader.readLine()) != null) {
 		    	msg.add(str);
 		    }
-		    msg.remove(msg.size()-1);
+		    //msg.remove(msg.size());
 		    reader.close();
 		}
+		System.out.println(msg);
 		int listCount = mService.getListCount(sm);
 		int currentPage = page;
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 10);

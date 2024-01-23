@@ -443,6 +443,7 @@ window.onpopstate = function() {
       </button>
     </div>
   </div>
+  <jsp:include page="chat.jsp"/>
   <!-- [E]header -->
   <script src="main/js/setting.js"></script>
   <script src="main/js/plugin.js"></script>

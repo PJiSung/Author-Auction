@@ -251,7 +251,7 @@
 	<div style="width: 70%; margin-left:15%; background:white; padding:2% 0 1.5% 0;">
 		<form action="search.adac" method="get">
 			<div id="coverAll">
-				<h1 style="text-align: center; font-size: 80px; margin-bottom: 8%;">Auction</h1>
+				<h2 style="text-align: center; font-size: 60px; margin-bottom: 8%;">Auction</h2>
 				<div id="searchBox">
 					<div id="checkBoxAll">
 						<input type="checkBox" id="all"><label for="all">전체</label>
