@@ -927,9 +927,9 @@ table tr {
 						<button type="button" id="insertAuctionBtn">등록</button>
 						<button type="button" id="closeAuctionModal" style="margin-right: 8%;">취소</button>
 					</div>
-				</div>
-				<input type="hidden" name="aucNo">
-			</form>
+				</form>
+			</div>
+		<input type="hidden" name="aucNo">
 		</div>
 	</div>
 
