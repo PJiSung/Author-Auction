@@ -26,6 +26,7 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <style type="text/css">
+.con_startdate, .con_enddate, .pagiset-line, .select, .tabset-item, .input-fill {cursor:pointer;}
 .tableset tr:hover{
    background: #dcdcdc;
    cursor: pointer;

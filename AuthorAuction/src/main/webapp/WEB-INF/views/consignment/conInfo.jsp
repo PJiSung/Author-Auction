@@ -27,10 +27,10 @@
     <div class="hooms-N24" data-bid="gFlqG63e38">
       <div class="contents-container container-md">
         <div class="textset">
-          <a class="textset-tit" style="font-size: 50px;">위탁 안내 </a>
+          <a class="textset-tit" style="font-size: 50px; margin-top: 3rem;">위탁 안내 </a>
         </div><a class="textset-tit">
           <div class="textset">
-            <h5 class="textset-tit"> Why Author Auction? </h5>
+            <h1 style="margin-bottom: 1rem;"> Why Author Auction? </h1>
             <p class="textset-desc"> 소장하신 작품의 가치가 궁금하신가요? 대한민국 대표 미술품 경매 회사 어서옥션에서 작품 위탁을 도와드리겠습니다. </p>
           </div>
           <div class="contents-cardgroup">

@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="recommendation/css/common.css">
   <link rel="stylesheet" href="recommendation/css/style.css">
 <style>
+.fileset-upload, .fileset-input{cursor:pointer;}
 .inputset .content{width: 87%; margin-left: 12.5rem;}
 #recContent {width: 87%; margin-left: 12.5rem;}
 #addPicButton{

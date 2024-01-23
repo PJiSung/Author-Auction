@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="consignment/css/common.css">
   <link rel="stylesheet" href="consignment/css/style.css">
 <style>
+.pagiset-line, .input-fill{cursor:pointer;}
+.badgeset{cursor: auto;}
 .recommendationEnroll > a{   
 	width: 80px;
     height: auto;

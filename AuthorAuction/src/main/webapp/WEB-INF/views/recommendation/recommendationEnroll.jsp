@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="recommendation/css/common.css">
   <link rel="stylesheet" href="recommendation/css/style.css">
 <style>
+.fileset-upload, .fileset-input{cursor:pointer;}
 #addPicButton{
    border: 0;
     background-color: transparent;

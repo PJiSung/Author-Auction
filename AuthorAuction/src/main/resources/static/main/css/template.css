@@ -310,7 +310,7 @@ body.body-scroll { overflow: hidden; }
 
 /* ========== */
 /* Textset */
-.textset { position: relative; margin-bottom: 4rem; } 
+.textset { position: relative; } 
 .textset .textset-tit { font-size: var(--fs-h3); line-height: var(--lh-h3); font-weight: 600; } 
 .textset .textset-tit + .textset-desc,
 .textset .textset-subtit + .textset-desc { margin-top: 2rem; } 

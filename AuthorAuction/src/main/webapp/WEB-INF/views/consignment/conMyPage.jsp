@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="consignment/css/common.css">
   <link rel="stylesheet" href="consignment/css/style.css">
 <style>
+.pagiset-line{cursor:pointer;}
 .date-box{border-radius: 0.6rem; border: 1px solid lightgray;}
 .con_startdate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem; cursor: pointer;}
 .con_enddate{border: 1px solid lightgray; height: 5rem; border-radius :0.6rem; cursor: pointer;}
@@ -76,7 +77,7 @@ tr{cursor: pointer;}
             <br>
           </div>
           
-          <div><button class="con_enroll" style="float: left;"><a href="conEnroll.co" style="color:white;">문의하기</a></button></div>
+          <div><button class="con_enroll" style="float: left; cursor: pointer;'"><a href="conEnroll.co" style="color:white;">문의하기</a></button></div>
           
           <br>
           

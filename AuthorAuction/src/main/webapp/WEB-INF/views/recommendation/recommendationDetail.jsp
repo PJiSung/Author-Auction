@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="recommendation/css/common.css">
   <link rel="stylesheet" href="recommendation/css/style.css">
 <style>
+#select, .contents-thumbimg{cursor: auto;}
 .inputset .content{width: 87%; margin-left: 12.5rem;}
 #recContent {width: 87%; margin-left: 12.5rem;}
 #addPicButton{
@@ -453,7 +454,7 @@
 	            <div class="inputset inputset-lg inputset-label">
 	              <a class="inputset-tit">그림스타일</a>
 	              <div class="selectset selectset-round selectset-lg">
-	                <button class="selectset-toggle btn" type="button">
+	                <button class="selectset-toggle btn" type="button"   id="select">
 	                  <span>
 	                  	<c:if test="${r.recStyle == '추상화'}">추상화</c:if>
 	                  	<c:if test="${r.recStyle == '인물화'}">인물화</c:if>

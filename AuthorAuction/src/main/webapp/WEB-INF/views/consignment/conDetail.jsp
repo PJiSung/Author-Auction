@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="consignment/css/common.css">
   <link rel="stylesheet" href="consignment/css/style.css">
 <style> 
+.fileset-upload, .fileset-input{cursor:pointer;}
 #attmForm .contents-thumbimg:hover{
 	filter: brightness(75%);
 }

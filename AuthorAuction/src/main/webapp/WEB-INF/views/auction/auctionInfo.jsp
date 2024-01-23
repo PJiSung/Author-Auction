@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="auction/css/style.css">
 <style>
 .hooms-N42 .contents-inner {
-    padding: 4rem 2.4rem;
+    padding: 2rem 2.4rem;
 }
 </style>  
 </head>
@@ -23,7 +23,7 @@
     <div class="hooms-N24" data-bid="gFlqG63e38">
       <div class="contents-container container-md">
         <div class="textset">
-          <h2 class="h2" style="margin-bottom: 5rem;">경매 안내</h2>
+          <h2 class="h2" style="margin-bottom: 5rem; margin-top: 3rem;">경매 안내</h2>
           <div style="color: #767676;">
 	      어서 옥션이 국내 최초로 시작한 온라인 경매는 폭넓은 작가군과 합리적인 가격의 작품을 선보입니다.<br>
 	      미술품과 더불어 명품 및 주얼리, 오디오, 디자인가구, 피규어 등 누구나 쉽게 경매에 참여할 수 있는 라이프스타일 아이템을 선보입니다.
@@ -37,27 +37,27 @@
         <div class="tabset tabset-solid">
           <ul class="tabset-list tabset-sm">
             <li class="tabset-item">
-              <a class="tabset-link active" href="javascript:void(0)">
+              <a class="tabset-link active" href="#tab1">
                 <span>STEP 1. 회원가입</span>
               </a>
             </li>
             <li class="tabset-item">
-              <a class="tabset-link" href="javascript:void(0)">
+              <a class="tabset-link" href="#tab2">
                 <span>STEP 2. 프리뷰</span>
               </a>
             </li>
             <li class="tabset-item">
-              <a class="tabset-link" href="javascript:void(0)">
+              <a class="tabset-link" href="#tab3">
                 <span>STEP 3. 응찰방법</span>
               </a>
             </li>
             <li class="tabset-item">
-              <a class="tabset-link" href="javascript:void(0)">
+              <a class="tabset-link" href="#tab4">
                 <span>STEP 4. 낙찰확인 및 결제</span>
               </a>
             </li>
             <li class="tabset-item">
-              <a class="tabset-link" href="javascript:void(0)">
+              <a class="tabset-link" href="#tab5">
                 <span>STEP 5. 수령 및 배송</span>
               </a>
             </li>
@@ -68,7 +68,7 @@
 
     <div class="hooms-N42" data-bid="VWlqg6q14D">
       <div>
-        <div class="contents-inner">
+        <div class="contents-inner" id="tab1">
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
@@ -94,7 +94,7 @@
             </ul>
           </div>
         </div>
-        <div class="contents-inner">
+        <div class="contents-inner" id="tab2">
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
@@ -110,11 +110,11 @@
             </ul>
           </div>
         </div>
-        <div class="contents-inner">
+        <div class="contents-inner" id="tab3">
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
-                <h3 class="h3">STEP 3 응찰 방법</h3>
+                <h4 class="h4" >STEP 3 응찰 방법</h4>
                 <br>
                 <p class="contents-desc"> 프리뷰 전시 기간 동안 홈페이지를 통해 응찰 가능하며, 경매 마감 시간부터 lot 번호 순차적으로 마감됩니다. </p>
                 <p class="contents-desc"> 경매 마감시간 30초 전에 응찰이 있을 경우, 자동으로 30초 연장 됩니다. </p>
@@ -127,16 +127,15 @@
                 <div style="text-align: center;">
 					<img class="img" src="auction/images/list.png" style="width: 50%;">
 				</div>	
-
               </li>
             </ul>
           </div>
         </div>
-        <div class="contents-inner">
+        <div class="contents-inner" id="tab4">
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
-                <h3 class="h3">STEP 4 낙찰확인 및 결제</h3>
+                <h4 class="h4">STEP 4 낙찰확인 및 결제</h4>
                 <br>
                 <h5 class="h5"> 1. 낙찰 및 우선 순위 </h5>
                 <br> 경매 낙찰은 시작 후 최고가를 제시한 응찰자에게 경매작품이 낙찰되며, 자동응찰 &gt; 수동 응찰 순으로 우선적으로 낙찰 기회가 주어집니다.<br> 동일한 금액의 응찰이 발생할 경우 서버시각에 따라 먼저 응찰금액을 입력하신 분에게 우선 순위가 주어집니다.<br> 응찰 시 응찰 단위 기준으로 금액이 상승합니다.<br><br>
@@ -163,14 +162,23 @@
           </div>
         </div>
         
-        <div class="contents-inner">
+        <div class="contents-inner" id="tab5">
           <div class="contents-container container-md">
             <ul class="contents-list">
               <li class="contents-item">
-                <h3 class="h3">STEP 5 수령 및 배송</h3>
-                <br>
-                <img class="img" src="auction/images/tab5.png" alt="이미지" style="height: 500px;">
-                <br><br>
+                <h5 class="h5">STEP 5 수령 및 배송</h5>
+                <div style="border: 1px solid black; margin-top: 3rem; margin-bottom: 3rem; padding: 3rem 3rem 3rem;">
+	                <label style="font-weight: bold; font-size: 25px;">낙찰자 작품 인수 방법</label><br><br>
+	                1. 경매의 낙찰작품은 <label style="font-weight: bold;">구매자 직접 작품수령</label>을 원칙으로 합니다.<br><br>
+					2. 작품 직접 수령장소 : 서울시 <label style="font-weight: bold;">중구 남대문로 120 그레이츠 청계 (어서옥션하우스) 지하1층 수장고</label>에서만 가능합니다.<br><br>
+					3. 낙찰 작품의 <label style="font-weight: bold;">희망 수령 날짜 하루 전까지</label> '판매 담당자'와 <label style="font-weight: bold;">방문일자 예약 필히</label> 하신 후 방문 부탁드립니다.<br>
+					<label style="color: red;">전일 방문 예약제로 운영하오니, <label style="font-weight: bold;">예약없이 당일 방문시 작품 수령 불가능합니다.</label></label><br><br>
+					4. 작품수령 가능 요일, 시간 : <label style="font-weight: bold;">월요일 ~ 금요일</label>(법정 공휴일 제외) / 당사 업무시간 9시 ~ 18시 (점심시간 12시~13시 제외.)<br>
+					<label style="color: red;">낙찰자 승용차에 작품 상차시 참고 : 작품 전체 크기 <label style="font-weight: bold;">90 * 118cm</label>까지 가능함(캔버스 50호 크기)</label><br><br>
+					5. 낙찰자 직접 작품 수령이 어려울 경우 당사는 <label style="font-weight: bold;">낙찰자의 책임과 비용부담 하에</label> 작품의 운송(미술품운송 전문업체)을 주선해드립니다.<br>
+					<label style="color: red;">작품 파손, 분실의 위험이 크므로 <label style="font-weight: bold;">택배업체는 주선 안함</label></label>
+              	</div>
+                <label style="font-weight: bold;">기본 배송(편도)</label>
                 <p class="contents-desc"> 서울 및 수도권 지역 무료 배송 진행 </p>
                 <p class="contents-desc"> 수도권 외 지역은 월 2회 운송사 지정 일정(주말 포함)에 맞춰 일괄 무료 배송 진행 </p>
                 <p class="contents-desc"> 상기 일정 외 개별 운송 진행 및 도서 산간(제주 포함)지역, 해외 운송의 경우 운송비 고객 부담 </p>
