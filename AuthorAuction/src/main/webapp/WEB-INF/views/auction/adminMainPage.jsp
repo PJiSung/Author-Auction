@@ -114,7 +114,7 @@
 	  left: 50%;
 	  transform: translateX(-50%) translateY(-50%);
 	  width: 600px;
-	  height: 500px;
+	  height: 550px;
 	  padding: 50px 50px 150px 50px;
 	  background-color: rgb(255, 255, 255);
 	  border-radius: 10px;
@@ -167,7 +167,6 @@
     	text-align: center;
     	align-items: center;
     	justify-content: center;
-    	margin-top: 20px;
     	font-weight: 1000;
     }
     
@@ -261,7 +260,11 @@
                             </tr>
                             
                             <c:if  test="${empty cList}">
-                            	<h1 id="noData"> 조회할 데이터가 없습니다</h1>
+                            	<tr>
+                            		<td colspan=5>
+                            			<div id="noData"> 신규 등록된 문의글이 없습니다</div>
+                            		</td>
+                            	</tr>
                             </c:if>
                             <c:forEach items="${ cList }" var="consignment">
                             	<tr>
@@ -301,6 +304,7 @@
         
         <div class="modal" id="aucModal">
 		      <div class="modal_body">
+		      <h1 style="text-align: center; color: white; background: black; width:600px; margin-top: -3%;">경매품 정보</h1>
 		      	<div>경매 번호</div>
 		      	<div>작품명</div>
 		      	<div><input type="text" disabled  class="modalInput"></div>
