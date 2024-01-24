@@ -1188,7 +1188,6 @@ body.modal-open {
  	const reviewImgUl = document.querySelector('#reviewImgUl');
 	const selectImagDiv = document.querySelector('#selectImagDiv');
 	
-	console.log(selectImagDiv);
 	const reviewImgs = reviewImgUl.querySelectorAll('img');
     for (let i = 0; i < reviewImgs.length; i++) {
         reviewImgs[i].onclick = function() {

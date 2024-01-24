@@ -124,8 +124,6 @@ public class OrderController {
 		map.put("strDate", strDate);
 		map.put("endDate", endDate);
 		
-		System.out.println(map);
-		
 		int listCount = oService.getSearchListCount(map);
 		
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 9);

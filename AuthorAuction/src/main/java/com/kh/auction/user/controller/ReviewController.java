@@ -246,8 +246,6 @@ public class ReviewController {
 			replyList = rService.selectReplyList(revNo);
 		}
 		
-		System.out.println(rList);
-		
 		if(rList != null) {
 				model.addAttribute("pi", pi);
 				model.addAttribute("rList", rList);

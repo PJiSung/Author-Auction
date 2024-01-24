@@ -106,9 +106,6 @@ public class OrderAdminController {
 		PageInfo pi = Pagination.getPageInfo(page, searchListCount, 9);
 		ArrayList<Order> list = oService.searchAdmOrderList(map, pi);
 		
-		System.out.println(map);
-		System.out.println(list);
-		
 		if(list != null) {
 			model.addAttribute("pi", pi);
 			model.addAttribute("listCount", listCount);
