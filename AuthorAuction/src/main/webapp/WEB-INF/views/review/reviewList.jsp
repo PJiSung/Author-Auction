@@ -583,7 +583,7 @@ body.modal-open {
 							</c:if>
 						</div>
 					</div>
-					<c:if test="${ !empty rList }">—
+					<c:if test="${ !empty rList }">
 						<nav class="pagiset pagiset-line">
 							<c:if test="${ pi.currentPage <= 1 }">
 								<div class="pagiset-ctrl">

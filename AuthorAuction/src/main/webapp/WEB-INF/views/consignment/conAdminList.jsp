@@ -828,11 +828,11 @@ table tr {
 							<div id="startCalendar"	style="border: 1px black solid; background: white; width: 30%; position: absolute;">
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
-										<button id="previous" type="button" style="width: 100%; background: white; border: 0; !important">&lt;</button>
+										<button id="previous" type="button" style="width: 100%; background: white; border: 0; color:black; !important">&lt;</button>
 									</div>
 									<span id="yearPlace"></span>년 <span id="monthPlace"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
-										<button id="next" type="button" style="width: 100%; background: white; border: 0;">&gt;</button>
+										<button id="next" type="button" style="width: 100%; background: white; border: 0; color:black;">&gt;</button>
 									</div>
 								</div>
 								<table>
@@ -862,11 +862,11 @@ table tr {
 							<div id="endCalendar" style="border: 1px black solid; background: white; width: 30%; position: absolute;">
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
-										<button id="previousEnd" type="button" style="width: 100%; background: white; border: 0;">&lt;</button>
+										<button id="previousEnd" type="button" style="width: 100%; background: white; border: 0; color:black;">&lt;</button>
 									</div>
 									<span id="yearPlaceEnd"></span>년 <span id="monthPlaceEnd"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
-										<button id="nextEnd" type="button" style="width: 100%; background: white; border: 0;">&gt;</button>
+										<button id="nextEnd" type="button" style="width: 100%; background: white; border: 0; color:black;">&gt;</button>
 									</div>
 								</div>
 								<table>

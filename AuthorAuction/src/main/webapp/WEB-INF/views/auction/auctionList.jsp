@@ -117,17 +117,6 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp" />
-	<button onclick="location.href='adminInquiry.adac'">관리자</button>
-
-	<button onclick="location.href='myInterest.ac'">내 관심 목록</button>
-
-	<button onclick="location.href='myBidList.ac'">내 입찰 경매</button>
-
-	<button onclick="location.href='adminMain.adac'">관리자 메인</button>
-	
-	<button onclick="location.href='moveTocal.ac'">달력</button> 
-
-
 	<div id="containerCover">
 		<div id="searchLine">
 			<span id="aucNums">전체 경매<span>${ total }</span> 개

@@ -356,7 +356,7 @@
 				  Swal.fire({
 				      icon: 'success',
 				      title: data
-				    });	
+				    });
 				
 				for(ff of document.getElementsByClassName('forminfo')){
 					ff.value = "";

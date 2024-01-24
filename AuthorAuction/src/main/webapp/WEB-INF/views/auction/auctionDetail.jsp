@@ -797,7 +797,7 @@
 		                                <span onclick="location.href='';" class="cashButton">충전</span>
 		                                <span onclick="location.href='';" class="cashButton">출금</span>
 		                     </td>
-		                     <td class="userText"><fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원</td>
+		                     <td class="userText" id="headMoney"><fmt:formatNumber type="number" value="${ loginUser.memBalance }"/>원</td>
 		                  </tr>
 		                  <tr>
 		                     <td><a href="myBidList.ac" class="userMenu">나의 경매</a></td>
@@ -1799,6 +1799,7 @@ const enterSend = () =>{
 												let jsonObject = JSON.parse(data)
 												const aucFinishPriceJs = jsonObject[0].aucFinishPrice;
 												const memBalanceJs = jsonObject[0].memBalance;
+												const headMoney = document.getElementById("headMoney");
 												alert("입찰에 성공하였습니다.") //에이젝스로 새로 갱신
 												bidModal.style.display = 'none';
 												nowPrice.innerText = aucFinishPriceJs.toLocaleString().concat(" 원");
@@ -1846,6 +1847,8 @@ const enterSend = () =>{
 												myInputPoint.value = aucFinishPriceJs + minIncrement;
 												minPrice.innerText = formatMinPoint.concat(' 원');
 												possession.innerText = memBalanceJs.toLocaleString().concat(" 원");
+												headMoney.innerText = memBalanceJs.toLocaleString().concat(" 원");
+												document.body.style.overflow = '';
 												
 												//
 											}else{
@@ -1871,11 +1874,13 @@ const enterSend = () =>{
 												let jsonObject = JSON.parse(data)
 												const aucFinishPriceJs = jsonObject[0].aucFinishPrice;
 												const memBalanceJs = jsonObject[0].memBalance;
+												const headMoney = document.getElementById("headMoney");
 												alert("입찰에 성공하였습니다.") //에이젝스로 새로 갱신
 												
 												bidModal.style.display = 'none';
 												nowPrice.innerText = aucFinishPriceJs.toLocaleString().concat(" 원");
 												modalNowPrice.innerText = aucFinishPriceJs.toLocaleString().concat(" 원");
+												
 												//
 												
 												let minIncrement = 0;
@@ -1919,6 +1924,8 @@ const enterSend = () =>{
 												myInputPoint.value = aucFinishPriceJs + minIncrement;
 												minPrice.innerText = formatMinPoint.concat(' 원');
 												possession.innerText = memBalanceJs.toLocaleString().concat(" 원");
+												headMoney.innerText = memBalanceJs.toLocaleString().concat(" 원");
+												document.body.style.overflow = '';
 												
 												//
 											}else{

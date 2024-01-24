@@ -67,7 +67,7 @@
      }
      
      .sideBar{
-     	width:300px;
+     	width:301px;
      	height:100%;
      	background:black;
      	position:fixed;
@@ -92,8 +92,8 @@
      
      #adminHeader{
          display:flex;
-         justify-content: center;
-         font-size: xxx-large;
+         justify-content: flex-start;
+         font-size: xx-large;
          align-items: center;
          height:90px;
          color:white;
@@ -106,7 +106,7 @@
 </script>
 </head>
 <body>
-	<div style="text-align:center;">
+	<div style="text-align:left;">
 		<div id="adminHeader" onclick="location.href='adminMain.adac'" style="font-family: inherit;font-weight: 1000;">A_Auction Manager</div>
 	</div>
     <div style="display:flex; height:90%; width:85%; margin:auto;">

@@ -80,7 +80,7 @@ public class MemberController {
 				}
 			}
 			if(checkExist == true) {
-				return "index";
+				return "redirect:/";
 			} else {
 				model.addAttribute("id", existId);
 				return "member/kakaoLogin";

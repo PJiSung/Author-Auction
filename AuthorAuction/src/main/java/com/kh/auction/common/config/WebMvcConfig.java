@@ -28,10 +28,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		/*
-		 * registry.addInterceptor(new
-		 * CheckAdminInterceptor()).addPathPatterns("/*.ad*");
-		 */
+		
+		registry.addInterceptor(new
+		CheckAdminInterceptor()).addPathPatterns("/*.ad*");
+		 
 		registry.addInterceptor(new CheckWishlistInterceptor()).addPathPatterns("/wishlist.ar","/artsDetail.ar","/payment.ar","/directPayment.ar","/pointpayment.ar");
 	}
 }

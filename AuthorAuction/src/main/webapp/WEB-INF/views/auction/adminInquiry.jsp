@@ -298,13 +298,13 @@
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
 										<button class="previous" type="button"
-											style="width: 100%; background: white; border: 0;">&lt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&lt;</button>
 									</div>
 									<div style="">경매 시작 날짜</div>
 									<span class="yearPlace"></span>년 <span class="monthPlace"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
 										<button class="next" type="button"
-											style="width: 100%; background: white; border: 0;">&gt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&gt;</button>
 									</div>
 								</div>
 								<table>
@@ -336,12 +336,12 @@
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
 										<button class="previous" type="button"
-											style="width: 100%; background: white; border: 0;">&lt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&lt;</button>
 									</div>
 									<span class="yearPlace"></span>년 <span class="monthPlace"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
 										<button class="next" type="button"
-											style="width: 100%; background: white; border: 0;">&gt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&gt;</button>
 									</div>
 								</div>
 								<table>
@@ -376,12 +376,12 @@
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
 										<button class="previous" type="button"
-											style="width: 100%; background: white; border: 0;">&lt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&lt;</button>
 									</div>
 									<span class="yearPlace"></span>년 <span class="monthPlace"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
 										<button class="next" type="button"
-											style="width: 100%; background: white; border: 0;">&gt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&gt;</button>
 									</div>
 								</div>
 								<table>
@@ -413,12 +413,12 @@
 								<div style="text-align: center;">
 									<div style="float: left; width: 8%; display: inline-block;">
 										<button class="previous" type="button"
-											style="width: 100%; background: white; border: 0;">&lt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&lt;</button>
 									</div>
 									<span class="yearPlace"></span>년 <span class="monthPlace"></span>월
 									<div style="float: right; width: 8%; display: inline-block;">
 										<button class="next" type="button"
-											style="width: 100%; background: white; border: 0;">&gt;</button>
+											style="width: 100%; background: white; border: 0; color:black;">&gt;</button>
 									</div>
 								</div>
 								<table>
