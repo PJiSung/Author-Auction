@@ -212,7 +212,7 @@
 			<if test="status != null">
 				and con_del_status = #{status}
 			</if>
-		order by con_del_status desc, con_adm_status desc, con_con_status
+		order by con_del_status desc, con_adm_status, con_con_status
 	</select>	
 	
 	<select id="selectUser" resultType="Consignment">									<!-- 관리자 상세조회 -->

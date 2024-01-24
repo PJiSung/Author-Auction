@@ -653,7 +653,7 @@
 				})
 				let form = document.getElementById("attmForm");
 				form.submit();
-				alert("성공");
+				alert("수정이 완료 되었습니다.");
 		})
 				
 		const fileInputs = document.querySelectorAll('.fileset-group input[type="file"]');
