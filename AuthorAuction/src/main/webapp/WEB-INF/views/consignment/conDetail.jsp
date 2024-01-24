@@ -477,7 +477,7 @@
 						</div>
 	                </c:if>
 	                
-					<button class="btnset" onclick="location.href='list.co'" type="button" id="back">이전</button>
+					<button class="btnset" onclick="location.href='javascript:history.back();'" type="button" id="back">이전</button>
 	                
 	                
 					<div id="myModal2" class="modal">
@@ -653,7 +653,7 @@
 				})
 				let form = document.getElementById("attmForm");
 				form.submit();
-				alert("수정이 완료 되었습니다.");
+				alert("성공");
 		})
 				
 		const fileInputs = document.querySelectorAll('.fileset-group input[type="file"]');
