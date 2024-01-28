@@ -1227,7 +1227,6 @@
 	<script>
 		window.onload = () =>{
 			let url = window.location.href;
-			console.log(currentDate)
 			if(url.includes("?date=")){
 				handleDateClick(url.split("-")[2] + "/새로고침");
 				displayCalendar();
@@ -1275,104 +1274,56 @@
         let selectedDate = new Date();
         
 
-        function displayCalendar(reloadDate) {
+        function displayCalendar() {
         	 const header = document.getElementById('header');
              const dates = document.getElementById('dates');
              const prevBtn = document.getElementById('prevBtn');
              const nextBtn = document.getElementById('nextBtn');
              const today = new Date();
         	
-        	if(!(reloadDate == undefined)){
-        		currentDate = new Date( reloadDate + 'T00:00:00+09:00');
-        		
-        		header.textContent = currentDate.toLocaleString('ko-KR', { year: 'numeric', month: 'long' });
-        		
-        		let dateContent = '';
+       		const url = window.location.href;
+       		console.log("url : " + url)
+       		if(url.includes("?date=")){
+       			selectedDate = new Date( url.split("=")[1] + 'T00:00:00+09:00');
+       		}
+       		
+       		console.log("디스플레이 selectedDate : " + selectedDate)
+       		
+            header.textContent = currentDate.toLocaleString('ko-KR', { year: 'numeric', month: 'long' });
+            
+            let dateContent = '';
 
-                const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-                const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
 
-                for (let i = 1; i <= lastDayOfMonth; i++) {
-                    const currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
-                    
-                    
-	                let isFutureDate = currentDay > today || currentDay.toDateString() === today.toDateString();
-						
-                    if (isFutureDate) {
-                        const classNames = currentDay.toDateString() === selectedDate.toDateString() ? 'date-item current-date' : 'date-item future-date';
-                        if(i <= 9) {
-                        	dateContent += "<span class='" + classNames + "' onclick='handleDateClick(this.innerText)'>" + "&nbsp;" + i + "&nbsp;" + "</span>";
-                        }else{
-                        	dateContent += "&nbsp" + "<span class='" + classNames + "' onclick='handleDateClick(this.innerText)'>" + i + "</span>";
-                        }
+            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+            const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+            for (let i = 1; i <= lastDayOfMonth; i++) {
+                const currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
+                
+                
+                let	isFutureDate = currentDay > today || currentDay.toDateString() === today.toDateString();
+                
+                if (isFutureDate) {
+                    const classNames = currentDay.toDateString() === selectedDate.toDateString() ? 'date-item current-date' : 'date-item future-date';
+                    if(i <= 9) {
+                    	dateContent += "<span class='" + classNames + "' onclick='handleDateClick(this.innerText)'>" + "&nbsp;" + i + "&nbsp;" + "</span>";
+                    }else{
+                    	dateContent += "&nbsp" + "<span class='" + classNames + "' onclick='handleDateClick(this.innerText)'>" + i + "</span>";
                     }
                 }
-                
-                let clickedDate = reloadDate.split("-")[2];
-                
-                dates.innerHTML = dateContent;
-                
-                for(const spanValue of document.querySelectorAll("div[id='dates'] span[class='date-item future-date']")){
-                	if(clickedDate.split('')[0] == 0 && spanValue.innerText.trim() == clickedDate.split('')[1]){
-                		spanValue.className = 'date-item current-date';
-                	}
-                	
-                	if(clickedDate.split('')[0] != 0 && spanValue.innerText == clickedDate){
-                		spanValue.className = 'date-item current-date';
-                	}
-                }
+            }
 
-                // 이전 달 버튼 활성화/비활성화
-                prevBtn.disabled = currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear();
-                if(prevBtn.disabled){
-                	prevBtn.style.color = 'black';
-                	prevBtn.style.background = 'gray';
-                }else{
-                	prevBtn.style.color = 'white';
-                	prevBtn.style.background = 'darkgray';
-                }
-        	}else{
-        		const url = window.location.href;
-        		if(url.includes("?date=")){
-        			selectedDate = new Date( url.split("=")[1] + 'T00:00:00+09:00');
-        		}
-        		
-	            header.textContent = currentDate.toLocaleString('ko-KR', { year: 'numeric', month: 'long' });
-	            
-	            let dateContent = '';
-	
-	
-	            const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-	            const lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-	
-	            for (let i = 1; i <= lastDayOfMonth; i++) {
-	                const currentDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), i);
-	                
-	                
-	                let	isFutureDate = currentDay > today || currentDay.toDateString() === today.toDateString();
-	                
-	                if (isFutureDate) {
-	                    const classNames = currentDay.toDateString() === selectedDate.toDateString() ? 'date-item current-date' : 'date-item future-date';
-	                    if(i <= 9) {
-	                    	dateContent += "<span class='" + classNames + "' onclick='handleDateClick(this.innerText)'>" + "&nbsp;" + i + "&nbsp;" + "</span>";
-	                    }else{
-	                    	dateContent += "&nbsp" + "<span class='" + classNames + "' onclick='handleDateClick(this.innerText)'>" + i + "</span>";
-	                    }
-	                }
-	            }
-	
-	            dates.innerHTML = dateContent;
-	
-	            // 이전 달 버튼 활성화/비활성화
-	            prevBtn.disabled = currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear();
-	            if(prevBtn.disabled){
-	            	prevBtn.style.color = 'black';
-	            	prevBtn.style.background = 'gray';
-	            }else{
-	            	prevBtn.style.color = 'white';
-	            	prevBtn.style.background = 'darkgray';
-	            }
-	        }
+            dates.innerHTML = dateContent;
+
+            // 이전 달 버튼 활성화/비활성화
+            prevBtn.disabled = currentDate.getMonth() === today.getMonth() && currentDate.getFullYear() === today.getFullYear();
+            if(prevBtn.disabled){
+            	prevBtn.style.color = 'black';
+            	prevBtn.style.background = 'gray';
+            }else{
+            	prevBtn.style.color = 'white';
+            	prevBtn.style.background = 'darkgray';
+            }
         }
         
         function moveMonth(months) {
@@ -1400,17 +1351,15 @@
 	            selectedDate = new Date(currentDate);
 	            displayCalendar();
         	}else{
-	            let url = window.location.href;
-	            let newUrl = null;
 	            const clickedDate = parseInt(element);
 	            currentDate.setDate(clickedDate);
-	            selectedDate = new Date(currentDate); 
-	            displayCalendar();
 	            
 	            const selectDate = currentDate.toLocaleDateString().split(".");
 	            let selectYear = selectDate[0];
 	            let selectMonth = selectDate[1].trim();
 	            let selectDay = selectDate[2].trim();
+	            
+	            
 	            
 	            if(selectMonth.length == 1 ){
 	                selectMonth = "0" + selectMonth;
@@ -1419,6 +1368,9 @@
 	            if(selectDay.length == 1 ){
 	                selectDay = "0" + selectDay;
 	            }
+	            
+	            let url = window.location.href;
+	            let newUrl = null;
 	            
 	            switch(true){
 	                case !url.includes("?date="):
@@ -1430,6 +1382,9 @@
 	                    history.pushState(null,null,newUrl);
 	                    break;
 	            }
+	            
+	            selectedDate = new Date(currentDate);
+	            displayCalendar();
 	            
 	            $("#mainContent").load(location.href + " #mainContent",()=>{
 	            	carasel();        
